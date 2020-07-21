@@ -20,7 +20,7 @@ public class RandomItemsChest implements Listener {
     public void onInventoryOpenEvent(InventoryOpenEvent event) {
         if (event.getPlayer() instanceof Player) {
             Player player = (Player) event.getPlayer();
-            if (player.getWorld() == Bukkit.getWorld("world")) {
+            if (player.getWorld() != Bukkit.getWorld("world")) {
                 if (event.getInventory().getHolder() instanceof Chest) {
                     Bukkit.broadcastMessage("ahhlskdhnaspi");
 
