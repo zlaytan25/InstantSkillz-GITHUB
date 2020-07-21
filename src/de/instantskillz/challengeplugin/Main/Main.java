@@ -24,7 +24,6 @@ public class Main extends JavaPlugin {
     public SneakKillListener skl = new SneakKillListener();
     public GameModeListener gml = new GameModeListener();
 
-    //sagvhghadjshdasjk
 
     //SneakKillEvent
     private boolean SKL = true;
@@ -83,7 +82,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new SneakKillListener(), this);
         //pluginManager.registerEvents(new FallDMGListener(), this);
         pluginManager.registerEvents(new Navigator(), this);
-        //pluginManager.registerEvents(new RandomItemsChest(), this);
+        pluginManager.registerEvents(new RandomItemsChest(), this);
         pluginManager.registerEvents(new GameModeListener(), this);
         pluginManager.registerEvents(new BingoStart(), this);
         pluginManager.registerEvents(new EnderDragonKill(), this);
