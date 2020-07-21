@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
     public SneakKillListener skl = new SneakKillListener();
     public GameModeListener gml = new GameModeListener();
 
+
     //SneakKillEvent
     private boolean SKL = true;
     //TimerAn/Aus
