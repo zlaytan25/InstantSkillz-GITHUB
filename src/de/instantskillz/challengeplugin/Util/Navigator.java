@@ -36,6 +36,7 @@ public class Navigator implements Listener {
     //Navi
     Inventory inventory = Bukkit.createInventory(null, 9 * 3, GUI_NAME);
     Inventory WeltenOrdner = Bukkit.createInventory(null, 9 * 3, GUI_NAME2);
+    //asdasd
 
     Inventory InvCW1 = Bukkit.createInventory(null, 9 * 3, CW1);
     Inventory InvCW2 = Bukkit.createInventory(null, 9 * 3, CW2);
