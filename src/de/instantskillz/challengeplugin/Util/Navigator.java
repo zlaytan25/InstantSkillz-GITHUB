@@ -293,17 +293,17 @@ public class Navigator implements Listener {
         if (Bukkit.getWorld("Challenge-3") != null) {
             ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
             ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lCreate Challenge-Welt-3");
+            IMC.setDisplayName("§6§lChallenge-Welt-3 -> Online §a\u2714");
             IMC.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
             IMC.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-3", " "));
+            IMC.setLore(Arrays.asList(" ", "§7§oTeleportiere dich ->", "§7§oLösche die Welt -->", " "));
             Create.setItemMeta(IMC);
             Create.setAmount(1);
             InvCW3.setItem(12, Create);
         } else if (Bukkit.getWorld("Challenge-3") == null) {
             ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
             ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lChallenge-Welt-3 -> Online §a\u2714");
+            IMC.setDisplayName("§6§lCreate Challenge-Welt-3");
             IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-3", " "));
             Create.setItemMeta(IMC);
             Create.setAmount(1);
@@ -343,17 +343,17 @@ public class Navigator implements Listener {
         if (Bukkit.getWorld("Challenge-4") != null) {
             ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
             ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lCreate Challenge-Welt-4");
+            IMC.setDisplayName("§6§lChallenge-Welt-4 -> Online §a\u2714");
             IMC.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
             IMC.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-4", " "));
+            IMC.setLore(Arrays.asList(" ", "§7§oTeleportiere dich ->", "§7§oLösche die Welt -->", " "));
             Create.setItemMeta(IMC);
             Create.setAmount(1);
             InvCW4.setItem(12, Create);
-        } else if (Bukkit.getWorld("Challenge-4") == null) {
+        } else if (Bukkit.getWorld("Challenge-3") == null) {
             ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
             ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lChallenge-Welt-4 -> Online §a\u2714");
+            IMC.setDisplayName("§6§lCreate Challenge-Welt-4");
             IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-4", " "));
             Create.setItemMeta(IMC);
             Create.setAmount(1);
@@ -393,17 +393,17 @@ public class Navigator implements Listener {
         if (Bukkit.getWorld("Challenge-5") != null) {
             ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
             ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lCreate Challenge-Welt-5");
+            IMC.setDisplayName("§6§lChallenge-Welt-5 -> Online §a\u2714");
             IMC.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
             IMC.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-5", " "));
+            IMC.setLore(Arrays.asList(" ", "§7§oTeleportiere dich ->", "§7§oLösche die Welt -->", " "));
             Create.setItemMeta(IMC);
             Create.setAmount(1);
             InvCW5.setItem(12, Create);
         } else if (Bukkit.getWorld("Challenge-5") == null) {
             ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
             ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lChallenge-Welt-5 -> Online §a\u2714");
+            IMC.setDisplayName("§6§lCreate Challenge-Welt-5");
             IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-5", " "));
             Create.setItemMeta(IMC);
             Create.setAmount(1);
@@ -837,7 +837,7 @@ public class Navigator implements Listener {
             event.setCancelled(true);
 
             switch (event.getCurrentItem().getType()) {
-                case GREEN_STAINED_GLASS_PANE:
+                case GREEN_CONCRETE:
 
                     if (Bukkit.getWorld("Challenge-3") == null) {
                         player.closeInventory();
@@ -854,7 +854,7 @@ public class Navigator implements Listener {
                     }
                     break;
 
-                case WHITE_STAINED_GLASS_PANE:
+                case WHITE_CONCRETE:
 
                     if (Bukkit.getWorld("Challenge-3") != null) {
                         Location location1 = world1.getSpawnLocation();
@@ -870,7 +870,7 @@ public class Navigator implements Listener {
                     }
                     break;
 
-                case RED_STAINED_GLASS_PANE:
+                case RED_CONCRETE:
 
                     if (Bukkit.getWorld("Challenge-3") != null) {
                         player.closeInventory();
