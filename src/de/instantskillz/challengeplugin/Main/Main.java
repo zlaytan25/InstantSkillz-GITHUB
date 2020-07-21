@@ -23,7 +23,8 @@ public class Main extends JavaPlugin {
     public final String PREFIX = "§aServer " + "§8>> §r";
     public SneakKillListener skl = new SneakKillListener();
     public GameModeListener gml = new GameModeListener();
-    //Mein Pimmel ist groß
+
+    //sagvhghadjshdasjk
 
     //SneakKillEvent
     private boolean SKL = true;
