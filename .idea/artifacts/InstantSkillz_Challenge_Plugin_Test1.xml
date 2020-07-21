@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InstantSkillz-Challenge-Plugin-Test1">
+    <output-path>$PROJECT_DIR$/../../../Server/plugins</output-path>
+    <root id="archive" name="InstantSkillz-Challenge-Plugin-Test1.jar">
+      <element id="module-output" name="InstantSkillz-Challenge-Plugin" />
+      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+    </root>
+  </artifact>
+</component>
