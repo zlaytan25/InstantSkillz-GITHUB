@@ -25,6 +25,8 @@ commands:
       description: Startet den Timer!
    gm1:
       description: Kreativ-Modus!
+   gm2:
+      description: Abenteuer-Modus!
    gm3:
       description: Zuschauer-Modus!
    gm0:

@@ -62,6 +62,7 @@ public class Main extends JavaPlugin {
         getCommand("bp").setExecutor(new BackPackCommand());
         getCommand("timer").setExecutor(new TimerCommand());
         getCommand("gm1").setExecutor(new GM1());
+        getCommand("gm2").setExecutor(new GM2());
         getCommand("gm3").setExecutor(new GM3());
         getCommand("gm0").setExecutor(new GM0());
         //getCommand("startbingo").setExecutor(new BingoWorldStart());
