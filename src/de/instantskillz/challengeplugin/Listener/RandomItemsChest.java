@@ -20,25 +20,32 @@ public class RandomItemsChest implements Listener {
     public void onInventoryOpenEvent(InventoryOpenEvent event) {
         if (event.getPlayer() instanceof Player) {
             Player player = (Player) event.getPlayer();
-            if (event.getInventory().getHolder() instanceof Chest) {
-                Bukkit.broadcastMessage("ahhlskdhnaspi");
+            if (player.getWorld() == Bukkit.getWorld("world")) {
+                if (event.getInventory().getHolder() instanceof Chest) {
+                    Bukkit.broadcastMessage("ahhlskdhnaspi");
 
-                Random ran = new Random();
-                int c = ran.nextInt(27);
+                    Random ran = new Random();
+                    int c = ran.nextInt(27);
 
-                Chest chest = (Chest) event.getInventory().getHolder();
-                Inventory chestinv = chest.getBlockInventory();
+                    Chest chest = (Chest) event.getInventory().getHolder();
+                    Inventory chestinv = chest.getBlockInventory();
 
-                ItemStack item_1 = new ItemStack(Material.APPLE);               //60%
-                ItemStack item_2 = new ItemStack(Material.GOLDEN_APPLE);        //10%
-                ItemStack item_3 = new ItemStack(Material.CARROT);                //30%
+                    ItemStack item_1 = new ItemStack(Material.APPLE);               //60%
+                    ItemStack item_2 = new ItemStack(Material.GOLDEN_APPLE);        //10%
+                    ItemStack item_3 = new ItemStack(Material.CARROT);                //30%
+                    ItemStack item_4 = new ItemStack(Material.GREEN_CONCRETE);
 
-                chestinv.clear();
-                chestinv.setItem(c, item_1);
-                chestinv.setItem(c, item_2);
-                chestinv.setItem(c, item_3);
+                    chestinv.clear();
+                    chestinv.setItem(c, item_1);
+                    chestinv.setItem(c, item_2);
+                    chestinv.setItem(c, item_3);
+                    chestinv.setItem(c, item_4);
 
+                }
+            } else {
+                return;
             }
+
 
         }
     }
