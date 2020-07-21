@@ -1,3 +1,43 @@
 main: de.instantskillz.challengeplugin.Main.Main
 version: 1.0
 name: InstantSkillzTV
+
+commands:
+   heal:
+      description: Dieses Kommando heilt dich!
+   kit:
+      description: Oeffnet das Kit-Inventar!
+   setspawn:
+      description: Setze deinen individuellen Spawnpunkt!
+   hub:
+      description: Teleportiert dich zu deinem Spawnpunkt!
+   party:
+      description: Starte eine Party steigen!!! Juhu :D
+   chatclear:
+      description: Chatverlauf loeschen.
+   mute:
+      description: Mute andere Spieler.
+   inv:
+      description: Speichere/Lade dein Inventar!
+   bp:
+      description: Oeffnet das Backpack!
+   timer:
+      description: Startet den Timer!
+   gm1:
+      description: Kreativ-Modus!
+   gm3:
+      description: Zuschauer-Modus!
+   gm0:
+      description: Ueberlebens-Modus!
+   startbingo:
+      description: Startet eine Welt mit dem Bingo-Spielmodus!
+   stopbingo:
+      description: Loescht die Welt mit dem Bingo-Spielmodus!
+   start:
+      description: Erstellt eine zufaellige Challenge-Welten <1-5>!
+   delete:
+      description: Loescht die Challenge-Welten <1-5>!
+   modes:
+      description: Oeffnet dir die Spiel-Modi-Auswahl!
+   bingo:
+      description: Startet Bingo!
