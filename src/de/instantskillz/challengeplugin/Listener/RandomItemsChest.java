@@ -44,7 +44,7 @@ public class RandomItemsChest implements Listener {
                 }
             } else {
                 return;
-                //asdas
+                //end
             }
 
 
