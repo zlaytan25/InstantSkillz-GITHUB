@@ -165,6 +165,5 @@ public class Main extends JavaPlugin {
         this.UHC = start;
     }
 
-    //HalbesHerz
 
 }
