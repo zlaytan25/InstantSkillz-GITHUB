@@ -22,16 +22,21 @@ public class InvCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length == 1) {
                 if (player.getWorld() != Bukkit.getWorld("world")) {
+
                     if (args[0].equalsIgnoreCase("save")) {
+
                         inventorySave.put(player.getName(), player.getInventory().getContents());
                         player.getInventory().clear();
                         player.sendMessage("§aServer " + "§8>> " + "§aDein Inventar wurde §6gespeichert§a.");
 
                     } else if (args[0].equalsIgnoreCase("get")) {
+
                         if (inventorySave.containsKey(player.getName())) {
+
                             player.getInventory().setContents(inventorySave.get(player.getName()));
                             inventorySave.remove(player.getName());
                             player.sendMessage("§aServer " + "§8>> " + "§aDein Inventar wurde §6geladen§a.");
+
                         } else
                             player.sendMessage("§aServer " + "§8>> " + "§cDu hast noch kein Inventar gespeichert!");
                     } else

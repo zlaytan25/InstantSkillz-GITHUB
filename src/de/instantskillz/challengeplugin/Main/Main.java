@@ -2,15 +2,26 @@
 //-> Mullemann25 and Mannam01
 package de.instantskillz.challengeplugin.Main;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import de.instantskillz.challengeplugin.Commands.*;
 import de.instantskillz.challengeplugin.Listener.*;
+import de.instantskillz.challengeplugin.Util.BingoSkull;
+import de.instantskillz.challengeplugin.Util.GlobeSkull1;
 import de.instantskillz.challengeplugin.Util.Navigator;
 import de.instantskillz.challengeplugin.Util.RecipeLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.UUID;
 
 //import de.instantskillz.challengeplugin.Commands.BingoWorldStart;
 //import de.instantskillz.challengeplugin.Commands.BingoWorldStop;
@@ -168,5 +179,66 @@ public class Main extends JavaPlugin {
         this.UHC = start;
     }
 
+    public static ItemStack getBingoHead(String name) {
+        for (BingoSkull head : BingoSkull.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createBingoSkull(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta = (SkullMeta) skullBingo.getItemMeta();
+        smeta.setDisplayName("§cStarte BINGO");
+        smeta.setLore(Arrays.asList(" ", "§7§oErstellt eine Bingo Welt!", " "));
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getGlobeSkull1(String name) {
+        for (GlobeSkull1 head : GlobeSkull1.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createGlobeSkull1(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 1");
+        smeta1.setLore(Arrays.asList(" ", "§7Rechtsklick: Detail Seite", "§7Linksklick: Quickjoin", " "));
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
 
 }

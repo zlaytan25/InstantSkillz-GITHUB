@@ -24,6 +24,7 @@ public class SpawnCommand implements CommandExecutor {
                 if (args.length == 0) {
 
                     player.getInventory().clear();
+
                     FileConfiguration config = Main.getPlugin().getConfig();
                     World world = Bukkit.getWorld(config.getString("Spawn.World"));
                     double x = config.getDouble("Spawn.X");

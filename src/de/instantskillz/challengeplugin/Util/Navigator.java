@@ -24,25 +24,21 @@ import java.util.Arrays;
 
 public class Navigator implements Listener {
 
-    private final String GUI_NAME = "§6§lNavigator";
-    private final String GUI_NAME2 = "§6§lChallenge-Welten";
-    private final String CW1 = "§6§lChallenge-Welt-1";
-    private final String CW2 = "§6§lChallenge-Welt-2";
-    private final String CW3 = "§6§lChallenge-Welt-3";
-    private final String CW4 = "§6§lChallenge-Welt-4";
-    private final String CW5 = "§6§lChallenge-Welt-5";
-
+    private final String GUI_NAME = "§6Navigator";
+    private final String GUI_NAME2 = "§6Challenge-Welten";
+    private final String CW1 = "§6Welt 1";
+    private final String CW2 = "§6Welt 2";
+    private final String CW3 = "§6Welt 3";
+    private final String CW4 = "§6Welt 4";
 
     //Navi
-    Inventory inventory = Bukkit.createInventory(null, 9 * 3, GUI_NAME);
-    Inventory WeltenOrdner = Bukkit.createInventory(null, 9 * 3, GUI_NAME2);
-    //asdasd
+    Inventory inventory = Bukkit.createInventory(null, 9 * 5, GUI_NAME);
+    Inventory WeltenOrdner = Bukkit.createInventory(null, 9 * 5, GUI_NAME2);
 
-    Inventory InvCW1 = Bukkit.createInventory(null, 9 * 3, CW1);
-    Inventory InvCW2 = Bukkit.createInventory(null, 9 * 3, CW2);
-    Inventory InvCW3 = Bukkit.createInventory(null, 9 * 3, CW3);
-    Inventory InvCW4 = Bukkit.createInventory(null, 9 * 3, CW4);
-    Inventory InvCW5 = Bukkit.createInventory(null, 9 * 3, CW5);
+    Inventory InvCW1 = Bukkit.createInventory(null, 9 * 5, CW1);
+    Inventory InvCW2 = Bukkit.createInventory(null, 9 * 5, CW2);
+    Inventory InvCW3 = Bukkit.createInventory(null, 9 * 5, CW3);
+    Inventory InvCW4 = Bukkit.createInventory(null, 9 * 5, CW4);
 
 
     private GameModeListener gl = new GameModeListener();
@@ -50,13 +46,32 @@ public class Navigator implements Listener {
     public void openGUI(Player player) {
 
         //Item im Navi
-        ItemStack Bingo = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE);
-        ItemMeta itemMeta = Bingo.getItemMeta();
-        itemMeta.setDisplayName("§cStarte BINGO");
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        itemMeta.setLore(Arrays.asList(" ", "§7§oErstellt eine Bingo Welt!", " "));
-        Bingo.setItemMeta(itemMeta);
-        Bingo.setAmount(1);
+
+        inventory.setItem(28, Main.getBingoHead("BINGO"));
+
+        ItemStack PlatzHalter = new ItemStack(Material.BEDROCK);
+        ItemMeta imp = PlatzHalter.getItemMeta();
+        imp.setDisplayName("§cPlatzhalter");
+        imp.setLore(Arrays.asList(" ", "§7§oPlatz für Zukünftige Mini-Games!", " "));
+        PlatzHalter.setItemMeta(imp);
+        PlatzHalter.setAmount(1);
+        inventory.setItem(30, PlatzHalter);
+        ItemStack PlatzHalter2 = new ItemStack(Material.BEDROCK);
+        PlatzHalter2.setItemMeta(imp);
+        PlatzHalter2.setAmount(1);
+        inventory.setItem(32, PlatzHalter2);
+        ItemStack PlatzHalter3 = new ItemStack(Material.BEDROCK);
+        PlatzHalter3.setItemMeta(imp);
+        PlatzHalter3.setAmount(1);
+        inventory.setItem(34, PlatzHalter3);
+
+        ItemStack ChallengeAuswahl = new ItemStack(Material.NETHER_STAR);
+        ItemMeta imca = ChallengeAuswahl.getItemMeta();
+        imca.setDisplayName("§cChallenges");
+        imca.setLore(Arrays.asList(" ", "§7§oEine Übersicht mit allen Challenge-Welten!", " "));
+        ChallengeAuswahl.setItemMeta(imca);
+        ChallengeAuswahl.setAmount(1);
+        inventory.setItem(13, ChallengeAuswahl);
 
         ItemStack Welten = new ItemStack(Material.END_PORTAL_FRAME);
         ItemMeta itemMeta2 = Welten.getItemMeta();
@@ -67,112 +82,6 @@ public class Navigator implements Listener {
         Welten.setItemMeta(itemMeta2);
         Welten.setAmount(1);
 
-        if (Bukkit.getWorld("Challenge-1") == null) {
-            ItemStack Welt1 = new ItemStack(Material.WHITE_CONCRETE);
-            ItemMeta itemMeta3 = Welt1.getItemMeta();
-            itemMeta3.setDisplayName("§6§lChallenge-Welt-1");
-            itemMeta3.setLore(Arrays.asList(" ", "§4\u2715 §c§lWelt inaktiv! §4\u2715", " "));
-            Welt1.setItemMeta(itemMeta3);
-            Welt1.setAmount(1);
-            WeltenOrdner.setItem(11, Welt1);
-        } else if (Bukkit.getWorld("Challenge-1") != null) {
-            ItemStack Welt1 = new ItemStack(Material.WHITE_CONCRETE);
-            ItemMeta itemMeta3 = Welt1.getItemMeta();
-            itemMeta3.setDisplayName("§6§lChallenge-Welt-1");
-            itemMeta3.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            itemMeta3.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            itemMeta3.setLore(Arrays.asList(" ", "§a\u2714 §c§lWelt aktiv! §a\u2714", " "));
-            Welt1.setItemMeta(itemMeta3);
-            Welt1.setAmount(1);
-            WeltenOrdner.setItem(11, Welt1);
-        }
-
-        if (Bukkit.getWorld("Challenge-2") == null) {
-            ItemStack Welt2 = new ItemStack(Material.RED_CONCRETE);
-            ItemMeta itemMeta4 = Welt2.getItemMeta();
-            itemMeta4.setDisplayName("§6§lChallenge-Welt-2");
-            itemMeta4.setLore(Arrays.asList(" ", "§4\u2715 §c§lWelt inaktiv! §4\u2715", " "));
-            Welt2.setItemMeta(itemMeta4);
-            Welt2.setAmount(1);
-            WeltenOrdner.setItem(12, Welt2);
-        } else if (Bukkit.getWorld("Challenge-2") != null) {
-            ItemStack Welt2 = new ItemStack(Material.RED_CONCRETE);
-            ItemMeta itemMeta4 = Welt2.getItemMeta();
-            itemMeta4.setDisplayName("§6§lChallenge-Welt-2");
-            itemMeta4.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            itemMeta4.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            itemMeta4.setLore(Arrays.asList(" ", "§a\u2714 §c§lWelt aktiv! §a\u2714", " "));
-            Welt2.setItemMeta(itemMeta4);
-            Welt2.setAmount(1);
-            WeltenOrdner.setItem(12, Welt2);
-        }
-
-        if (Bukkit.getWorld("Challenge-3") == null) {
-            ItemStack Welt3 = new ItemStack(Material.BLUE_CONCRETE);
-            ItemMeta itemMeta5 = Welt3.getItemMeta();
-            itemMeta5.setDisplayName("§6§lChallenge-Welt-3");
-            itemMeta5.setLore(Arrays.asList(" ", "§4\u2715 §c§lWelt inaktiv! §4\u2715", " "));
-            Welt3.setItemMeta(itemMeta5);
-            Welt3.setAmount(1);
-            WeltenOrdner.setItem(13, Welt3);
-        } else if (Bukkit.getWorld("Challenge-3") != null) {
-            ItemStack Welt3 = new ItemStack(Material.BLUE_CONCRETE);
-            ItemMeta itemMeta5 = Welt3.getItemMeta();
-            itemMeta5.setDisplayName("§6§lChallenge-Welt-3");
-            itemMeta5.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            itemMeta5.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            itemMeta5.setLore(Arrays.asList(" ", "§a\u2714 §c§lWelt aktiv! §a\u2714", " "));
-            Welt3.setItemMeta(itemMeta5);
-            Welt3.setAmount(1);
-            WeltenOrdner.setItem(13, Welt3);
-        }
-
-        if (Bukkit.getWorld("Challenge-4") == null) {
-            ItemStack Welt4 = new ItemStack(Material.GREEN_CONCRETE);
-            ItemMeta itemMeta6 = Welt4.getItemMeta();
-            itemMeta6.setDisplayName("§6§lChallenge-Welt-4");
-            itemMeta6.setLore(Arrays.asList(" ", "§4\u2715 §c§lWelt inaktiv! §4\u2715", " "));
-            Welt4.setItemMeta(itemMeta6);
-            Welt4.setAmount(1);
-            WeltenOrdner.setItem(14, Welt4);
-        } else if (Bukkit.getWorld("Challenge-4") != null) {
-            ItemStack Welt4 = new ItemStack(Material.GREEN_CONCRETE);
-            ItemMeta itemMeta6 = Welt4.getItemMeta();
-            itemMeta6.setDisplayName("§6§lChallenge-Welt-4");
-            itemMeta6.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            itemMeta6.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            itemMeta6.setLore(Arrays.asList(" ", "§a\u2714 §c§lWelt aktiv! §a\u2714", " "));
-            Welt4.setItemMeta(itemMeta6);
-            Welt4.setAmount(1);
-            WeltenOrdner.setItem(14, Welt4);
-        }
-
-        if (Bukkit.getWorld("Challenge-5") == null) {
-            ItemStack Welt5 = new ItemStack(Material.BLACK_CONCRETE);
-            ItemMeta itemMeta7 = Welt5.getItemMeta();
-            itemMeta7.setDisplayName("§6§lChallenge-Welt-5");
-            itemMeta7.setLore(Arrays.asList(" ", "§4\u2715 §c§lWelt inaktiv! §4\u2715", " "));
-            Welt5.setItemMeta(itemMeta7);
-            Welt5.setAmount(1);
-            WeltenOrdner.setItem(15, Welt5);
-        } else if (Bukkit.getWorld("Challenge-5") != null) {
-            ItemStack Welt5 = new ItemStack(Material.BLACK_CONCRETE);
-            ItemMeta itemMeta7 = Welt5.getItemMeta();
-            itemMeta7.setDisplayName("§6§lChallenge-Welt-5");
-            itemMeta7.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            itemMeta7.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            itemMeta7.setLore(Arrays.asList(" ", "§a\u2714 §c§lWelt aktiv! §a\u2714", " "));
-            Welt5.setItemMeta(itemMeta7);
-            Welt5.setAmount(1);
-            WeltenOrdner.setItem(15, Welt5);
-        }
-        ItemStack Zurück = new ItemStack(Material.BARRIER);
-        ItemMeta itemMetaZ = Zurück.getItemMeta();
-        itemMetaZ.setDisplayName("§6§lZurück!");
-        itemMetaZ.setLore(Arrays.asList(" ", "§7Letzte Menü-Seite", " "));
-        Zurück.setItemMeta(itemMetaZ);
-        Zurück.setAmount(1);
-        WeltenOrdner.setItem(26, Zurück);
 
         ItemStack Modes = new ItemStack(Material.PAPER);
         ItemMeta itemMetaM = Modes.getItemMeta();
@@ -182,60 +91,207 @@ public class Navigator implements Listener {
         itemMetaM.setLore(Arrays.asList(" ", "§7Zeigt die Spiel-Modi-Auswahl!", " "));
         Modes.setItemMeta(itemMetaM);
         Modes.setAmount(1);
-        inventory.setItem(15, Modes);
+        inventory.setItem(2, Modes);
 
-
-        inventory.setItem(11, Bingo);
-        inventory.setItem(13, Welten);
+        inventory.setItem(1, Welten);
         player.openInventory(inventory);
 
     }
 
-    public void openCW1(Player player) {
+    public void openGUI2(Player player) {
 
-        if (Bukkit.getWorld("Challenge-1") != null) {
-            ItemStack CreateCW1 = new ItemStack(Material.GREEN_CONCRETE);
-            ItemMeta IMCCW1 = CreateCW1.getItemMeta();
-            IMCCW1.setDisplayName("§6§lChallenge-Welt-1 -> Online §a\u2714");
-            IMCCW1.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            IMCCW1.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            IMCCW1.setLore(Arrays.asList(" ", "§7§oTeleportiere dich ->", "§7§oLösche die Welt -->", " "));
-            CreateCW1.setItemMeta(IMCCW1);
-            CreateCW1.setAmount(1);
-            InvCW1.setItem(12, CreateCW1);
-        } else if (Bukkit.getWorld("Challenge-1") == null) {
-            ItemStack CreateCW1 = new ItemStack(Material.GREEN_CONCRETE);
-            ItemMeta IMCCW1 = CreateCW1.getItemMeta();
-            IMCCW1.setDisplayName("§6§lCreate Challenge-Welt-1");
-            IMCCW1.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-1", " "));
-            CreateCW1.setItemMeta(IMCCW1);
-            CreateCW1.setAmount(1);
-            InvCW1.setItem(12, CreateCW1);
+        ItemStack deko = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        ItemMeta d = deko.getItemMeta();
+        d.setDisplayName(" ");
+        deko.setItemMeta(d);
+        deko.setAmount(1);
+        WeltenOrdner.setItem(0, deko);
+        ItemStack deko2 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko2.setItemMeta(d);
+        deko2.setAmount(1);
+        WeltenOrdner.setItem(1, deko2);
+        ItemStack deko3 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko3.setItemMeta(d);
+        deko3.setAmount(1);
+        WeltenOrdner.setItem(2, deko3);
+        ItemStack deko4 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko4.setItemMeta(d);
+        deko4.setAmount(1);
+        WeltenOrdner.setItem(3, deko4);
+        ItemStack deko5 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko5.setItemMeta(d);
+        deko5.setAmount(1);
+        WeltenOrdner.setItem(5, deko5);
+        ItemStack deko6 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko6.setItemMeta(d);
+        deko6.setAmount(1);
+        WeltenOrdner.setItem(6, deko6);
+        ItemStack deko7 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko7.setItemMeta(d);
+        deko7.setAmount(1);
+        WeltenOrdner.setItem(7, deko7);
+        ItemStack deko8 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko8.setItemMeta(d);
+        deko8.setAmount(1);
+        WeltenOrdner.setItem(8, deko8);
+        ItemStack deko9 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko9.setItemMeta(d);
+        deko9.setAmount(1);
+        WeltenOrdner.setItem(9, deko9);
+        ItemStack deko10 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko10.setItemMeta(d);
+        deko10.setAmount(1);
+        WeltenOrdner.setItem(11, deko10);
+        ItemStack deko11 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko11.setItemMeta(d);
+        deko11.setAmount(1);
+        WeltenOrdner.setItem(13, deko11);
+        ItemStack deko12 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko12.setItemMeta(d);
+        deko12.setAmount(1);
+        WeltenOrdner.setItem(15, deko12);
+        ItemStack deko13 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko13.setItemMeta(d);
+        deko13.setAmount(1);
+        WeltenOrdner.setItem(17, deko13);
+
+        for (int k = 37; k < 45; k++) {
+            ItemStack deko14 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+            deko14.setItemMeta(d);
+            deko14.setAmount(1);
+            WeltenOrdner.setItem(k, deko14);
         }
 
-        ItemStack TPCW1 = new ItemStack(Material.WHITE_CONCRETE);
-        ItemMeta IMOCW1 = TPCW1.getItemMeta();
-        IMOCW1.setDisplayName("§6§lTeleport Challenge-Welt-1");
-        IMOCW1.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oTeleportiert dich in die Challenge-Welt-1", " "));
-        TPCW1.setItemMeta(IMOCW1);
-        TPCW1.setAmount(1);
-        InvCW1.setItem(13, TPCW1);
+        if (Bukkit.getWorld("Challenge-1") != null) {
+            ItemStack wa = new ItemStack(Material.GREEN_DYE);
+            ItemMeta imwa = wa.getItemMeta();
+            imwa.setDisplayName("§a\u2714 §2§lWelt aktiv! §a\u2714");
+            wa.setItemMeta(imwa);
+            wa.setAmount(1);
+            WeltenOrdner.setItem(19, wa);
+        } else {
+            ItemStack wa = new ItemStack(Material.GRAY_DYE);
+            ItemMeta imwa = wa.getItemMeta();
+            imwa.setDisplayName("§4\u2715 §c§lWelt inaktiv! §4\u2715");
+            wa.setItemMeta(imwa);
+            wa.setAmount(1);
+            WeltenOrdner.setItem(19, wa);
+        }
 
-        ItemStack DeleteCW1 = new ItemStack(Material.RED_CONCRETE);
-        ItemMeta IMDCW1 = DeleteCW1.getItemMeta();
-        IMDCW1.setDisplayName("§6§lDelete Challenge-Welt-1");
-        IMDCW1.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oLöscht die Challenge-Welt-1", " "));
-        DeleteCW1.setItemMeta(IMDCW1);
-        DeleteCW1.setAmount(1);
-        InvCW1.setItem(14, DeleteCW1);
 
-        ItemStack Zurück = new ItemStack(Material.BARRIER);
+        ItemStack ChallengeAuswahl = new ItemStack(Material.NETHER_STAR);
+        ItemMeta imca = ChallengeAuswahl.getItemMeta();
+        imca.setDisplayName("§cChallenges");
+        ChallengeAuswahl.setItemMeta(imca);
+        ChallengeAuswahl.setAmount(1);
+        WeltenOrdner.setItem(4, ChallengeAuswahl);
+
+
+        ItemStack Zurück = new ItemStack(Material.RED_DYE);
         ItemMeta itemMetaZ = Zurück.getItemMeta();
         itemMetaZ.setDisplayName("§6§lZurück!");
         itemMetaZ.setLore(Arrays.asList(" ", "§7Letzte Menü-Seite", " "));
         Zurück.setItemMeta(itemMetaZ);
         Zurück.setAmount(1);
-        InvCW1.setItem(26, Zurück);
+        WeltenOrdner.setItem(36, Zurück);
+
+        WeltenOrdner.setItem(10, Main.getGlobeSkull1("GLOBE1"));
+        WeltenOrdner.setItem(12, Main.getGlobeSkull1("GLOBE1"));
+        WeltenOrdner.setItem(14, Main.getGlobeSkull1("GLOBE1"));
+        WeltenOrdner.setItem(16, Main.getGlobeSkull1("GLOBE1"));
+        player.openInventory(WeltenOrdner);
+
+    }
+
+    public void openCW1(Player player) {
+
+        InvCW1.setItem(4, Main.getGlobeSkull1("GLOBE1"));
+
+        ItemStack deko = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        ItemMeta d = deko.getItemMeta();
+        d.setDisplayName(" ");
+        deko.setItemMeta(d);
+        deko.setAmount(1);
+        InvCW1.setItem(0, deko);
+        ItemStack deko2 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko2.setItemMeta(d);
+        deko2.setAmount(1);
+        InvCW1.setItem(1, deko2);
+        ItemStack deko3 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko3.setItemMeta(d);
+        deko3.setAmount(1);
+        InvCW1.setItem(2, deko3);
+        ItemStack deko4 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko4.setItemMeta(d);
+        deko4.setAmount(1);
+        InvCW1.setItem(3, deko4);
+        ItemStack deko5 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko5.setItemMeta(d);
+        deko5.setAmount(1);
+        InvCW1.setItem(5, deko5);
+        ItemStack deko6 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko6.setItemMeta(d);
+        deko6.setAmount(1);
+        InvCW1.setItem(6, deko6);
+        ItemStack deko7 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko7.setItemMeta(d);
+        deko7.setAmount(1);
+        InvCW1.setItem(7, deko7);
+        ItemStack deko8 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+        deko8.setItemMeta(d);
+        deko8.setAmount(1);
+        InvCW1.setItem(8, deko8);
+        ItemStack deko9 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko9.setItemMeta(d);
+        deko9.setAmount(1);
+        InvCW1.setItem(10, deko9);
+        ItemStack deko10 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko10.setItemMeta(d);
+        deko10.setAmount(1);
+        InvCW1.setItem(11, deko10);
+        ItemStack deko11 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        deko11.setItemMeta(d);
+        deko11.setAmount(1);
+        InvCW1.setItem(16, deko11);
+
+        for (int k = 37; k < 45; k++) {
+            ItemStack deko14 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+            deko14.setItemMeta(d);
+            deko14.setAmount(1);
+            InvCW1.setItem(k, deko14);
+        }
+
+        ItemStack wl = new ItemStack(Material.BARRIER);
+        ItemMeta imwl = wl.getItemMeta();
+        imwl.setDisplayName("§cWelt 1 löschen!");
+        imwl.setLore(Arrays.asList(" ", "§7Diese Aktion kann nicht rückgängig gemacht werden!", " "));
+        wl.setItemMeta(imwl);
+        wl.setAmount(1);
+        InvCW1.setItem(19, wl);
+
+        ItemStack wo = new ItemStack(Material.REPEATER);
+        ItemMeta imwo = wo.getItemMeta();
+        imwo.setDisplayName("§6Challenge Einstellungen");
+        imwo.setLore(Arrays.asList(" ", "§7Konfiguriere die Challenge nach deinem Willen!", " "));
+        wo.setItemMeta(imwo);
+        wo.setAmount(1);
+        InvCW1.setItem(20, wo);
+
+        ItemStack wt = new ItemStack(Material.ENDER_PEARL);
+        ItemMeta imwt = wt.getItemMeta();
+        imwt.setDisplayName("§aTeleport Welt 1");
+        imwt.setLore(Arrays.asList(" ", "§7Teleportiert dich in Welt 1!", " "));
+        wt.setItemMeta(imwt);
+        wt.setAmount(1);
+        InvCW1.setItem(25, wt);
+
+        ItemStack Zurück = new ItemStack(Material.RED_DYE);
+        ItemMeta itemMetaZ = Zurück.getItemMeta();
+        itemMetaZ.setDisplayName("§6§lZurück!");
+        itemMetaZ.setLore(Arrays.asList(" ", "§7Letzte Menü-Seite", " "));
+        Zurück.setItemMeta(itemMetaZ);
+        Zurück.setAmount(1);
+        InvCW1.setItem(36, Zurück);
 
         player.openInventory(InvCW1);
     }
@@ -389,56 +445,6 @@ public class Navigator implements Listener {
 
     }
 
-    public void openCW5(Player player) {
-
-        if (Bukkit.getWorld("Challenge-5") != null) {
-            ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
-            ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lChallenge-Welt-5 -> Online §a\u2714");
-            IMC.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-            IMC.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            IMC.setLore(Arrays.asList(" ", "§7§oTeleportiere dich ->", "§7§oLösche die Welt -->", " "));
-            Create.setItemMeta(IMC);
-            Create.setAmount(1);
-            InvCW5.setItem(12, Create);
-        } else if (Bukkit.getWorld("Challenge-5") == null) {
-            ItemStack Create = new ItemStack(Material.GREEN_CONCRETE);
-            ItemMeta IMC = Create.getItemMeta();
-            IMC.setDisplayName("§6§lCreate Challenge-Welt-5");
-            IMC.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErstellt die Challenge-Welt-5", " "));
-            Create.setItemMeta(IMC);
-            Create.setAmount(1);
-            InvCW5.setItem(12, Create);
-        }
-
-        ItemStack TP = new ItemStack(Material.WHITE_CONCRETE);
-        ItemMeta IMO = TP.getItemMeta();
-        IMO.setDisplayName("§6§lTeleport Challenge-Welt-5");
-        IMO.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oTeleportiert dich in die Challenge-Welt-5", " "));
-        TP.setItemMeta(IMO);
-        TP.setAmount(1);
-        InvCW5.setItem(13, TP);
-
-        ItemStack Delete = new ItemStack(Material.RED_CONCRETE);
-        ItemMeta IMD = Delete.getItemMeta();
-        IMD.setDisplayName("§6§lDelete Challenge-Welt-5");
-        IMD.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oLöscht die Challenge-Welt-5", " "));
-        Delete.setItemMeta(IMD);
-        Delete.setAmount(1);
-        InvCW5.setItem(14, Delete);
-
-        ItemStack Zurück = new ItemStack(Material.BARRIER);
-        ItemMeta itemMetaZ = Zurück.getItemMeta();
-        itemMetaZ.setDisplayName("§6§lZurück!");
-        itemMetaZ.setLore(Arrays.asList(" ", "§7Letzte Menü-Seite", " "));
-        Zurück.setItemMeta(itemMetaZ);
-        Zurück.setAmount(1);
-        InvCW5.setItem(26, Zurück);
-
-        player.openInventory(InvCW5);
-
-    }
-
 
     //RightClick on Book(Navi)
     @EventHandler
@@ -446,31 +452,27 @@ public class Navigator implements Listener {
         if (event.getItem().getItemMeta().getDisplayName() != "§6§lNavigator" && event.getItem().getType() != Material.BOOK) return;
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
             openGUI(event.getPlayer());
-            Player player = (Player) event.getPlayer();
-            player.sendMessage("§aServer " + "§8>> " + "§aDir wurde der Navigator geöffnet!");
         }
 
     }
 
     //Was tun wenn Click im Navi
     @EventHandler
-    public void handleNavigatorGUIClick(InventoryClickEvent event) {
+    public void openGUIinv(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals(GUI_NAME)) {
             event.setCancelled(true);
             switch (event.getCurrentItem().getType()) {
-                case ENCHANTED_GOLDEN_APPLE:
+                case PLAYER_HEAD:
                     Bukkit.dispatchCommand(player, "startbingo");
                     player.closeInventory();
                     break;
-                case END_PORTAL_FRAME:
-                    player.openInventory(WeltenOrdner);
-                    //player.sendMessage("§aServer " + "§8>> " + "§aDir wurde die Welten-Auswahl geöffnet!");
+                case NETHER_STAR:
+                    openGUI2(player.getPlayer());
                     break;
                 case PAPER:
                     gl.openGUI(player.getPlayer());
-                    //player.sendMessage(Main.getPlugin().PREFIX + "§aDir wurde die Spiel-Modi-Auswahl geöffnet!");
                     break;
                 default:
                     break;
@@ -480,81 +482,69 @@ public class Navigator implements Listener {
     }
 
     @EventHandler
-    public void handleNavigatorGUIClick2(InventoryClickEvent event) {
+    public void openGUI2inv(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
 
+        World world1 = Bukkit.getWorld("Challenge-1");
 
-        World world2 = Bukkit.getWorld("Challenge-2");
-        World world3 = Bukkit.getWorld("Challenge-3");
-        World world4 = Bukkit.getWorld("Challenge-4");
-        World world5 = Bukkit.getWorld("Challenge-5");
+        if (event.getClick().isLeftClick()) {
+            if (event.getView().getTitle().equals(GUI_NAME2)) {
+                event.setCancelled(true);
 
-        if (event.getView().getTitle().equals(GUI_NAME2)) {
-            event.setCancelled(true);
-
-            switch (event.getCurrentItem().getType()) {
-                case WHITE_CONCRETE:
-
+                if (event.getSlot() == 10 && Bukkit.getWorld("Challenge-1") != null) {
+                    player.closeInventory();
+                    Location location1 = world1.getSpawnLocation();
+                    location1.setY(world1.getHighestBlockYAt(location1) + 1);
+                    player.teleport(location1);
+                    player.getInventory().clear();
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1§a!");
+                } else if (Bukkit.getWorld("Challenge-1") == null) {
+                    player.closeInventory();
+                    player.sendMessage("§aServer " + "§8>> " + "§cWelt 1 wird erstellt!");
+                    WorldCreator c1 = new WorldCreator("Challenge-1");
+                    c1.type(WorldType.NORMAL);
+                    c1.generateStructures(true);
+                    World w1 = c1.createWorld();
+                    player.updateInventory();
+                    player.sendMessage(Main.getPlugin().PREFIX + "§cWelt 1 wurde erstellt!");
                     openCW1(player.getPlayer());
-                    break;
+                }
 
-                case RED_CONCRETE:
-
-                    openCW2(player.getPlayer());
-                    break;
-
-                case BLUE_CONCRETE:
-
-                    openCW3(player.getPlayer());
-                    break;
-
-                case GREEN_CONCRETE:
-
-                    if (Bukkit.getWorld("Challenge-4") != null) {
-                        Location location4 = world4.getSpawnLocation();
-                        location4.setY(world4.getHighestBlockYAt(location4) + 1);
-                        player.teleport(location4);
-                        player.getInventory().clear();
-                        player.setGameMode(GameMode.SURVIVAL);
-                        player.closeInventory();
-                        player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: Challenge-Welt-4!");
-                    } else {
-                        player.sendMessage("§aServer " + "§8>> " + "§cEs existiert keine Challenge-Welt-4!");
-                        player.closeInventory();
-                        break;
-                    }
-                    break;
-
-                case BLACK_CONCRETE:
-
-                    if (Bukkit.getWorld("Challenge-5") != null) {
-                        Location location5 = world5.getSpawnLocation();
-                        location5.setY(world5.getHighestBlockYAt(location5) + 1);
-                        player.teleport(location5);
-                        player.getInventory().clear();
-                        player.setGameMode(GameMode.SURVIVAL);
-                        player.closeInventory();
-                        player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: Challenge-Welt-5!");
-                    } else {
-                        player.sendMessage("§aServer " + "§8>> " + "§cEs existiert keine Challenge-Welt-5!");
-                        player.closeInventory();
-                        break;
-                    }
-                    break;
-                case BARRIER:
-
+                if (event.getSlot() == 36) {
                     player.openInventory(inventory);
-                    break;
+                }
 
-                default:
-                    break;
+            }
+        }
+        if (event.getClick().isRightClick()) {
+            if (event.getView().getTitle().equals(GUI_NAME2)) {
+                event.setCancelled(true);
+
+                if (event.getSlot() == 10 && Bukkit.getWorld("Challenge-1") != null) {
+                    openCW1(player.getPlayer());
+                } else if (Bukkit.getWorld("Challenge-1") == null) {
+                    player.closeInventory();
+                    player.sendMessage("§aServer " + "§8>> " + "§cWelt 1 wird erstellt!");
+                    WorldCreator c1 = new WorldCreator("Challenge-1");
+                    c1.type(WorldType.NORMAL);
+                    c1.generateStructures(true);
+                    World w1 = c1.createWorld();
+                    player.updateInventory();
+                    player.sendMessage(Main.getPlugin().PREFIX + "§cWelt 1 wurde erstellt!");
+                    openCW1(player.getPlayer());
+                }
+
+                if (event.getSlot() == 36) {
+                    player.openInventory(inventory);
+                }
             }
         }
     }
 
     @EventHandler
-    public void handleNavigatorGUIClick3(InventoryClickEvent event) {
+    public void CW1Inv(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
 
         World world1 = Bukkit.getWorld("Challenge-1");
@@ -671,7 +661,7 @@ public class Navigator implements Listener {
                     }
                     break;
 
-                case BARRIER:
+                case RED_DYE:
 
                     player.openInventory(WeltenOrdner);
                     break;
@@ -687,7 +677,7 @@ public class Navigator implements Listener {
     public void handleNavigatorGUIClick4(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
 
-        World world1 = Bukkit.getWorld("Challenge-2");
+        World world12 = Bukkit.getWorld("Challenge-2");
         World world;
 
         World hub = Bukkit.getWorld("world");
@@ -726,8 +716,8 @@ public class Navigator implements Listener {
                 case WHITE_CONCRETE:
 
                     if (Bukkit.getWorld("Challenge-2") != null) {
-                        Location location1 = world1.getSpawnLocation();
-                        location1.setY(world1.getHighestBlockYAt(location1) + 1);
+                        Location location1 = world12.getSpawnLocation();
+                        location1.setY(world12.getHighestBlockYAt(location1) + 1);
                         player.teleport(location1);
                         player.getInventory().clear();
                         player.setGameMode(GameMode.SURVIVAL);
@@ -983,38 +973,6 @@ public class Navigator implements Listener {
     public void handleNavigatorGUIClick7(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
-        if (event.getView().getTitle().equals(CW5)) {
-            event.setCancelled(true);
-
-            switch (event.getCurrentItem().getType()) {
-                case GREEN_STAINED_GLASS_PANE:
-                    player.sendMessage("green");
-                    break;
-
-                case WHITE_STAINED_GLASS_PANE:
-                    player.sendMessage("white");
-                    break;
-
-                case RED_STAINED_GLASS_PANE:
-                    player.sendMessage("red");
-                    break;
-
-                case BARRIER:
-
-                    player.openInventory(WeltenOrdner);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-    }
-
-    @EventHandler
-    public void handleNavigatorGUIClick8(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player)) return;
-        Player player = (Player) event.getWhoClicked();
         if (player.getWorld() == Bukkit.getWorld("world")) {
             if (event.getSlotType() == SlotType.QUICKBAR) {
                 event.setCancelled(true);
@@ -1043,3 +1001,5 @@ public class Navigator implements Listener {
 
 
 }
+
+

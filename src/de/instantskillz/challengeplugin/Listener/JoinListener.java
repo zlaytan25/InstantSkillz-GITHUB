@@ -39,7 +39,6 @@ public class JoinListener implements Listener {
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
 
-
             //Navigator
             ItemStack item = new ItemStack(Material.BOOK);
             ItemMeta itemMeta = item.getItemMeta();
@@ -59,7 +58,6 @@ public class JoinListener implements Listener {
             config.set("Spawn.Yaw", player.getLocation().getYaw());
             config.set("Spawn.Pitch", player.getLocation().getPitch());
             Main.getPlugin().saveConfig();
-
         }
 
         //Join-Message
