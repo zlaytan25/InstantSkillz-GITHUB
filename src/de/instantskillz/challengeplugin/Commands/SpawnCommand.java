@@ -8,11 +8,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -23,7 +28,41 @@ public class SpawnCommand implements CommandExecutor {
             if (player.hasPermission("schnellerHase.hub")) {
                 if (args.length == 0) {
 
-                    player.getInventory().clear();
+                    if (player.getWorld() != Bukkit.getWorld("world")) {
+                        this.checkDirectory();
+                        ArrayList<ItemStack> list = new ArrayList<>();
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + playername + ".yml");
+
+                        if (!file.exists()) {
+                            try {
+                                file.createNewFile();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                            ItemStack[] contents = player.getInventory().getContents();
+
+                            for (int i = 0; i < contents.length; i++) {
+                                ItemStack item = contents[i];
+
+                                if (!(item == null)) {
+                                    list.add(item);
+                                }
+                            }
+                            inv.set("Inventory", list);
+
+                            try {
+                                inv.save(file);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            player.getInventory().clear();
+
+                        }
+                        return true;
+                    }
+
                     FileConfiguration config = Main.getPlugin().getConfig();
                     World world = Bukkit.getWorld(config.getString("Spawn.World"));
                     double x = config.getDouble("Spawn.X");
@@ -58,6 +97,13 @@ public class SpawnCommand implements CommandExecutor {
 
 
         return false;
+    }
+
+    public void checkDirectory() {
+        File file = new File("plugins//InstantSkillzTV//Inventories");
+        if (!file.exists()) {
+            file.mkdir();
+        }
     }
 
 }
