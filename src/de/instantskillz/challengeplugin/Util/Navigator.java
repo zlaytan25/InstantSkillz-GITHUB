@@ -30,6 +30,7 @@ public class Navigator implements Listener {
     private final String CW2 = "§6Welt 2";
     private final String CW3 = "§6Welt 3";
     private final String CW4 = "§6Welt 4";
+    private final String OCW1 = "§6Einstellungen Welt 1";
 
     //Navi
     Inventory inventory = Bukkit.createInventory(null, 9 * 5, GUI_NAME);
@@ -39,6 +40,8 @@ public class Navigator implements Listener {
     Inventory InvCW2 = Bukkit.createInventory(null, 9 * 5, CW2);
     Inventory InvCW3 = Bukkit.createInventory(null, 9 * 5, CW3);
     Inventory InvCW4 = Bukkit.createInventory(null, 9 * 5, CW4);
+
+    Inventory OptionsCW1 = Bukkit.createInventory(null, 9 * 6, OCW1);
 
 
     private GameModeListener gl = new GameModeListener();
@@ -445,6 +448,19 @@ public class Navigator implements Listener {
 
     }
 
+    public void openOWC1(Player player) {
+
+        ItemStack Zurück = new ItemStack(Material.RED_DYE);
+        ItemMeta itemMetaZ = Zurück.getItemMeta();
+        itemMetaZ.setDisplayName("§6§lZurück!");
+        itemMetaZ.setLore(Arrays.asList(" ", "§7Letzte Menü-Seite", " "));
+        Zurück.setItemMeta(itemMetaZ);
+        Zurück.setAmount(1);
+        OptionsCW1.setItem(45, Zurück);
+
+        player.openInventory(OptionsCW1);
+    }
+
 
     //RightClick on Book(Navi)
     @EventHandler
@@ -509,6 +525,7 @@ public class Navigator implements Listener {
                     World w1 = c1.createWorld();
                     player.updateInventory();
                     player.sendMessage(Main.getPlugin().PREFIX + "§cWelt 1 wurde erstellt!");
+                    openGUI2(player.getPlayer());
                     openCW1(player.getPlayer());
                 }
 
@@ -548,7 +565,6 @@ public class Navigator implements Listener {
         if (!(event.getWhoClicked() instanceof Player)) return;
 
         World world1 = Bukkit.getWorld("Challenge-1");
-        World world;
         World hub = Bukkit.getWorld("world");
         Location lochub = new Location(hub, 0.5, 75, 0.5);
         ItemStack item = new ItemStack(Material.BOOK);
@@ -564,24 +580,12 @@ public class Navigator implements Listener {
             event.setCancelled(true);
 
             switch (event.getCurrentItem().getType()) {
-                case GREEN_CONCRETE:
+                case REPEATER:
 
-                    if (Bukkit.getWorld("Challenge-1") == null) {
-                        player.closeInventory();
-                        player.sendMessage("§aServer " + "§8>> " + "§cChallenge-Welt-1 wird erstellt!");
-                        WorldCreator c1 = new WorldCreator("Challenge-1");
-                        c1.type(WorldType.NORMAL);
-                        c1.generateStructures(true);
-                        world = c1.createWorld();
-                        player.sendMessage(Main.getPlugin().PREFIX + "§cChallenge-Welt-1 wurde erstellt!");
-                        openCW1(player.getPlayer());
-                        break;
-                    } else if (Bukkit.getWorld("Challenge-1") != null) {
-                        break;
-                    }
+                    openOWC1(player.getPlayer());
                     break;
 
-                case WHITE_CONCRETE:
+                case ENDER_PEARL:
 
                     if (Bukkit.getWorld("Challenge-1") != null) {
                         Location location1 = world1.getSpawnLocation();
@@ -597,7 +601,7 @@ public class Navigator implements Listener {
                     }
                     break;
 
-                case RED_CONCRETE:
+                case BARRIER:
 
                     if (Bukkit.getWorld("Challenge-1") != null) {
                         player.closeInventory();
@@ -653,7 +657,7 @@ public class Navigator implements Listener {
                             challenge.delete();
                         }
                         player.sendMessage("§aServer " + "§8>> " + "§cChallenge-Welt-1 wurde gelöscht!");
-                        openCW1(player.getPlayer());
+                        openGUI2(player.getPlayer());
                         break;
                     } else if (Bukkit.getWorld("Challenge-1") == null) {
                         player.sendMessage(Main.getPlugin().PREFIX + "§cEs existiert keine Challenge-Welt-1!");
