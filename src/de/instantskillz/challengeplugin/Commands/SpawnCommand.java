@@ -29,10 +29,12 @@ public class SpawnCommand implements CommandExecutor {
                 if (args.length == 0) {
 
                     if (player.getWorld() != Bukkit.getWorld("world")) {
+
                         this.checkDirectory();
                         ArrayList<ItemStack> list = new ArrayList<>();
                         String playername = player.getName();
-                        File file = new File("plugins//InstantSkillzTV//Inventories//" + playername + ".yml");
+                        World world = player.getWorld();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world + "//" + playername + ".yml");
 
                         if (!file.exists()) {
                             try {
