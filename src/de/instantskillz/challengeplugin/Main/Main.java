@@ -6,10 +6,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.instantskillz.challengeplugin.Commands.*;
 import de.instantskillz.challengeplugin.Listener.*;
-import de.instantskillz.challengeplugin.Util.BingoSkull;
-import de.instantskillz.challengeplugin.Util.GlobeSkull1;
-import de.instantskillz.challengeplugin.Util.Navigator;
-import de.instantskillz.challengeplugin.Util.RecipeLoader;
+import de.instantskillz.challengeplugin.Util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -39,17 +36,17 @@ public class Main extends JavaPlugin {
     //SneakKillEvent
     private boolean SKL = true;
     //TimerAn/Aus
-    private boolean timer = true;
+    private boolean timer = false;
     //KillALL
     private boolean KA = true;
     //FallDMG
     private boolean FDMG = true;
     //Backpack
-    private boolean BP = true;
+    private boolean BP = false;
     //BINGO
     private boolean BINGO = true;
     //EnderDragonKill
-    private boolean EDK = true;
+    private boolean EDK = false;
     //UUHC
     private boolean UUHC = true;
     //UHC
@@ -226,6 +223,219 @@ public class Main extends JavaPlugin {
         SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
         smeta1.setDisplayName("§6§lWelt 1");
         smeta1.setLore(Arrays.asList(" ", "§7Rechtsklick: Detail Seite", "§7Linksklick: Quickjoin", " "));
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getGlobeSkull2(String name) {
+        for (GlobeSkull2 head : GlobeSkull2.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createGlobeSkull2(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 2");
+        smeta1.setLore(Arrays.asList(" ", "§7Rechtsklick: Detail Seite", "§7Linksklick: Quickjoin", " "));
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getGlobeSkull3(String name) {
+        for (GlobeSkull3 head : GlobeSkull3.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createGlobeSkull3(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 3");
+        smeta1.setLore(Arrays.asList(" ", "§7Rechtsklick: Detail Seite", "§7Linksklick: Quickjoin", " "));
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getGlobeSkull4(String name) {
+        for (GlobeSkull4 head : GlobeSkull4.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createGlobeSkull4(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 4");
+        smeta1.setLore(Arrays.asList(" ", "§7Rechtsklick: Detail Seite", "§7Linksklick: Quickjoin", " "));
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getDeko1(String name) {
+        for (DekoGS1 head : DekoGS1.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createDeko1(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 1");
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getDeko2(String name) {
+        for (DekoGS2 head : DekoGS2.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createDeko2(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 2");
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getDeko3(String name) {
+        for (DekoGS3 head : DekoGS3.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createDeko3(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 3");
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", url));
+
+        try {
+            Field profileField = smeta1.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(smeta1, profile);
+        } catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+            error.printStackTrace();
+        }
+        skullBingo.setItemMeta(smeta1);
+
+        return skullBingo;
+    }
+
+    public static ItemStack getDeko4(String name) {
+        for (DekoGS4 head : DekoGS4.values()) {
+            if (head.getIdTag().equalsIgnoreCase(name)) {
+                return head.getItemStack();
+            }
+        }
+        return null;
+    }
+
+    public static ItemStack createDeko4(String url, String name) {
+
+        ItemStack skullBingo = new ItemStack(Material.PLAYER_HEAD, 1);
+        if (url.isEmpty()) return skullBingo;
+        SkullMeta smeta1 = (SkullMeta) skullBingo.getItemMeta();
+        smeta1.setDisplayName("§6§lWelt 4");
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
         profile.getProperties().put("textures", new Property("textures", url));
 

@@ -21,9 +21,9 @@ public class FallDMGListener implements Listener {
                 Main.getPlugin().setTimer(true);
                 Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§c" + player.getName() + " §ahat Fallschaden bekommen!");
             }
-            if (Main.getPlugin().getFDMG() == true) {
-                event.setCancelled(true);
-            }
+            //if (Main.getPlugin().getFDMG() == true) {
+            // event.setCancelled(true);
+            //}
         }
     }
 
