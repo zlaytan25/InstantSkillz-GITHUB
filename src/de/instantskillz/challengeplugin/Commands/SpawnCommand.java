@@ -45,6 +45,15 @@ public class SpawnCommand implements CommandExecutor {
 
                         YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
 
+                        ArrayList<Integer> slot = new ArrayList<>();
+
+
+                        for (int i = 0; i <= player.getInventory().getSize(); i++) {
+                            if (player.getInventory().getItem(i) != null) {
+                                slot.add(i);
+                            }
+                        }
+
                         ItemStack[] contents = player.getInventory().getContents();
                         double health = player.getHealth();
                         int level = player.getLevel();
@@ -55,10 +64,11 @@ public class SpawnCommand implements CommandExecutor {
                             ItemStack item = contents[i];
 
                             if (!(item == null)) {
-                                list.add(i, item);
+                                list.add(item);
                             }
                         }
 
+                        inv.set("Slot", slot);
                         inv.set("Inventory", list);
                         inv.set("Health", health);
                         inv.set("Exp", exp);

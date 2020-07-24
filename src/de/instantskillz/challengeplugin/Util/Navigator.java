@@ -761,14 +761,8 @@ public class Navigator implements Listener {
                     if (file.exists()) {
                         YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
                         player.getInventory().clear();
-                        //
-                        ItemStack[] contents = player.getInventory().getContents();
                         List<?> list = inv.getList("Inventory");
-
-                        for (int i = 0; i < list.size(); i++) {
-                            contents[i] = (ItemStack) list.get(i);
-                        }
-                        player.getInventory().setContents(contents);
+                        List<?> slot = inv.getList("Slot");
 
                         double health = inv.getDouble("Health");
                         player.setHealth(health);
@@ -779,6 +773,9 @@ public class Navigator implements Listener {
                         int hunger = inv.getInt("Hunger");
                         player.setFoodLevel(hunger);
 
+                        for (int i = 0; i < player.getInventory().getSize(); i++) {
+                            player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                        }
 
                         file.delete();
 
@@ -805,7 +802,34 @@ public class Navigator implements Listener {
                     Location location2 = world2.getSpawnLocation();
                     location2.setY(world2.getHighestBlockYAt(location2) + 1);
                     player.teleport(location2);
-                    player.getInventory().clear();
+
+                    String playername = player.getName();
+                    File file = new File("plugins//InstantSkillzTV//Inventories//" + world2 + "//" + playername + ".yml");
+
+                    if (file.exists()) {
+                        YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                        player.getInventory().clear();
+                        List<?> list = inv.getList("Inventory");
+                        List<?> slot = inv.getList("Slot");
+
+                        double health = inv.getDouble("Health");
+                        player.setHealth(health);
+                        double exp = inv.getDouble("Exp");
+                        player.setExp((float) exp);
+                        int level = inv.getInt("Level");
+                        player.setLevel(level);
+                        int hunger = inv.getInt("Hunger");
+                        player.setFoodLevel(hunger);
+
+                        for (int i = 0; i < player.getInventory().getSize(); i++) {
+                            player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                        }
+
+                        file.delete();
+
+                        return;
+                    }
+
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 2§a!");
                 } else if (event.getSlot() == 12 && Bukkit.getWorld("Challenge-2") == null) {
@@ -826,7 +850,34 @@ public class Navigator implements Listener {
                     Location location3 = world3.getSpawnLocation();
                     location3.setY(world3.getHighestBlockYAt(location3) + 1);
                     player.teleport(location3);
-                    player.getInventory().clear();
+
+                    String playername = player.getName();
+                    File file = new File("plugins//InstantSkillzTV//Inventories//" + world3 + "//" + playername + ".yml");
+
+                    if (file.exists()) {
+                        YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                        player.getInventory().clear();
+                        List<?> list = inv.getList("Inventory");
+                        List<?> slot = inv.getList("Slot");
+
+                        double health = inv.getDouble("Health");
+                        player.setHealth(health);
+                        double exp = inv.getDouble("Exp");
+                        player.setExp((float) exp);
+                        int level = inv.getInt("Level");
+                        player.setLevel(level);
+                        int hunger = inv.getInt("Hunger");
+                        player.setFoodLevel(hunger);
+
+                        for (int i = 0; i < player.getInventory().getSize(); i++) {
+                            player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                        }
+
+                        file.delete();
+
+                        return;
+                    }
+
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 3§a!");
                 } else if (event.getSlot() == 14 && Bukkit.getWorld("Challenge-3") == null) {
@@ -847,7 +898,34 @@ public class Navigator implements Listener {
                     Location location4 = world4.getSpawnLocation();
                     location4.setY(world4.getHighestBlockYAt(location4) + 1);
                     player.teleport(location4);
-                    player.getInventory().clear();
+
+                    String playername = player.getName();
+                    File file = new File("plugins//InstantSkillzTV//Inventories//" + world4 + "//" + playername + ".yml");
+
+                    if (file.exists()) {
+                        YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                        player.getInventory().clear();
+                        List<?> list = inv.getList("Inventory");
+                        List<?> slot = inv.getList("Slot");
+
+                        double health = inv.getDouble("Health");
+                        player.setHealth(health);
+                        double exp = inv.getDouble("Exp");
+                        player.setExp((float) exp);
+                        int level = inv.getInt("Level");
+                        player.setLevel(level);
+                        int hunger = inv.getInt("Hunger");
+                        player.setFoodLevel(hunger);
+
+                        for (int i = 0; i < player.getInventory().getSize(); i++) {
+                            player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                        }
+
+                        file.delete();
+
+                        return;
+                    }
+
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 4§a!");
                 } else if (event.getSlot() == 16 && Bukkit.getWorld("Challenge-4") == null) {
@@ -973,7 +1051,32 @@ public class Navigator implements Listener {
                         player.teleport(location1);
                         player.getInventory().clear();
 
-                        //*************
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+
+                        if (file.exists()) {
+                            YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                            player.getInventory().clear();
+                            List<?> list = inv.getList("Inventory");
+                            List<?> slot = inv.getList("Slot");
+
+                            double health = inv.getDouble("Health");
+                            player.setHealth(health);
+                            double exp = inv.getDouble("Exp");
+                            player.setExp((float) exp);
+                            int level = inv.getInt("Level");
+                            player.setLevel(level);
+                            int hunger = inv.getInt("Hunger");
+                            player.setFoodLevel(hunger);
+
+                            for (int i = 0; i < player.getInventory().getSize(); i++) {
+                                player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                            }
+
+                            file.delete();
+
+                            return;
+                        }
 
                         player.setGameMode(GameMode.SURVIVAL);
                         player.closeInventory();
@@ -998,6 +1101,12 @@ public class Navigator implements Listener {
                         }
                         //Welt-Löschen
                         File challenge = new File("Challenge-1");
+
+                        //Inventar löschen
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+                        file.delete();
+
                         if (challenge.exists()) {
 
                             Bukkit.unloadWorld("Challenge-1", true);
@@ -1040,8 +1149,6 @@ public class Navigator implements Listener {
                             challenge.delete();
                         }
 
-                        //************
-
                         player.sendMessage("§aServer " + "§8>> " + "§cChallenge-Welt-1 wurde gelöscht!");
                         openGUI2(player.getPlayer());
                         break;
@@ -1078,6 +1185,7 @@ public class Navigator implements Listener {
         item.setItemMeta(itemMeta);
         item.setAmount(1);
 
+
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals(CW2)) {
             event.setCancelled(true);
@@ -1095,6 +1203,34 @@ public class Navigator implements Listener {
                         location1.setY(world1.getHighestBlockYAt(location1) + 1);
                         player.teleport(location1);
                         player.getInventory().clear();
+
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+
+                        if (file.exists()) {
+                            YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                            player.getInventory().clear();
+                            List<?> list = inv.getList("Inventory");
+                            List<?> slot = inv.getList("Slot");
+
+                            double health = inv.getDouble("Health");
+                            player.setHealth(health);
+                            double exp = inv.getDouble("Exp");
+                            player.setExp((float) exp);
+                            int level = inv.getInt("Level");
+                            player.setLevel(level);
+                            int hunger = inv.getInt("Hunger");
+                            player.setFoodLevel(hunger);
+
+                            for (int i = 0; i < player.getInventory().getSize(); i++) {
+                                player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                            }
+
+                            file.delete();
+
+                            return;
+                        }
+
                         player.setGameMode(GameMode.SURVIVAL);
                         player.closeInventory();
                         player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 2!");
@@ -1118,6 +1254,12 @@ public class Navigator implements Listener {
                         }
                         //Welt-Löschen
                         File challenge2 = new File("Challenge-2");
+
+                        //Inventar löschen
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+                        file.delete();
+
                         if (challenge2.exists()) {
 
                             Bukkit.unloadWorld("Challenge-2", true);
@@ -1212,6 +1354,34 @@ public class Navigator implements Listener {
                         location1.setY(world1.getHighestBlockYAt(location1) + 1);
                         player.teleport(location1);
                         player.getInventory().clear();
+
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+
+                        if (file.exists()) {
+                            YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                            player.getInventory().clear();
+                            List<?> list = inv.getList("Inventory");
+                            List<?> slot = inv.getList("Slot");
+
+                            double health = inv.getDouble("Health");
+                            player.setHealth(health);
+                            double exp = inv.getDouble("Exp");
+                            player.setExp((float) exp);
+                            int level = inv.getInt("Level");
+                            player.setLevel(level);
+                            int hunger = inv.getInt("Hunger");
+                            player.setFoodLevel(hunger);
+
+                            for (int i = 0; i < player.getInventory().getSize(); i++) {
+                                player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                            }
+
+                            file.delete();
+
+                            return;
+                        }
+
                         player.setGameMode(GameMode.SURVIVAL);
                         player.closeInventory();
                         player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 3!");
@@ -1235,6 +1405,12 @@ public class Navigator implements Listener {
                         }
                         //Welt-Löschen
                         File challenge3 = new File("Challenge-3");
+
+                        //Inventar löschen
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+                        file.delete();
+
                         if (challenge3.exists()) {
 
                             Bukkit.unloadWorld("Challenge-3", true);
@@ -1329,6 +1505,34 @@ public class Navigator implements Listener {
                         location1.setY(world1.getHighestBlockYAt(location1) + 1);
                         player.teleport(location1);
                         player.getInventory().clear();
+
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+
+                        if (file.exists()) {
+                            YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                            player.getInventory().clear();
+                            List<?> list = inv.getList("Inventory");
+                            List<?> slot = inv.getList("Slot");
+
+                            double health = inv.getDouble("Health");
+                            player.setHealth(health);
+                            double exp = inv.getDouble("Exp");
+                            player.setExp((float) exp);
+                            int level = inv.getInt("Level");
+                            player.setLevel(level);
+                            int hunger = inv.getInt("Hunger");
+                            player.setFoodLevel(hunger);
+
+                            for (int i = 0; i < player.getInventory().getSize(); i++) {
+                                player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
+                            }
+
+                            file.delete();
+
+                            return;
+                        }
+
                         player.setGameMode(GameMode.SURVIVAL);
                         player.closeInventory();
                         player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 4!");
@@ -1352,6 +1556,12 @@ public class Navigator implements Listener {
                         }
                         //Welt-Löschen
                         File challenge4 = new File("Challenge-4");
+
+                        //Inventar löschen
+                        String playername = player.getName();
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+                        file.delete();
+
                         if (challenge4.exists()) {
 
                             Bukkit.unloadWorld("Challenge-4", true);
