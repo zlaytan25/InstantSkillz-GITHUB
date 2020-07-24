@@ -28,6 +28,7 @@ public class SpawnCommand implements CommandExecutor {
             if (player.hasPermission("schnellerHase.hub")) {
                 if (args.length == 0) {
 
+
                     if (player.getWorld() != Bukkit.getWorld("world")) {
 
                         this.checkDirectory();
@@ -41,8 +42,23 @@ public class SpawnCommand implements CommandExecutor {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
                         YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+
+                        ArrayList<Integer> slot = new ArrayList<>();
+
+
+                        for (int i = 0; i <= player.getInventory().getSize(); i++) {
+                            if (player.getInventory().getItem(i) != null) {
+                                slot.add(i);
+                            }
+                        }
+
                         ItemStack[] contents = player.getInventory().getContents();
+                        double health = player.getHealth();
+                        int level = player.getLevel();
+                        double exp = player.getExp();
+                        int hunger = player.getFoodLevel();
 
                         for (int i = 0; i < contents.length; i++) {
                             ItemStack item = contents[i];
@@ -51,15 +67,21 @@ public class SpawnCommand implements CommandExecutor {
                                 list.add(item);
                             }
                         }
+
+                        inv.set("Slot", slot);
                         inv.set("Inventory", list);
+                        inv.set("Health", health);
+                        inv.set("Exp", exp);
+                        inv.set("Level", level);
+                        inv.set("Hunger", hunger);
 
                         try {
                             inv.save(file);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        player.getInventory().clear();
 
+                        player.getInventory().clear();
                         FileConfiguration config = Main.getPlugin().getConfig();
                         World world1 = Bukkit.getWorld(config.getString("Spawn.World"));
                         double x = config.getDouble("Spawn.X");
@@ -75,18 +97,13 @@ public class SpawnCommand implements CommandExecutor {
                         itemMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
                         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                         item.setItemMeta(itemMeta);
-
                         item.setAmount(1);
                         player.getInventory().setItem(4, item);
-
                         player.teleport(location);
-
                         player.setFoodLevel(20);
                         player.setHealth(20);
-                        player.setTotalExperience(0);
                         player.setExp(0);
                         player.setLevel(0);
-
                         player.setGameMode(GameMode.ADVENTURE);
                         player.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
 
