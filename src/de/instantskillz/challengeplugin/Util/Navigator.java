@@ -200,14 +200,12 @@ public class Navigator implements Listener {
             WeltenOrdner.setItem(25, wa4);
         }
 
-
         ItemStack ChallengeAuswahl = new ItemStack(Material.NETHER_STAR);
         ItemMeta imca = ChallengeAuswahl.getItemMeta();
         imca.setDisplayName("§cChallenges");
         ChallengeAuswahl.setItemMeta(imca);
         ChallengeAuswahl.setAmount(1);
         WeltenOrdner.setItem(4, ChallengeAuswahl);
-
 
         ItemStack Zurück = new ItemStack(Material.RED_DYE);
         ItemMeta itemMetaZ = Zurück.getItemMeta();
