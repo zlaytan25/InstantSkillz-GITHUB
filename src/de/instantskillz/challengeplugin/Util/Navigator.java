@@ -5,6 +5,7 @@ package de.instantskillz.challengeplugin.Util;
 import de.instantskillz.challengeplugin.Listener.GameModeListener;
 import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.*;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 
 public class Navigator implements Listener {
 
@@ -752,6 +754,37 @@ public class Navigator implements Listener {
                     location1.setY(world1.getHighestBlockYAt(location1) + 1);
                     player.teleport(location1);
                     player.getInventory().clear();
+
+                    String playername = player.getName();
+                    File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+
+                    if (file.exists()) {
+                        YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                        player.getInventory().clear();
+                        //
+                        ItemStack[] contents = player.getInventory().getContents();
+                        List<?> list = inv.getList("Inventory");
+
+                        for (int i = 0; i < list.size(); i++) {
+                            contents[i] = (ItemStack) list.get(i);
+                        }
+                        player.getInventory().setContents(contents);
+
+                        double health = inv.getDouble("Health");
+                        player.setHealth(health);
+                        double exp = inv.getDouble("Exp");
+                        player.setExp((float) exp);
+                        int level = inv.getInt("Level");
+                        player.setLevel(level);
+                        int hunger = inv.getInt("Hunger");
+                        player.setFoodLevel(hunger);
+
+
+                        file.delete();
+
+                        return;
+                    }
+
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1§a!");
                 } else if (event.getSlot() == 10 && Bukkit.getWorld("Challenge-1") == null) {
@@ -939,6 +972,9 @@ public class Navigator implements Listener {
                         location1.setY(world1.getHighestBlockYAt(location1) + 1);
                         player.teleport(location1);
                         player.getInventory().clear();
+
+                        //*************
+
                         player.setGameMode(GameMode.SURVIVAL);
                         player.closeInventory();
                         player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Challenge-Welt-1!");
@@ -1003,6 +1039,9 @@ public class Navigator implements Listener {
                             }
                             challenge.delete();
                         }
+
+                        //************
+
                         player.sendMessage("§aServer " + "§8>> " + "§cChallenge-Welt-1 wurde gelöscht!");
                         openGUI2(player.getPlayer());
                         break;
