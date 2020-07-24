@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
     //TimerAn/Aus
     private boolean timer = false;
     //KillALL
-    private boolean KA = true;
+    private boolean KA = false;
     //FallDMG
     private boolean FDMG = true;
     //Backpack
@@ -450,5 +450,6 @@ public class Main extends JavaPlugin {
 
         return skullBingo;
     }
+
 
 }

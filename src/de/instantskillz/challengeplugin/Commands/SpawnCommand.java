@@ -91,6 +91,38 @@ public class SpawnCommand implements CommandExecutor {
                         player.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
 
                         return true;
+                    } else {
+
+                        FileConfiguration config = Main.getPlugin().getConfig();
+                        World world1 = Bukkit.getWorld(config.getString("Spawn.World"));
+                        double x = config.getDouble("Spawn.X");
+                        double y = config.getDouble("Spawn.Y");
+                        double z = config.getDouble("Spawn.Z");
+                        float yaw = (float) config.getDouble("Spwan.Yaw");
+                        float pitch = (float) config.getDouble("Spawn.Pitch");
+                        Location location = new Location(world1, x, y, z, yaw, pitch);
+
+                        ItemStack item = new ItemStack(Material.BOOK);
+                        ItemMeta itemMeta = item.getItemMeta();
+                        itemMeta.setDisplayName("§6§lNavigator");
+                        itemMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+                        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                        item.setItemMeta(itemMeta);
+
+                        item.setAmount(1);
+                        player.getInventory().clear();
+                        player.getInventory().setItem(4, item);
+
+                        player.teleport(location);
+
+                        player.setFoodLevel(20);
+                        player.setHealth(20);
+                        player.setTotalExperience(0);
+                        player.setExp(0);
+                        player.setLevel(0);
+
+                        player.setGameMode(GameMode.ADVENTURE);
+                        player.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
                     }
 
 

@@ -18,6 +18,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 import java.io.File;
 import java.util.Arrays;
@@ -30,10 +33,19 @@ public class Navigator implements Listener {
     private final String CW2 = "§6Welt 2";
     private final String CW3 = "§6Welt 3";
     private final String CW4 = "§6Welt 4";
-    private final String OCW1 = "§6Einstellungen Welt 1";
-    private final String OCW2 = "§6Einstellungen Welt 2";
-    private final String OCW3 = "§6Einstellungen Welt 3";
-    private final String OCW4 = "§6Einstellungen Welt 2";
+    private final String OCW1 = "§6Einstellungen Welt 1.1";
+    private final String OCW2 = "§6Einstellungen Welt 2.1";
+    private final String OCW3 = "§6Einstellungen Welt 3.1";
+    private final String OCW4 = "§6Einstellungen Welt 4.1";
+    private final String OCW11 = "§6Einstellungen Welt 1.2";
+    private final String OCW21 = "§6Einstellungen Welt 2.2";
+    private final String OCW31 = "§6Einstellungen Welt 3.2";
+    private final String OCW41 = "§6Einstellungen Welt 4.2";
+    private final String OCW12 = "§6Einstellungen Welt 1.3";
+    private final String OCW22 = "§6Einstellungen Welt 2.3";
+    private final String OCW32 = "§6Einstellungen Welt 3.3";
+    private final String OCW42 = "§6Einstellungen Welt 4.3";
+
 
     //Navi
     Inventory inventory = Bukkit.createInventory(null, 9 * 5, GUI_NAME);
@@ -49,6 +61,15 @@ public class Navigator implements Listener {
     Inventory OptionsCW3 = Bukkit.createInventory(null, 9 * 6, OCW3);
     Inventory OptionsCW4 = Bukkit.createInventory(null, 9 * 6, OCW4);
 
+    Inventory OptionsCW11 = Bukkit.createInventory(null, 9 * 6, OCW11);
+    Inventory OptionsCW21 = Bukkit.createInventory(null, 9 * 6, OCW21);
+    Inventory OptionsCW31 = Bukkit.createInventory(null, 9 * 6, OCW31);
+    Inventory OptionsCW41 = Bukkit.createInventory(null, 9 * 6, OCW41);
+
+    Inventory OptionsCW12 = Bukkit.createInventory(null, 9 * 6, OCW12);
+    Inventory OptionsCW22 = Bukkit.createInventory(null, 9 * 6, OCW22);
+    Inventory OptionsCW32 = Bukkit.createInventory(null, 9 * 6, OCW32);
+    Inventory OptionsCW42 = Bukkit.createInventory(null, 9 * 6, OCW42);
 
     private GameModeListener gl = new GameModeListener();
 
@@ -545,60 +566,63 @@ public class Navigator implements Listener {
             ItemStack Timer1 = new ItemStack(Material.GREEN_DYE, 1);
             ItemMeta itemMeta22 = Timer1.getItemMeta();
             itemMeta22.setDisplayName("§cTimer -> AN §a\u2714");
-            itemMeta22.setLore(Arrays.asList(" ", "§7§oDurch Klick ->", "§7§oSchaltet den Timer aus!", " "));
+            itemMeta22.setLore(Arrays.asList(" ", "§7§oSchaltet den Timer aus!", " "));
             Timer1.setItemMeta(itemMeta22);
             OptionsCW1.setItem(19, Timer1);
         } else if (Main.getPlugin().getTimer() == true) {
             ItemStack Timer2 = new ItemStack(Material.GRAY_DYE, 1);
             ItemMeta itemMeta2 = Timer2.getItemMeta();
             itemMeta2.setDisplayName("§cTimer -> AUS §4\u2715");
-            itemMeta2.setLore(Arrays.asList(" ", "§7§oDurch Klick ->", "§7§oSchaltet den Timer aus!", " "));
+            itemMeta2.setLore(Arrays.asList(" ", "§7§oSchaltet den Timer an!", " "));
             Timer2.setItemMeta(itemMeta2);
             OptionsCW1.setItem(19, Timer2);
         }
 
-        ItemStack ED = new ItemStack(Material.DRAGON_HEAD, 1);
-        ItemMeta imed = ED.getItemMeta();
-        imed.setDisplayName("§6Ziel: Ender Drache");
-        imed.setLore(Arrays.asList(" ", "§7§oSetzt das Challenge Ziel: ", "§7Töte den Ender Drachen!", " "));
-        ED.setItemMeta(imed);
-        OptionsCW1.setItem(12, ED);
+        ItemStack sh = new ItemStack(Material.POTION, 1);
+        PotionMeta meta = (PotionMeta) sh.getItemMeta();
+        meta.setBasePotionData(new PotionData(PotionType.INSTANT_DAMAGE, false, true));
+        meta.setDisplayName("§6Split-Herzen");
+        meta.setLore(Arrays.asList(" ", "§7§oAlle Spieler haben §7§o§lEIN §7§oeinheitliches Leben", " "));
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        sh.setItemMeta(meta);
+        OptionsCW1.setItem(12, sh);
 
-        if (Main.getPlugin().getEDK() == false) {
-            ItemStack EDK1 = new ItemStack(Material.GREEN_DYE, 1);
-            ItemMeta itemMeta7 = EDK1.getItemMeta();
-            itemMeta7.setDisplayName("§cZiel: Ender Drache -> AN §a\u2714");
-            itemMeta7.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oSchaltet das Ziel des Ender Drachens aus!", " "));
-            EDK1.setItemMeta(itemMeta7);
-            OptionsCW1.setItem(21, EDK1);
-        } else if (Main.getPlugin().getEDK() == true) {
-            ItemStack EDK2 = new ItemStack(Material.GRAY_DYE, 1);
-            ItemMeta itemMeta77 = EDK2.getItemMeta();
-            itemMeta77.setDisplayName("§cZiel: Ender Drache -> AUS §4\u2715");
-            itemMeta77.setLore(Arrays.asList(" ", "§7§oDurch Klick ->", "§7§oSchaltet das Ziel des Ender Drachens an!", " "));
-            EDK2.setItemMeta(itemMeta77);
-            OptionsCW1.setItem(21, EDK2);
-        }
+        ItemStack KA1 = new ItemStack(Material.GREEN_DYE, 1);
+        ItemMeta itemMeta7 = KA1.getItemMeta();
+        itemMeta7.setDisplayName("§cSplit-Herzen -> AN §a\u2714");
+        itemMeta7.setLore(Arrays.asList(" ", "§7§oSchaltet das einheitliche Leben aus!", " "));
+        KA1.setItemMeta(itemMeta7);
+        OptionsCW1.setItem(21, KA1);
 
-        ItemStack hp = new ItemStack(Material.POTION, 1, (short) 8197);
-        ItemMeta imhp = hp.getItemMeta();
-        imhp.setDisplayName("§6Anzahl der Herzen");
-        imhp.setLore(Arrays.asList(" ", "§7§oStandard: 10 Herzen", " "));
-        imhp.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-        hp.setItemMeta(imhp);
+        ItemStack KA2 = new ItemStack(Material.GRAY_DYE, 1);
+        ItemMeta itemMeta77 = KA2.getItemMeta();
+        itemMeta77.setDisplayName("§cSplit-Herzen -> AUS §4\u2715");
+        itemMeta77.setLore(Arrays.asList(" ", "§7§oSchaltet das einheitliche Leben an!", " "));
+        KA2.setItemMeta(itemMeta77);
+        OptionsCW1.setItem(21, KA2);
+
+
+        ItemStack hp = new ItemStack(Material.POTION, 1);
+        PotionMeta meta1 = (PotionMeta) sh.getItemMeta();
+        meta1.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL, false, true));
+        meta1.setDisplayName("§6Anzahl der Herzen");
+        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen", " "));
+        meta1.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        hp.setItemMeta(meta1);
         OptionsCW1.setItem(14, hp);
 
+        //GETTERS UND SETTERS MACHEN
         ItemStack hp1 = new ItemStack(Material.LIGHT_BLUE_DYE, 1);
         ItemMeta itemMeta8 = hp1.getItemMeta();
         itemMeta8.setDisplayName("§cHalbes Herz: \u002B");
-        itemMeta8.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oErhöht das Leben um ein halbes Herz!", " "));
+        itemMeta8.setLore(Arrays.asList(" ", "§7§oErhöht das Leben um ein halbes Herz!", " "));
         hp1.setItemMeta(itemMeta8);
         OptionsCW1.setItem(23, hp1);
 
         ItemStack hp2 = new ItemStack(Material.MAGENTA_DYE, 1);
         ItemMeta itemMeta88 = hp2.getItemMeta();
         itemMeta88.setDisplayName("§cHalbes Herz: \u002D");
-        itemMeta88.setLore(Arrays.asList(" ", "§7§oDurch Klick ->", "§7§oVerringert das Leben um ein halbes Herz!", " "));
+        itemMeta88.setLore(Arrays.asList(" ", "§7§oVerringert das Leben um ein halbes Herz!", " "));
         hp2.setItemMeta(itemMeta88);
         OptionsCW1.setItem(32, hp2);
 
@@ -609,10 +633,11 @@ public class Navigator implements Listener {
         food.setItemMeta(imf);
         OptionsCW1.setItem(16, food);
 
+        //GETTER UND SETTER MACHEN
         ItemStack fl = new ItemStack(Material.GREEN_DYE, 1);
         ItemMeta imfl = fl.getItemMeta();
         imfl.setDisplayName("§cHunger -> AN §a\u2714");
-        imfl.setLore(Arrays.asList(" ", "§7§oDurch Klick -> ", "§7§oSchaltet den Hunger aus!", " "));
+        imfl.setLore(Arrays.asList(" ", "§7§oSchaltet den Hunger aus!", " "));
         fl.setItemMeta(imfl);
         OptionsCW1.setItem(25, fl);
 
@@ -655,6 +680,330 @@ public class Navigator implements Listener {
         OptionsCW1.setItem(45, Zurück);
 
         player.openInventory(OptionsCW1);
+    }
+
+    public void openOCW11(Player player) {
+
+        for (int k = 0; k < 9; k++) {
+            ItemStack deko14 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+            ItemMeta d = deko14.getItemMeta();
+            d.setDisplayName(" ");
+            deko14.setItemMeta(d);
+            deko14.setAmount(1);
+            OptionsCW11.setItem(k, deko14);
+
+        }
+
+        ItemStack wo = new ItemStack(Material.REPEATER);
+        ItemMeta imwo = wo.getItemMeta();
+        imwo.setDisplayName("§6Challenge Einstellungen");
+        wo.setItemMeta(imwo);
+        wo.setAmount(1);
+        OptionsCW11.setItem(4, wo);
+
+        for (int k = 9; k < 18; k++) {
+            ItemStack deko1 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+            ItemMeta d = deko1.getItemMeta();
+            d.setDisplayName(" ");
+            deko1.setItemMeta(d);
+            deko1.setAmount(1);
+            OptionsCW11.setItem(k, deko1);
+        }
+
+        ItemStack bp = new ItemStack(Material.CHEST, 1);
+        ItemMeta imbp = bp.getItemMeta();
+        imbp.setDisplayName("§6Backpack");
+        imbp.setLore(Arrays.asList(" ", "§7§oEin integriertes Backpack mit §7§o§l/bp§7§o!", " "));
+        bp.setItemMeta(imbp);
+        OptionsCW11.setItem(10, bp);
+
+        if (Main.getPlugin().getBP() == false) {
+            ItemStack Timer1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta22 = Timer1.getItemMeta();
+            itemMeta22.setDisplayName("§cBackpack -> AN §a\u2714");
+            itemMeta22.setLore(Arrays.asList(" ", "§7§oSchaltet das Backpack aus!", " "));
+            Timer1.setItemMeta(itemMeta22);
+            OptionsCW11.setItem(19, Timer1);
+        } else if (Main.getPlugin().getBP() == true) {
+            ItemStack Timer2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta2 = Timer2.getItemMeta();
+            itemMeta2.setDisplayName("§cBackpack -> AUS §4\u2715");
+            itemMeta2.setLore(Arrays.asList(" ", "§7§oSchaltet das Backpack aus!", " "));
+            Timer2.setItemMeta(itemMeta2);
+            OptionsCW11.setItem(19, Timer2);
+        }
+
+        ItemStack ED = new ItemStack(Material.BRICK_STAIRS, 1);
+        ItemMeta imed = ED.getItemMeta();
+        imed.setDisplayName("§6Sneak = Kill");
+        imed.setLore(Arrays.asList(" ", "§7§oDirekte tötung durch Schleichen!", " "));
+        ED.setItemMeta(imed);
+        OptionsCW11.setItem(12, ED);
+
+        if (Main.getPlugin().getSKL() == false) {
+            ItemStack EDK1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta7 = EDK1.getItemMeta();
+            itemMeta7.setDisplayName("§cSneak = Kill -> AN §a\u2714");
+            itemMeta7.setLore(Arrays.asList(" ", "§7§oSchaltet Sneak = Kill aus!", " "));
+            EDK1.setItemMeta(itemMeta7);
+            OptionsCW11.setItem(21, EDK1);
+        } else if (Main.getPlugin().getSKL() == true) {
+            ItemStack EDK2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta77 = EDK2.getItemMeta();
+            itemMeta77.setDisplayName("§cSneak = Kill -> AUS §4\u2715");
+            itemMeta77.setLore(Arrays.asList(" ", "§7§oSchaltet Sneak = Kill an!", " "));
+            EDK2.setItemMeta(itemMeta77);
+            OptionsCW11.setItem(21, EDK2);
+        }
+
+        ItemStack hp = new ItemStack(Material.GOLDEN_APPLE, 1);
+        ItemMeta imhp = hp.getItemMeta();
+        imhp.setDisplayName("§6UHC");
+        imhp.setLore(Arrays.asList(" ", "§7§oKeine natürliche Regeneration!", " "));
+        hp.setItemMeta(imhp);
+        OptionsCW11.setItem(14, hp);
+
+        if (Main.getPlugin().getUHC() == false) {
+            ItemStack hp1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta8 = hp1.getItemMeta();
+            itemMeta8.setDisplayName("§cUHC -> AN §4\u2715");
+            itemMeta8.setLore(Arrays.asList(" ", "§7§oSchaltet UHC aus!", " "));
+            hp1.setItemMeta(itemMeta8);
+            OptionsCW11.setItem(23, hp1);
+        } else if (Main.getPlugin().getUHC() == true) {
+            ItemStack hp2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta88 = hp2.getItemMeta();
+            itemMeta88.setDisplayName("§cUHC -> AUS §4\u2715");
+            itemMeta88.setLore(Arrays.asList(" ", "§7§oSchaltet UHC an!", " "));
+            hp2.setItemMeta(itemMeta88);
+            OptionsCW11.setItem(23, hp2);
+        }
+
+        ItemStack food = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
+        ItemMeta imf = food.getItemMeta();
+        imf.setDisplayName("§6UUHC");
+        imf.setLore(Arrays.asList(" ", "§7§oKeine Regeneration!", "§7§o§lWirklich keine *_*!", " "));
+        food.setItemMeta(imf);
+        OptionsCW11.setItem(16, food);
+
+        if (Main.getPlugin().getUUHC() == false) {
+            ItemStack hp1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta8 = hp1.getItemMeta();
+            itemMeta8.setDisplayName("§cUUHC -> AN §4\u2715");
+            itemMeta8.setLore(Arrays.asList(" ", "§7§oSchaltet UUHC aus!", " "));
+            hp1.setItemMeta(itemMeta8);
+            OptionsCW11.setItem(25, hp1);
+        } else if (Main.getPlugin().getUUHC() == true) {
+            ItemStack hp2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta88 = hp2.getItemMeta();
+            itemMeta88.setDisplayName("§cUUHC -> AUS §4\u2715");
+            itemMeta88.setLore(Arrays.asList(" ", "§7§oSchaltet UUHC an!", " "));
+            hp2.setItemMeta(itemMeta88);
+            OptionsCW11.setItem(25, hp2);
+        }
+
+
+        for (int k = 45; k < 54; k++) {
+            ItemStack deko14 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+            ItemMeta d = deko14.getItemMeta();
+            d.setDisplayName(" ");
+            deko14.setItemMeta(d);
+            deko14.setAmount(1);
+            OptionsCW11.setItem(k, deko14);
+        }
+
+        ItemStack bq = new ItemStack(Material.WRITABLE_BOOK, 1);
+        ItemMeta imbq = bq.getItemMeta();
+        imbq.setDisplayName("§6Save & Quit");
+        imbq.setLore(Arrays.asList(" ", "§7§oSpeichert die Einstellungen und schließt das Inventar!", " "));
+        bq.setItemMeta(imbq);
+        OptionsCW11.setItem(48, bq);
+
+        ItemStack emer = new ItemStack(Material.EMERALD, 1);
+        ItemMeta ime = emer.getItemMeta();
+        ime.setDisplayName("§6Save & Teleport");
+        ime.setLore(Arrays.asList(" ", "§7§oSpeichert die Einstellungen und Teleportiert dich!", " "));
+        emer.setItemMeta(ime);
+        OptionsCW11.setItem(50, emer);
+
+        ItemStack map = new ItemStack(Material.MAP, 1);
+        ItemMeta imm = map.getItemMeta();
+        imm.setDisplayName("§6§lWeiter");
+        imm.setLore(Arrays.asList(" ", "§7§oNächste Menü-Seite", " "));
+        map.setItemMeta(imm);
+        OptionsCW11.setItem(53, map);
+
+        ItemStack Zurück = new ItemStack(Material.RED_DYE);
+        ItemMeta itemMetaZ = Zurück.getItemMeta();
+        itemMetaZ.setDisplayName("§6§lZurück!");
+        itemMetaZ.setLore(Arrays.asList(" ", "§7§oLetzte Menü-Seite", " "));
+        Zurück.setItemMeta(itemMetaZ);
+        Zurück.setAmount(1);
+        OptionsCW11.setItem(45, Zurück);
+
+        player.openInventory(OptionsCW11);
+    }
+
+    public void openOCW12(Player player) {
+
+        for (int k = 0; k < 9; k++) {
+            ItemStack deko14 = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
+            ItemMeta d = deko14.getItemMeta();
+            d.setDisplayName(" ");
+            deko14.setItemMeta(d);
+            deko14.setAmount(1);
+            OptionsCW12.setItem(k, deko14);
+
+        }
+
+        ItemStack wo = new ItemStack(Material.REPEATER);
+        ItemMeta imwo = wo.getItemMeta();
+        imwo.setDisplayName("§6Challenge Einstellungen");
+        wo.setItemMeta(imwo);
+        wo.setAmount(1);
+        OptionsCW12.setItem(4, wo);
+
+        for (int k = 9; k < 18; k++) {
+            ItemStack deko1 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+            ItemMeta d = deko1.getItemMeta();
+            d.setDisplayName(" ");
+            deko1.setItemMeta(d);
+            deko1.setAmount(1);
+            OptionsCW12.setItem(k, deko1);
+        }
+        //FDMG,KIllall,EnderDragon
+        ItemStack bp = new ItemStack(Material.GOLDEN_BOOTS, 1);
+        ItemMeta imbp = bp.getItemMeta();
+        imbp.setDisplayName("§6Fallschaden");
+        imbp.setLore(Arrays.asList(" ", "§7§oNormaler Fallschaden oder instant Kill?", " "));
+        bp.setItemMeta(imbp);
+        OptionsCW12.setItem(10, bp);
+
+        if (Main.getPlugin().getFDMG() == false) {
+            ItemStack Timer1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta22 = Timer1.getItemMeta();
+            itemMeta22.setDisplayName("§cFallschaden = Kill -> AN §a\u2714");
+            itemMeta22.setLore(Arrays.asList(" ", "§7§oSchaltet Fallschaden = Kill aus!", " "));
+            Timer1.setItemMeta(itemMeta22);
+            OptionsCW12.setItem(19, Timer1);
+        } else if (Main.getPlugin().getFDMG() == true) {
+            ItemStack Timer2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta2 = Timer2.getItemMeta();
+            itemMeta2.setDisplayName("§cFallschaden = Kill -> AUS §4\u2715");
+            itemMeta2.setLore(Arrays.asList(" ", "§7§oSchaltet Fallschaden = Kill aus!", " "));
+            Timer2.setItemMeta(itemMeta2);
+            OptionsCW12.setItem(19, Timer2);
+        }
+
+        ItemStack ED = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
+        ItemMeta imed = ED.getItemMeta();
+        imed.setDisplayName("§6Player Death = Kill all");
+        imed.setLore(Arrays.asList(" ", "§7§oChallenge ist beendet, wenn ein Spieler stirbt!", " "));
+        ED.setItemMeta(imed);
+        OptionsCW12.setItem(12, ED);
+
+        if (Main.getPlugin().getKA() == false) {
+            ItemStack EDK1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta7 = EDK1.getItemMeta();
+            itemMeta7.setDisplayName("§cPlayer Death = Kill -> AN §a\u2714");
+            itemMeta7.setLore(Arrays.asList(" ", "§7§oSchaltet Player Death = Kill aus!", " "));
+            EDK1.setItemMeta(itemMeta7);
+            OptionsCW12.setItem(21, EDK1);
+        } else if (Main.getPlugin().getKA() == true) {
+            ItemStack EDK2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta77 = EDK2.getItemMeta();
+            itemMeta77.setDisplayName("§cPlayer Death = Kill -> AUS §4\u2715");
+            itemMeta77.setLore(Arrays.asList(" ", "§7§oSchaltet Player Death = Kill an!", " "));
+            EDK2.setItemMeta(itemMeta77);
+            OptionsCW12.setItem(21, EDK2);
+        }
+
+        ItemStack hp = new ItemStack(Material.DRAGON_HEAD, 1);
+        ItemMeta imhp = hp.getItemMeta();
+        imhp.setDisplayName("§6Ziel: Ender Drache");
+        imhp.setLore(Arrays.asList(" ", "§7§oSetzt das Challenge Ziel auf:", "§7§o§lTöte den Ender Drachen", " "));
+        hp.setItemMeta(imhp);
+        OptionsCW12.setItem(14, hp);
+
+        if (Main.getPlugin().getEDK() == false) {
+            ItemStack hp1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta8 = hp1.getItemMeta();
+            itemMeta8.setDisplayName("§cZiel: Ender Drache -> AN §4\u2715");
+            itemMeta8.setLore(Arrays.asList(" ", "§7§oChallenge Ziel: §7§o§lEnder Drache§7§o!", " "));
+            hp1.setItemMeta(itemMeta8);
+            OptionsCW12.setItem(23, hp1);
+        } else if (Main.getPlugin().getEDK() == true) {
+            ItemStack hp2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta88 = hp2.getItemMeta();
+            itemMeta88.setDisplayName("§cZiel: Ender Drache -> AUS §4\u2715");
+            itemMeta88.setLore(Arrays.asList(" ", "§7§oChallenge Ziel: §7§o§lUnbekannt§7§o!", " "));
+            hp2.setItemMeta(itemMeta88);
+            OptionsCW12.setItem(23, hp2);
+        }
+
+        ItemStack food = new ItemStack(Material.BEDROCK, 1);
+        ItemMeta imf = food.getItemMeta();
+        imf.setDisplayName("§6Platzhalter");
+        imf.setLore(Arrays.asList(" ", "§7§oPlatz für Zuküntige Challenges!", " "));
+        food.setItemMeta(imf);
+        OptionsCW12.setItem(16, food);
+
+        /*if(Main.getPlugin().getUUHC() == false) {
+            ItemStack hp1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta8 = hp1.getItemMeta();
+            itemMeta8.setDisplayName("§cUUHC -> AUS §4\u2715");
+            itemMeta8.setLore(Arrays.asList(" ", "§7§oSchaltet UUHC aus!", " "));
+            hp1.setItemMeta(itemMeta8);
+            OptionsCW12.setItem(25, hp1);
+        }else if(Main.getPlugin().getUUHC() == true) {
+            ItemStack hp2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta88 = hp2.getItemMeta();
+            itemMeta88.setDisplayName("§cUUHC -> AUS §4\u2715");
+            itemMeta88.setLore(Arrays.asList(" ", "§7§oSchaltet UUHC an!", " "));
+            hp2.setItemMeta(itemMeta88);
+            OptionsCW12.setItem(25, hp2);
+        }*/
+
+
+        for (int k = 45; k < 54; k++) {
+            ItemStack deko14 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+            ItemMeta d = deko14.getItemMeta();
+            d.setDisplayName(" ");
+            deko14.setItemMeta(d);
+            deko14.setAmount(1);
+            OptionsCW12.setItem(k, deko14);
+        }
+
+        ItemStack bq = new ItemStack(Material.WRITABLE_BOOK, 1);
+        ItemMeta imbq = bq.getItemMeta();
+        imbq.setDisplayName("§6Save & Quit");
+        imbq.setLore(Arrays.asList(" ", "§7§oSpeichert die Einstellungen und schließt das Inventar!", " "));
+        bq.setItemMeta(imbq);
+        OptionsCW12.setItem(48, bq);
+
+        ItemStack emer = new ItemStack(Material.EMERALD, 1);
+        ItemMeta ime = emer.getItemMeta();
+        ime.setDisplayName("§6Save & Teleport");
+        ime.setLore(Arrays.asList(" ", "§7§oSpeichert die Einstellungen und Teleportiert dich!", " "));
+        emer.setItemMeta(ime);
+        OptionsCW12.setItem(50, emer);
+
+        ItemStack map = new ItemStack(Material.MAP, 1);
+        ItemMeta imm = map.getItemMeta();
+        imm.setDisplayName("§6§lWeiter");
+        imm.setLore(Arrays.asList(" ", "§7§oNächste Menü-Seite", " "));
+        map.setItemMeta(imm);
+        OptionsCW12.setItem(53, map);
+
+        ItemStack Zurück = new ItemStack(Material.RED_DYE);
+        ItemMeta itemMetaZ = Zurück.getItemMeta();
+        itemMetaZ.setDisplayName("§6§lZurück!");
+        itemMetaZ.setLore(Arrays.asList(" ", "§7§oLetzte Menü-Seite", " "));
+        Zurück.setItemMeta(itemMetaZ);
+        Zurück.setAmount(1);
+        OptionsCW12.setItem(45, Zurück);
+
+        player.openInventory(OptionsCW12);
     }
 
     public void openOWC2(Player player) {
@@ -941,9 +1290,9 @@ public class Navigator implements Listener {
                         player.getInventory().clear();
                         player.setGameMode(GameMode.SURVIVAL);
                         player.closeInventory();
-                        player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Challenge-Welt-1!");
+                        player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1!");
                     } else {
-                        player.sendMessage("§aServer " + "§8>> " + "§cEs existiert keine Challenge-Welt-1!");
+                        player.sendMessage("§aServer " + "§8>> " + "§cEs existiert keine Welt 1!");
                         break;
                     }
                     break;
@@ -1003,18 +1352,18 @@ public class Navigator implements Listener {
                             }
                             challenge.delete();
                         }
-                        player.sendMessage("§aServer " + "§8>> " + "§cChallenge-Welt-1 wurde gelöscht!");
+                        player.sendMessage("§aServer " + "§8>> " + "§cWelt 1 wurde gelöscht!");
                         openGUI2(player.getPlayer());
                         break;
                     } else if (Bukkit.getWorld("Challenge-1") == null) {
-                        player.sendMessage(Main.getPlugin().PREFIX + "§cEs existiert keine Challenge-Welt-1!");
+                        player.sendMessage(Main.getPlugin().PREFIX + "§cEs existiert keine Welt 1!");
                         break;
                     }
                     break;
 
                 case RED_DYE:
 
-                    player.openInventory(WeltenOrdner);
+                    openGUI2(player.getPlayer());
                     break;
 
                 default:
@@ -1022,6 +1371,217 @@ public class Navigator implements Listener {
             }
         }
 
+    }
+
+    @EventHandler
+    public void CW1InvEinstellungen1(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+
+        if (event.getView().getTitle().equals(OCW1)) {
+            event.setCancelled(true);
+
+            switch (event.getCurrentItem().getType()) {
+
+                case WRITABLE_BOOK:
+                    player.closeInventory();
+                    break;
+                case EMERALD:
+                    World world1 = Bukkit.getWorld("Challenge-1");
+                    Location location1 = world1.getSpawnLocation();
+                    location1.setY(world1.getHighestBlockYAt(location1) + 1);
+                    player.teleport(location1);
+                    player.getInventory().clear();
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.closeInventory();
+                    player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1!");
+                    break;
+                case RED_DYE:
+                    openCW1(player.getPlayer());
+                    break;
+                case MAP:
+                    openOCW11(player.getPlayer());
+                    break;
+                default:
+                    break;
+            }
+
+            if (event.getSlot() == 19) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setTimer(true);
+                    openOWC1(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setTimer(false);
+                    openOWC1(player.getPlayer());
+                }
+            }
+            if (event.getSlot() == 21) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+
+                }
+            }
+            if (event.getSlot() == 23) {
+
+            }
+            if (event.getSlot() == 32) {
+
+            }
+            if (event.getSlot() == 25) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+
+                }
+            }
+
+        }
+
+    }
+
+    @EventHandler
+    public void CW1InvEinstellungen2(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (event.getView().getTitle().equals(OCW11)) {
+            event.setCancelled(true);
+
+            switch (event.getCurrentItem().getType()) {
+
+                case WRITABLE_BOOK:
+                    player.closeInventory();
+                    break;
+                case EMERALD:
+                    World world1 = Bukkit.getWorld("Challenge-1");
+                    Location location1 = world1.getSpawnLocation();
+                    location1.setY(world1.getHighestBlockYAt(location1) + 1);
+                    player.teleport(location1);
+                    player.getInventory().clear();
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.closeInventory();
+                    player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1!");
+                    break;
+                case RED_DYE:
+                    openOWC1(player.getPlayer());
+                    break;
+                case MAP:
+                    openOCW12(player.getPlayer());
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (event.getSlot() == 19) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setBP(true);
+                    openOCW11(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setBP(false);
+                    openOCW11(player.getPlayer());
+                }
+            }
+            if (event.getSlot() == 21) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setSKL(true);
+                    openOCW11(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setSKL(false);
+                    openOCW11(player.getPlayer());
+                }
+            }
+            if (event.getSlot() == 23) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setUHC(true);
+                    openOCW11(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setUHC(false);
+                    openOCW11(player.getPlayer());
+                }
+            }
+            if (event.getSlot() == 25) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setUUHC(true);
+                    openOCW11(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setUUHC(false);
+                    openOCW11(player.getPlayer());
+                }
+            }
+        }
+
+    }
+
+    @EventHandler
+    public void CW1InvEinstellungen3(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (event.getView().getTitle().equals(OCW12)) {
+            event.setCancelled(true);
+
+            switch (event.getCurrentItem().getType()) {
+
+                case WRITABLE_BOOK:
+                    player.closeInventory();
+                    break;
+                case EMERALD:
+                    World world1 = Bukkit.getWorld("Challenge-1");
+                    Location location1 = world1.getSpawnLocation();
+                    location1.setY(world1.getHighestBlockYAt(location1) + 1);
+                    player.teleport(location1);
+                    player.getInventory().clear();
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.closeInventory();
+                    player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1!");
+                    break;
+                case RED_DYE:
+                    openOCW11(player.getPlayer());
+                    break;
+                case MAP:
+                    player.sendMessage(Main.getPlugin().PREFIX + "§aSeiten werden folgen!");
+                    break;
+                default:
+                    break;
+            }
+
+            if (event.getSlot() == 19) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setFDMG(true);
+                    openOCW12(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setFDMG(false);
+                    openOCW12(player.getPlayer());
+                }
+            }
+            if (event.getSlot() == 21) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setKA(true);
+                    openOCW12(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setKA(false);
+                    openOCW12(player.getPlayer());
+                }
+            }
+            if (event.getSlot() == 23) {
+                if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
+                    Main.getPlugin().setEDK(true);
+                    openOCW12(player.getPlayer());
+                } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
+                    Main.getPlugin().setEDK(false);
+                    openOCW12(player.getPlayer());
+                }
+            }
+            /*if(event.getSlot()  == 25){
+                if(event.getCurrentItem().getType() == Material.GREEN_DYE){
+                    Main.getPlugin().setUUHC(true);
+                    openOCW11(player.getPlayer());
+                }else if(event.getCurrentItem().getType() == Material.GRAY_DYE){
+                    Main.getPlugin().setUUHC(false);
+                    openOCW11(player.getPlayer());
+                }
+            }*/
+        }
     }
 
     @EventHandler
@@ -1131,7 +1691,7 @@ public class Navigator implements Listener {
 
                 case RED_DYE:
 
-                    player.openInventory(WeltenOrdner);
+                    openGUI2(player.getPlayer());
                     break;
 
                 default:
@@ -1248,7 +1808,7 @@ public class Navigator implements Listener {
 
                 case RED_DYE:
 
-                    player.openInventory(WeltenOrdner);
+                    openGUI2(player.getPlayer());
                     break;
 
                 default:
@@ -1365,7 +1925,7 @@ public class Navigator implements Listener {
 
                 case RED_DYE:
 
-                    player.openInventory(WeltenOrdner);
+                    openGUI2(player.getPlayer());
                     break;
 
                 default:
