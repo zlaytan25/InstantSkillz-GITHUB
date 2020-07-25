@@ -30,7 +30,7 @@ public class SpawnCommand implements CommandExecutor {
 
 
                     if (player.getWorld() != Bukkit.getWorld("world")) {
-
+                        Main.getPlugin().setTimer(true);
                         this.checkDirectory();
                         ArrayList<ItemStack> list = new ArrayList<>();
                         String playername = player.getName();
@@ -68,12 +68,21 @@ public class SpawnCommand implements CommandExecutor {
                             }
                         }
 
+                        String cw = player.getWorld().getName();
+                        Double X = player.getLocation().getX();
+                        Double Y = player.getLocation().getY();
+                        Double Z = player.getLocation().getZ();
+
                         inv.set("Slot", slot);
                         inv.set("Inventory", list);
                         inv.set("Health", health);
                         inv.set("Exp", exp);
                         inv.set("Level", level);
                         inv.set("Hunger", hunger);
+                        inv.set("World", cw);
+                        inv.set("X", X);
+                        inv.set("Y", Y);
+                        inv.set("Z", Z);
 
                         try {
                             inv.save(file);
@@ -82,14 +91,15 @@ public class SpawnCommand implements CommandExecutor {
                         }
 
                         player.getInventory().clear();
+
                         FileConfiguration config = Main.getPlugin().getConfig();
-                        World world1 = Bukkit.getWorld(config.getString("Spawn.World"));
+                        World world2 = Bukkit.getWorld(config.getString("Spawn.World"));
                         double x = config.getDouble("Spawn.X");
                         double y = config.getDouble("Spawn.Y");
                         double z = config.getDouble("Spawn.Z");
                         float yaw = (float) config.getDouble("Spwan.Yaw");
                         float pitch = (float) config.getDouble("Spawn.Pitch");
-                        Location location = new Location(world1, x, y, z, yaw, pitch);
+                        Location location = new Location(world2, x, y, z, yaw, pitch);
 
                         ItemStack item = new ItemStack(Material.BOOK);
                         ItemMeta itemMeta = item.getItemMeta();
@@ -163,5 +173,6 @@ public class SpawnCommand implements CommandExecutor {
             file.mkdir();
         }
     }
+
 
 }

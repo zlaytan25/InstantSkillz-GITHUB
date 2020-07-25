@@ -1126,6 +1126,13 @@ public class Navigator implements Listener {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
 
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
+
                         file.delete();
 
                         return;
@@ -1173,6 +1180,13 @@ public class Navigator implements Listener {
                         for (int i = 0; i < player.getInventory().getSize(); i++) {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
+
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
 
                         file.delete();
 
@@ -1222,6 +1236,13 @@ public class Navigator implements Listener {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
 
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
+
                         file.delete();
 
                         return;
@@ -1269,6 +1290,13 @@ public class Navigator implements Listener {
                         for (int i = 0; i < player.getInventory().getSize(); i++) {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
+
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
 
                         file.delete();
 
@@ -1398,7 +1426,6 @@ public class Navigator implements Listener {
                         Location location1 = world1.getSpawnLocation();
                         location1.setY(world1.getHighestBlockYAt(location1) + 1);
                         player.teleport(location1);
-                        player.getInventory().clear();
 
                         String playername = player.getName();
                         File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
@@ -1417,6 +1444,13 @@ public class Navigator implements Listener {
                             player.setLevel(level);
                             int hunger = inv.getInt("Hunger");
                             player.setFoodLevel(hunger);
+
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
 
                             for (int i = 0; i < player.getInventory().getSize(); i++) {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
@@ -1785,6 +1819,12 @@ public class Navigator implements Listener {
                             for (int i = 0; i < player.getInventory().getSize(); i++) {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                             }
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
 
                             file.delete();
 
@@ -1937,6 +1977,13 @@ public class Navigator implements Listener {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                             }
 
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
+
                             file.delete();
 
                             return;
@@ -2087,6 +2134,12 @@ public class Navigator implements Listener {
                             for (int i = 0; i < player.getInventory().getSize(); i++) {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                             }
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
 
                             file.delete();
 
