@@ -4,7 +4,6 @@ package de.instantskillz.challengeplugin.Commands;
 
 import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class BackPackCommand implements CommandExecutor {
 
     Inventory backpack = Bukkit.createInventory(null, 9 * 3, "§6§lBackpack");
@@ -29,56 +27,44 @@ public class BackPackCommand implements CommandExecutor {
                 Player player = (Player) sender;
                 if (player.hasPermission("schnellerHase.bp")) {
                     if (args.length == 0) {
+                        if (player.getWorld().getName().contains("Challenge")) {
+                            player.openInventory(backpack);
+                            player.sendMessage("§aServer " + "§8>> " + "§aDu hast das Backpack geöffnet!");
 
-                        String[] allWorlds = new String[Bukkit.getServer().getWorlds().size()];
-                        int count = 0;
-                        int challenge = 0;
-                        for (World w : Bukkit.getServer().getWorlds()) {
-                            allWorlds[count] = w.getName();
-                            if (w.getName().contains("Challenge")) {
-                                for (int i = 0; i < challenge; i++) {
-                                    if (player.getWorld() == Bukkit.getWorld("challenge-" + challenge)) {
+                            //FUNKTIONIERT NOCH NICHT!
+                            //HIER MUSS EIN LISTENER HIN DER WARTET BIS DAS INVENTORY "BACKBACK" VIEWERS HAT ODER NICHT
+                            //KEINE AHNUNG WIE DAS GEHT…
+                            if (backpack.getViewers().size() == 0) {
+                                this.checkDirectory();
+                                ArrayList<ItemStack> list = new ArrayList<>();
+                                File file = new File("plugins//InstantSkillzTV//Backpacks//" + player.getWorld().getName() + ".yml");
 
-                                        player.openInventory(backpack);
+                                try {
+                                    file.createNewFile();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
-                                        this.checkDirectory();
-                                        ArrayList<ItemStack> list = new ArrayList<>();
-                                        World world = player.getWorld();
-                                        File file = new File("plugins//InstantSkillzTV//Backpacks//" + world + ".yml");
+                                YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+                                ItemStack[] contents = backpack.getStorageContents();
 
-                                        try {
-                                            file.createNewFile();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+                                for (int j = 0; j < contents.length; j++) {
+                                    ItemStack item = contents[j];
 
-                                        YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
-                                        ItemStack[] contents = backpack.getStorageContents();
-
-                                        for (int j = 0; j < contents.length; j++) {
-                                            ItemStack item = contents[j];
-
-                                            if (!(item == null)) {
-                                                list.add(item);
-                                            }
-                                        }
-
-                                        inv.set("Inventory", list);
-
-                                        try {
-                                            inv.save(file);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        player.sendMessage("§aServer " + "§8>> " + "§aDu hast das Backpack geöffnet!");
+                                    if (!(item == null)) {
+                                        list.add(item);
                                     }
                                 }
-                                challenge++;
-                            }
-                            count++;
-                        }
 
+                                inv.set("Backpack", list);
+
+                                try {
+                                    inv.save(file);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
                     } else
                         player.sendMessage("§aServer " + "§8>> " + "§cBitte benutze §6/bp§c!");
                 } else
@@ -98,6 +84,4 @@ public class BackPackCommand implements CommandExecutor {
             file.mkdir();
         }
     }
-
-
 }
