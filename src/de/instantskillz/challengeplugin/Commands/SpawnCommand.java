@@ -116,6 +116,14 @@ public class SpawnCommand implements CommandExecutor {
                         player.setLevel(0);
                         player.setGameMode(GameMode.ADVENTURE);
                         player.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
+                        Main.getPlugin().setFDMG(true);
+                        Main.getPlugin().setSKL(true);
+                        Main.getPlugin().setUUHC(true);
+                        Main.getPlugin().setUHC(true);
+                        Main.getPlugin().setBP(false);
+                        Main.getPlugin().setEDK(false);
+                        Main.getPlugin().setKA(false);
+                        Main.getPlugin().setTimer(false);
 
                         return true;
                     } else {
@@ -150,6 +158,14 @@ public class SpawnCommand implements CommandExecutor {
 
                         player.setGameMode(GameMode.ADVENTURE);
                         player.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
+                        Main.getPlugin().setFDMG(true);
+                        Main.getPlugin().setSKL(true);
+                        Main.getPlugin().setUUHC(true);
+                        Main.getPlugin().setUHC(true);
+                        Main.getPlugin().setBP(false);
+                        Main.getPlugin().setEDK(false);
+                        Main.getPlugin().setKA(false);
+                        Main.getPlugin().setTimer(false);
                     }
 
 

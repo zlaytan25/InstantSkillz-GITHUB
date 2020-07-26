@@ -1101,7 +1101,7 @@ public class Navigator implements Listener {
                     player.closeInventory();
                     Location location1 = world1.getSpawnLocation();
                     location1.setY(world1.getHighestBlockYAt(location1) + 1);
-                    player.teleport(location1);
+
                     player.getInventory().clear();
 
                     String playername = player.getName();
@@ -1137,7 +1137,7 @@ public class Navigator implements Listener {
 
                         return;
                     }
-
+                    player.teleport(location1);
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1§a!");
                 } else if (event.getSlot() == 10 && Bukkit.getWorld("Challenge-1") == null) {

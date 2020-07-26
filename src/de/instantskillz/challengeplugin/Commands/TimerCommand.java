@@ -67,15 +67,25 @@ public class TimerCommand implements CommandExecutor {
                         public void run() {
                             if (sec == -1) {
                                 cancel();
+                                min = 0;
+                                h = 0;
+                                d = 0;
                                 return;
                             }
                             if (Main.getPlugin().getTimer() == true) {
                                 if (sec > 0) {
                                     Bukkit.broadcastMessage("§aServer " + "§8>> " + "§aDie Challenge hat §9§l" + t1 + " gedauert!");
                                     sec = 0;
+                                    min = 0;
+                                    h = 0;
+                                    d = 0;
                                     cancel();
                                     return;
                                 }
+                                sec = 0;
+                                min = 0;
+                                h = 0;
+                                d = 0;
                                 cancel();
                                 return;
                             }

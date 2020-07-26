@@ -42,6 +42,13 @@ public class KillatAllListener implements Listener {
                 return;
             } else
                 Main.getPlugin().setTimer(true);
+            Main.getPlugin().setFDMG(true);
+            Main.getPlugin().setSKL(true);
+            Main.getPlugin().setUUHC(true);
+            Main.getPlugin().setUHC(true);
+            Main.getPlugin().setBP(false);
+            Main.getPlugin().setEDK(false);
+            Main.getPlugin().setKA(false);
             for (Player all : Bukkit.getServer().getOnlinePlayers())
                 all.setGameMode(GameMode.SPECTATOR);
         }

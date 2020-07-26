@@ -19,18 +19,20 @@ public class SneakKillListener implements Listener {
             event.setCancelled(true);
         }
         if (Main.getPlugin().getSKL() == false) {
-            if (player.getGameMode() == GameMode.SPECTATOR) {
-                event.setCancelled(true);
-            } else if (player.getGameMode() == GameMode.CREATIVE) {
-                event.setCancelled(true);
-            } else if (player.getGameMode() == GameMode.ADVENTURE) {
-                event.setCancelled(true);
-            } else if (player instanceof Player) {
-                player.setHealth(0);
-                player.setGameMode(GameMode.SPECTATOR);
-                Main.getPlugin().setTimer(true);
-                Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§c" + player.getName() + " §ahat gesneaked!");
+            if (player.getWorld() != Bukkit.getWorld("world")) {
+                if (player.getGameMode() == GameMode.SPECTATOR) {
+                    event.setCancelled(true);
+                } else if (player.getGameMode() == GameMode.CREATIVE) {
+                    event.setCancelled(true);
+                } else if (player.getGameMode() == GameMode.ADVENTURE) {
+                    event.setCancelled(true);
+                } else if (player instanceof Player) {
+                    player.setHealth(0);
+                    player.setGameMode(GameMode.SPECTATOR);
+                    Main.getPlugin().setTimer(true);
+                    Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§c" + player.getName() + " §ahat gesneaked!");
 
+                }
             }
         }
 
