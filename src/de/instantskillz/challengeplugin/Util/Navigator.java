@@ -6,6 +6,7 @@ import de.instantskillz.challengeplugin.Listener.GameModeListener;
 import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.libs.org.apache.commons.io.FileUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -1482,54 +1483,21 @@ public class Navigator implements Listener {
                             //Gamemode
                             player.setGameMode(GameMode.ADVENTURE);
                         }
-                        //Welt-Löschen
-                        File challenge = new File("Challenge-1");
 
                         //Inventar löschen
                         String playername = player.getName();
-                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
-                        file.delete();
+                        File inventory = new File("plugins//InstantSkillzTV//Inventories//" + world1);
+                        FileUtils.deleteQuietly(inventory);
 
-                        if (challenge.exists()) {
+                        //Backpack löschen
+                        File backpack = new File("plugins//InstantSkillzTV//Backpacks//" + world1);
+                        backpack.delete();
 
+                        //Welt-Löschen
+                        File challenge1 = new File("Challenge-1");
+                        if (challenge1.exists()) {
                             Bukkit.unloadWorld("Challenge-1", true);
-
-                            File data = new File("Challenge-1\\data");
-                            if (data.exists()) {
-                                for (File files1 : data.listFiles()) {
-                                    files1.delete();
-                                }
-                                data.delete();
-                            }
-
-                            File playerdata = new File("Challenge-1\\playerdata");
-                            if (playerdata.exists()) {
-                                for (File files2 : playerdata.listFiles()) {
-                                    files2.delete();
-                                }
-                                playerdata.delete();
-                            }
-
-                            File poi = new File("Challenge-1\\poi");
-                            if (poi.exists()) {
-                                for (File files3 : poi.listFiles()) {
-                                    files3.delete();
-                                }
-                                poi.delete();
-                            }
-
-                            File region = new File("Challenge-1\\region");
-                            if (region.exists()) {
-                                for (File files4 : region.listFiles()) {
-                                    files4.delete();
-                                }
-                                region.delete();
-                            }
-
-                            for (File files5 : challenge.listFiles()) {
-                                files5.delete();
-                            }
-                            challenge.delete();
+                            FileUtils.deleteQuietly(challenge1);
                         }
                         player.sendMessage("§aServer " + "§8>> " + "§cWelt 1 wurde gelöscht!");
                         openGUI2(player.getPlayer());
@@ -1799,7 +1767,7 @@ public class Navigator implements Listener {
                         player.getInventory().clear();
 
                         String playername = player.getName();
-                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
+                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1);
 
                         if (file.exists()) {
                             YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
@@ -1852,55 +1820,23 @@ public class Navigator implements Listener {
                             //Gamemode
                             player.setGameMode(GameMode.ADVENTURE);
                         }
-                        //Welt-Löschen
-                        File challenge2 = new File("Challenge-2");
 
                         //Inventar löschen
                         String playername = player.getName();
-                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
-                        file.delete();
+                        File inventory = new File("plugins//InstantSkillzTV//Inventories//" + world1);
+                        FileUtils.deleteQuietly(inventory);
 
+                        //Backpack löschen
+                        File backpack = new File("plugins//InstantSkillzTV//Backpacks//" + world1);
+                        backpack.delete();
+
+                        //Welt-Löschen
+                        File challenge2 = new File("Challenge-2");
                         if (challenge2.exists()) {
-
                             Bukkit.unloadWorld("Challenge-2", true);
-
-                            File data2 = new File("Challenge-2\\data");
-                            if (data2.exists()) {
-                                for (File files1 : data2.listFiles()) {
-                                    files1.delete();
-                                }
-                                data2.delete();
-                            }
-
-                            File playerdata2 = new File("Challenge-2\\playerdata");
-                            if (playerdata2.exists()) {
-                                for (File files2 : playerdata2.listFiles()) {
-                                    files2.delete();
-                                }
-                                playerdata2.delete();
-                            }
-
-                            File poi2 = new File("Challenge-2\\poi");
-                            if (poi2.exists()) {
-                                for (File files3 : poi2.listFiles()) {
-                                    files3.delete();
-                                }
-                                poi2.delete();
-                            }
-
-                            File region2 = new File("Challenge-2\\region");
-                            if (region2.exists()) {
-                                for (File files4 : region2.listFiles()) {
-                                    files4.delete();
-                                }
-                                region2.delete();
-                            }
-
-                            for (File files5 : challenge2.listFiles()) {
-                                files5.delete();
-                            }
-                            challenge2.delete();
+                            FileUtils.deleteQuietly(challenge2);
                         }
+
                         player.sendMessage("§aServer " + "§8>> " + "§cWelt 2 wurde gelöscht!");
                         openGUI2(player.getPlayer());
                         break;
@@ -2010,55 +1946,23 @@ public class Navigator implements Listener {
                             //Gamemode
                             player.setGameMode(GameMode.ADVENTURE);
                         }
-                        //Welt-Löschen
-                        File challenge3 = new File("Challenge-3");
 
                         //Inventar löschen
                         String playername = player.getName();
-                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
-                        file.delete();
+                        File inventory = new File("plugins//InstantSkillzTV//Inventories//" + world1);
+                        FileUtils.deleteQuietly(inventory);
 
+                        //Backpack löschen
+                        File backpack = new File("plugins//InstantSkillzTV//Backpacks//" + world1);
+                        backpack.delete();
+
+                        //Welt-Löschen
+                        File challenge3 = new File("Challenge-3");
                         if (challenge3.exists()) {
-
                             Bukkit.unloadWorld("Challenge-3", true);
-
-                            File data3 = new File("Challenge-3\\data");
-                            if (data3.exists()) {
-                                for (File files1 : data3.listFiles()) {
-                                    files1.delete();
-                                }
-                                data3.delete();
-                            }
-
-                            File playerdata3 = new File("Challenge-3\\playerdata");
-                            if (playerdata3.exists()) {
-                                for (File files2 : playerdata3.listFiles()) {
-                                    files2.delete();
-                                }
-                                playerdata3.delete();
-                            }
-
-                            File poi3 = new File("Challenge-3\\poi");
-                            if (poi3.exists()) {
-                                for (File files3 : poi3.listFiles()) {
-                                    files3.delete();
-                                }
-                                poi3.delete();
-                            }
-
-                            File region3 = new File("Challenge-3\\region");
-                            if (region3.exists()) {
-                                for (File files4 : region3.listFiles()) {
-                                    files4.delete();
-                                }
-                                region3.delete();
-                            }
-
-                            for (File files5 : challenge3.listFiles()) {
-                                files5.delete();
-                            }
-                            challenge3.delete();
+                            FileUtils.deleteQuietly(challenge3);
                         }
+
                         player.sendMessage("§aServer " + "§8>> " + "§cWelt 3 wurde gelöscht!");
                         openGUI2(player.getPlayer());
                         break;
@@ -2167,55 +2071,23 @@ public class Navigator implements Listener {
                             //Gamemode
                             player.setGameMode(GameMode.ADVENTURE);
                         }
-                        //Welt-Löschen
-                        File challenge4 = new File("Challenge-4");
 
                         //Inventar löschen
                         String playername = player.getName();
-                        File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
-                        file.delete();
+                        File inventory = new File("plugins//InstantSkillzTV//Inventories//" + world1);
+                        FileUtils.deleteQuietly(inventory);
 
+                        //Backpack löschen
+                        File backpack = new File("plugins//InstantSkillzTV//Backpacks//" + world1);
+                        backpack.delete();
+
+                        //Welt-Löschen
+                        File challenge4 = new File("Challenge-4");
                         if (challenge4.exists()) {
-
                             Bukkit.unloadWorld("Challenge-4", true);
-
-                            File data4 = new File("Challenge-4\\data");
-                            if (data4.exists()) {
-                                for (File files1 : data4.listFiles()) {
-                                    files1.delete();
-                                }
-                                data4.delete();
-                            }
-
-                            File playerdata4 = new File("Challenge-4\\playerdata");
-                            if (playerdata4.exists()) {
-                                for (File files2 : playerdata4.listFiles()) {
-                                    files2.delete();
-                                }
-                                playerdata4.delete();
-                            }
-
-                            File poi4 = new File("Challenge-4\\poi");
-                            if (poi4.exists()) {
-                                for (File files3 : poi4.listFiles()) {
-                                    files3.delete();
-                                }
-                                poi4.delete();
-                            }
-
-                            File region4 = new File("Challenge-4\\region");
-                            if (region4.exists()) {
-                                for (File files4 : region4.listFiles()) {
-                                    files4.delete();
-                                }
-                                region4.delete();
-                            }
-
-                            for (File files5 : challenge4.listFiles()) {
-                                files5.delete();
-                            }
-                            challenge4.delete();
+                            FileUtils.deleteQuietly(challenge4);
                         }
+
                         player.sendMessage("§aServer " + "§8>> " + "§cWelt 4 wurde gelöscht!");
                         openGUI2(player.getPlayer());
                         break;
