@@ -16,12 +16,14 @@ public class HealCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (player.hasPermission("§aServer " + "§8>> " + "schnellerHase.heal")) {
                 if (args.length == 0) {
+                    player.setMaxHealth(20);
                     player.setHealth(20);
                     player.setFoodLevel(20);
                     player.sendMessage("§aServer " + "§8>> " + "§aDu wurdest geheilt!");
                 } else if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target != null) {
+                        target.setMaxHealth(20);
                         target.setHealth(20);
                         target.setFoodLevel(20);
                         target.sendMessage("§aServer " + "§8>> " + "§aDu wurdest von §6" + player.getName() + " §ageheilt!");

@@ -69,9 +69,9 @@ public class SpawnCommand implements CommandExecutor {
                         }
 
                         String cw = player.getWorld().getName();
-                        Double X = player.getLocation().getX();
-                        Double Y = player.getLocation().getY();
-                        Double Z = player.getLocation().getZ();
+                        double X = player.getLocation().getX();
+                        double Y = player.getLocation().getY();
+                        double Z = player.getLocation().getZ();
 
                         inv.set("Slot", slot);
                         inv.set("Inventory", list);
@@ -111,6 +111,7 @@ public class SpawnCommand implements CommandExecutor {
                         player.getInventory().setItem(4, item);
                         player.teleport(location);
                         player.setFoodLevel(20);
+                        player.setMaxHealth(20.0);
                         player.setHealth(20);
                         player.setExp(0);
                         player.setLevel(0);
@@ -124,6 +125,7 @@ public class SpawnCommand implements CommandExecutor {
                         Main.getPlugin().setEDK(false);
                         Main.getPlugin().setKA(false);
                         Main.getPlugin().setTimer(false);
+                        Main.getPlugin().setSH(true);
 
                         return true;
                     } else {
@@ -151,6 +153,7 @@ public class SpawnCommand implements CommandExecutor {
                         player.teleport(location);
 
                         player.setFoodLevel(20);
+                        player.setMaxHealth(20.0);
                         player.setHealth(20);
                         player.setTotalExperience(0);
                         player.setExp(0);
@@ -166,10 +169,8 @@ public class SpawnCommand implements CommandExecutor {
                         Main.getPlugin().setEDK(false);
                         Main.getPlugin().setKA(false);
                         Main.getPlugin().setTimer(false);
+                        Main.getPlugin().setSH(true);
                     }
-
-
-
 
                 } else
                     player.sendMessage("§aServer " + "§8>> " + "§cBitte benutze den §6/hub§c!");

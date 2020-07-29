@@ -41,7 +41,9 @@ public class KillatAllListener implements Listener {
             } else if (player.getGameMode() == GameMode.CREATIVE) {
                 return;
             } else
-                Main.getPlugin().setTimer(true);
+                Main.getPlugin().setKA(false);
+            player.setMaxHealth(20.0);
+            Main.getPlugin().setTimer(true);
             Main.getPlugin().setFDMG(true);
             Main.getPlugin().setSKL(true);
             Main.getPlugin().setUUHC(true);
@@ -49,6 +51,7 @@ public class KillatAllListener implements Listener {
             Main.getPlugin().setBP(false);
             Main.getPlugin().setEDK(false);
             Main.getPlugin().setKA(false);
+            Main.getPlugin().setSH(true);
             for (Player all : Bukkit.getServer().getOnlinePlayers())
                 all.setGameMode(GameMode.SPECTATOR);
         }

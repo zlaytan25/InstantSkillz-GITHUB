@@ -590,20 +590,21 @@ public class Navigator implements Listener {
         sh.setItemMeta(meta);
         OptionsCW1.setItem(12, sh);
 
-        ItemStack KA1 = new ItemStack(Material.GREEN_DYE, 1);
-        ItemMeta itemMeta7 = KA1.getItemMeta();
-        itemMeta7.setDisplayName("§cSplit-Herzen -> AN §a\u2714");
-        itemMeta7.setLore(Arrays.asList(" ", "§7§oSchaltet das einheitliche Leben aus!", " "));
-        KA1.setItemMeta(itemMeta7);
-        OptionsCW1.setItem(21, KA1);
-
-        ItemStack KA2 = new ItemStack(Material.GRAY_DYE, 1);
-        ItemMeta itemMeta77 = KA2.getItemMeta();
-        itemMeta77.setDisplayName("§cSplit-Herzen -> AUS §4\u2715");
-        itemMeta77.setLore(Arrays.asList(" ", "§7§oSchaltet das einheitliche Leben an!", " "));
-        KA2.setItemMeta(itemMeta77);
-        OptionsCW1.setItem(21, KA2);
-
+        if (Main.getPlugin().getSH() == false) {
+            ItemStack KA1 = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta itemMeta7 = KA1.getItemMeta();
+            itemMeta7.setDisplayName("§cSplit-Herzen -> AN §a\u2714");
+            itemMeta7.setLore(Arrays.asList(" ", "§7§oSchaltet das einheitliche Leben aus!", " "));
+            KA1.setItemMeta(itemMeta7);
+            OptionsCW1.setItem(21, KA1);
+        } else if (Main.getPlugin().getSH() == true) {
+            ItemStack KA2 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta itemMeta77 = KA2.getItemMeta();
+            itemMeta77.setDisplayName("§cSplit-Herzen -> AUS §4\u2715");
+            itemMeta77.setLore(Arrays.asList(" ", "§7§oSchaltet das einheitliche Leben an!", " "));
+            KA2.setItemMeta(itemMeta77);
+            OptionsCW1.setItem(21, KA2);
+        }
 
         ItemStack hp = new ItemStack(Material.POTION, 1);
         PotionMeta meta1 = (PotionMeta) sh.getItemMeta();
@@ -637,12 +638,22 @@ public class Navigator implements Listener {
         OptionsCW1.setItem(16, food);
 
         //GETTER UND SETTER MACHEN
-        ItemStack fl = new ItemStack(Material.GREEN_DYE, 1);
-        ItemMeta imfl = fl.getItemMeta();
-        imfl.setDisplayName("§cHunger -> AN §a\u2714");
-        imfl.setLore(Arrays.asList(" ", "§7§oSchaltet den Hunger aus!", " "));
-        fl.setItemMeta(imfl);
-        OptionsCW1.setItem(25, fl);
+        if (Main.getPlugin().getHunger() == false) {
+            ItemStack fl = new ItemStack(Material.GREEN_DYE, 1);
+            ItemMeta imfl = fl.getItemMeta();
+            imfl.setDisplayName("§cHunger -> AN §a\u2714");
+            imfl.setLore(Arrays.asList(" ", "§7§oSchaltet den Hunger aus!", " "));
+            fl.setItemMeta(imfl);
+            OptionsCW1.setItem(25, fl);
+        } else if (Main.getPlugin().getHunger() == true) {
+            ItemStack fl1 = new ItemStack(Material.GRAY_DYE, 1);
+            ItemMeta imfl1 = fl1.getItemMeta();
+            imfl1.setDisplayName("§cHunger -> AUS §a\u2714");
+            imfl1.setLore(Arrays.asList(" ", "§7§oSchaltet den Hunger an!", " "));
+            fl1.setItemMeta(imfl1);
+            OptionsCW1.setItem(25, fl1);
+        }
+
 
         for (int k = 45; k < 54; k++) {
             ItemStack deko14 = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
@@ -2498,11 +2509,7 @@ public class Navigator implements Listener {
 
                 if (event.getSlot() == 10 && Bukkit.getWorld("Challenge-1") != null) {
                     player.closeInventory();
-                    Location location1 = world1.getSpawnLocation();
-                    location1.setY(world1.getHighestBlockYAt(location1) + 1);
-
                     player.getInventory().clear();
-
                     String playername = player.getName();
                     File file = new File("plugins//InstantSkillzTV//Inventories//" + world1 + "//" + playername + ".yml");
 
@@ -2511,6 +2518,13 @@ public class Navigator implements Listener {
                         player.getInventory().clear();
                         List<?> list = inv.getList("Inventory");
                         List<?> slot = inv.getList("Slot");
+
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
 
                         double health = inv.getDouble("Health");
                         player.setHealth(health);
@@ -2525,18 +2539,14 @@ public class Navigator implements Listener {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
 
-                        World world = Bukkit.getWorld(inv.getString("World"));
-                        Double X = inv.getDouble("X");
-                        Double Y = inv.getDouble("Y");
-                        Double Z = inv.getDouble("Z");
-                        Location loc = new Location(world, X, Y, Z);
-                        player.teleport(loc);
-
                         file.delete();
 
                         return;
+                    } else {
+                        Location location1 = world1.getSpawnLocation();
+                        location1.setY(world1.getHighestBlockYAt(location1) + 1);
+                        player.teleport(location1);
                     }
-                    player.teleport(location1);
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage("§aServer " + "§8>> " + "§aTeleportiert in: §6Welt 1§a!");
                 } else if (event.getSlot() == 10 && Bukkit.getWorld("Challenge-1") == null) {
@@ -2567,6 +2577,13 @@ public class Navigator implements Listener {
                         List<?> list = inv.getList("Inventory");
                         List<?> slot = inv.getList("Slot");
 
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
+
                         double health = inv.getDouble("Health");
                         player.setHealth(health);
                         double exp = inv.getDouble("Exp");
@@ -2580,12 +2597,7 @@ public class Navigator implements Listener {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
 
-                        World world = Bukkit.getWorld(inv.getString("World"));
-                        Double X = inv.getDouble("X");
-                        Double Y = inv.getDouble("Y");
-                        Double Z = inv.getDouble("Z");
-                        Location loc = new Location(world, X, Y, Z);
-                        player.teleport(loc);
+
 
                         file.delete();
 
@@ -2622,6 +2634,13 @@ public class Navigator implements Listener {
                         List<?> list = inv.getList("Inventory");
                         List<?> slot = inv.getList("Slot");
 
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
+
                         double health = inv.getDouble("Health");
                         player.setHealth(health);
                         double exp = inv.getDouble("Exp");
@@ -2635,12 +2654,7 @@ public class Navigator implements Listener {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
 
-                        World world = Bukkit.getWorld(inv.getString("World"));
-                        Double X = inv.getDouble("X");
-                        Double Y = inv.getDouble("Y");
-                        Double Z = inv.getDouble("Z");
-                        Location loc = new Location(world, X, Y, Z);
-                        player.teleport(loc);
+
 
                         file.delete();
 
@@ -2677,6 +2691,13 @@ public class Navigator implements Listener {
                         List<?> list = inv.getList("Inventory");
                         List<?> slot = inv.getList("Slot");
 
+                        World world = Bukkit.getWorld(inv.getString("World"));
+                        Double X = inv.getDouble("X");
+                        Double Y = inv.getDouble("Y");
+                        Double Z = inv.getDouble("Z");
+                        Location loc = new Location(world, X, Y, Z);
+                        player.teleport(loc);
+
                         double health = inv.getDouble("Health");
                         player.setHealth(health);
                         double exp = inv.getDouble("Exp");
@@ -2690,12 +2711,7 @@ public class Navigator implements Listener {
                             player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                         }
 
-                        World world = Bukkit.getWorld(inv.getString("World"));
-                        Double X = inv.getDouble("X");
-                        Double Y = inv.getDouble("Y");
-                        Double Z = inv.getDouble("Z");
-                        Location loc = new Location(world, X, Y, Z);
-                        player.teleport(loc);
+
 
                         file.delete();
 
@@ -2962,9 +2978,11 @@ public class Navigator implements Listener {
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setSH(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setSH(false);
+                    openOWC1(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
@@ -2975,9 +2993,11 @@ public class Navigator implements Listener {
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setHunger(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setHunger(false);
+                    openOWC1(player.getPlayer());
                 }
             }
 
@@ -3173,6 +3193,13 @@ public class Navigator implements Listener {
                             List<?> list = inv.getList("Inventory");
                             List<?> slot = inv.getList("Slot");
 
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
+
                             double health = inv.getDouble("Health");
                             player.setHealth(health);
                             double exp = inv.getDouble("Exp");
@@ -3185,12 +3212,7 @@ public class Navigator implements Listener {
                             for (int i = 0; i < player.getInventory().getSize(); i++) {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                             }
-                            World world = Bukkit.getWorld(inv.getString("World"));
-                            Double X = inv.getDouble("X");
-                            Double Y = inv.getDouble("Y");
-                            Double Z = inv.getDouble("Z");
-                            Location loc = new Location(world, X, Y, Z);
-                            player.teleport(loc);
+
 
                             file.delete();
 
@@ -3511,6 +3533,13 @@ public class Navigator implements Listener {
                             List<?> list = inv.getList("Inventory");
                             List<?> slot = inv.getList("Slot");
 
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
+
                             double health = inv.getDouble("Health");
                             player.setHealth(health);
                             double exp = inv.getDouble("Exp");
@@ -3524,12 +3553,6 @@ public class Navigator implements Listener {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                             }
 
-                            World world = Bukkit.getWorld(inv.getString("World"));
-                            Double X = inv.getDouble("X");
-                            Double Y = inv.getDouble("Y");
-                            Double Z = inv.getDouble("Z");
-                            Location loc = new Location(world, X, Y, Z);
-                            player.teleport(loc);
 
                             file.delete();
 
@@ -3850,6 +3873,13 @@ public class Navigator implements Listener {
                             List<?> list = inv.getList("Inventory");
                             List<?> slot = inv.getList("Slot");
 
+                            World world = Bukkit.getWorld(inv.getString("World"));
+                            Double X = inv.getDouble("X");
+                            Double Y = inv.getDouble("Y");
+                            Double Z = inv.getDouble("Z");
+                            Location loc = new Location(world, X, Y, Z);
+                            player.teleport(loc);
+
                             double health = inv.getDouble("Health");
                             player.setHealth(health);
                             double exp = inv.getDouble("Exp");
@@ -3862,12 +3892,7 @@ public class Navigator implements Listener {
                             for (int i = 0; i < player.getInventory().getSize(); i++) {
                                 player.getInventory().setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                             }
-                            World world = Bukkit.getWorld(inv.getString("World"));
-                            Double X = inv.getDouble("X");
-                            Double Y = inv.getDouble("Y");
-                            Double Z = inv.getDouble("Z");
-                            Location loc = new Location(world, X, Y, Z);
-                            player.teleport(loc);
+
 
                             file.delete();
 

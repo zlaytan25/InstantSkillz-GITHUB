@@ -51,6 +51,10 @@ public class Main extends JavaPlugin {
     private boolean UUHC = true;
     //UHC
     private boolean UHC = true;
+    //SplitHerzen
+    private boolean SH = true;
+    //Hunger
+    private boolean Hunger = false;
 
     public static Main getPlugin() {
         return plugin;
@@ -96,6 +100,8 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new EnderDragonKill(), this);
         pluginManager.registerEvents(new UUHC(), this);
         pluginManager.registerEvents(new UHC(), this);
+        pluginManager.registerEvents(new SplitHerzen(), this);
+        pluginManager.registerEvents(new HungerOnOff(), this);
 
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.sendMessage("§aServer " + "§8>> " + "§aPlugin geladen.");
@@ -174,6 +180,22 @@ public class Main extends JavaPlugin {
 
     public void setUHC(boolean start) {
         this.UHC = start;
+    }
+
+    public boolean getSH() {
+        return SH;
+    }
+
+    public void setSH(boolean start) {
+        this.SH = start;
+    }
+
+    public boolean getHunger() {
+        return Hunger;
+    }
+
+    public void setHunger(boolean start) {
+        this.Hunger = start;
     }
 
     public static ItemStack getBingoHead(String name) {
