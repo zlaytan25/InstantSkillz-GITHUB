@@ -2564,6 +2564,7 @@ public class Navigator implements Listener {
 
                 if (event.getSlot() == 12 && Bukkit.getWorld("Challenge-2") != null) {
                     player.closeInventory();
+                    player.getInventory().clear();
                     String playername = player.getName();
                     File file = new File("plugins//InstantSkillzTV//Inventories//" + world2 + "//" + playername + ".yml");
 
@@ -2617,7 +2618,7 @@ public class Navigator implements Listener {
 
                 if (event.getSlot() == 14 && Bukkit.getWorld("Challenge-3") != null) {
                     player.closeInventory();
-
+                    player.getInventory().clear();
                     String playername = player.getName();
                     File file = new File("plugins//InstantSkillzTV//Inventories//" + world3 + "//" + playername + ".yml");
 
@@ -2671,7 +2672,7 @@ public class Navigator implements Listener {
 
                 if (event.getSlot() == 16 && Bukkit.getWorld("Challenge-4") != null) {
                     player.closeInventory();
-
+                    player.getInventory().clear();
                     String playername = player.getName();
                     File file = new File("plugins//InstantSkillzTV//Inventories//" + world4 + "//" + playername + ".yml");
 
@@ -2881,14 +2882,15 @@ public class Navigator implements Listener {
                     if (Bukkit.getWorld("Challenge-1") != null) {
                         player.closeInventory();
                         //HUB-Teleport
-                        if (player.getWorld() != hub) {
-                            player.teleport(lochub);
-                            //Navigator
-                            player.getInventory().setItem(4, item);
-                            //Gamemode
-                            player.setGameMode(GameMode.ADVENTURE);
-                        }
+                        for (Player all : Bukkit.getOnlinePlayers()) {
 
+                            all.teleport(lochub);
+                            //Navigator
+                            all.getInventory().setItem(4, item);
+                            //Gamemode
+                            all.setGameMode(GameMode.ADVENTURE);
+
+                        }
                         //Inventar löschen
                         String playername = player.getName();
                         File inventory = new File("plugins//InstantSkillzTV//Inventories//" + world1);
