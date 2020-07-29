@@ -47,7 +47,6 @@ public class SpawnCommand implements CommandExecutor {
 
                         ArrayList<Integer> slot = new ArrayList<>();
 
-
                         for (int i = 0; i <= player.getInventory().getSize(); i++) {
                             if (player.getInventory().getItem(i) != null) {
                                 slot.add(i);
