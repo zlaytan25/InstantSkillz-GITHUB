@@ -102,7 +102,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new UHC(), this);
         pluginManager.registerEvents(new SplitHerzen(), this);
         pluginManager.registerEvents(new HungerOnOff(), this);
-
+        pluginManager.registerEvents(new BackPackCommand(),this);
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.sendMessage("§aServer " + "§8>> " + "§aPlugin geladen.");
             all.setGameMode(GameMode.ADVENTURE);

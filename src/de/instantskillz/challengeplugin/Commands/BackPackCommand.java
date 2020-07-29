@@ -9,16 +9,20 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class BackPackCommand implements CommandExecutor {
+public class BackPackCommand implements CommandExecutor, Listener {
 
-    Inventory backpack = Bukkit.createInventory(null, 9 * 3, "§6§lBackpack");
+    private Inventory backpack = Bukkit.createInventory(null, 9 * 3, "§6Backpack");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -27,43 +31,25 @@ public class BackPackCommand implements CommandExecutor {
                 Player player = (Player) sender;
                 if (player.hasPermission("schnellerHase.bp")) {
                     if (args.length == 0) {
-                        if (player.getWorld().getName().contains("Challenge")) {
-                            player.openInventory(backpack);
-                            player.sendMessage("§aServer " + "§8>> " + "§aDu hast das Backpack geöffnet!");
+                        String world = player.getWorld().getName();
+                        if (world.contains("Challenge")) {
 
-                            //FUNKTIONIERT NOCH NICHT!
-                            //HIER MUSS EIN LISTENER HIN DER WARTET BIS DAS INVENTORY "BACKBACK" VIEWERS HAT ODER NICHT
-                            //KEINE AHNUNG WIE DAS GEHT…
-                            if (backpack.getViewers().size() == 0) {
-                                this.checkDirectory();
-                                ArrayList<ItemStack> list = new ArrayList<>();
-                                File file = new File("plugins//InstantSkillzTV//Backpacks//" + player.getWorld().getName() + ".yml");
+                            //Get Backpack
+                            backpack.clear();
+                            File file = new File("plugins//InstantSkillzTV//Backpacks//" + world + ".yml");
 
-                                try {
-                                    file.createNewFile();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
+                            if (file.exists()) {
                                 YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
-                                ItemStack[] contents = backpack.getStorageContents();
+                                List<?> list = inv.getList("Backpack");
+                                List<?> slot = inv.getList("Slot");
 
-                                for (int j = 0; j < contents.length; j++) {
-                                    ItemStack item = contents[j];
-
-                                    if (!(item == null)) {
-                                        list.add(item);
-                                    }
-                                }
-
-                                inv.set("Backpack", list);
-
-                                try {
-                                    inv.save(file);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                for (int i = 0; i < list.size(); i++) {
+                                    backpack.setItem((Integer) slot.get(i), (ItemStack) list.get(i));
                                 }
                             }
+
+                            player.openInventory(backpack);
+                            player.sendMessage("§aServer " + "§8>> " + "§aDu hast das Backpack geöffnet!");
                         }
                     } else
                         player.sendMessage("§aServer " + "§8>> " + "§cBitte benutze §6/bp§c!");
@@ -76,6 +62,56 @@ public class BackPackCommand implements CommandExecutor {
         }
 
         return false;
+    }
+
+
+    @EventHandler
+    public void checkBackpack(InventoryCloseEvent event) {
+        if (event.getView().getTitle().equals("§6Backpack")) {
+            String world = event.getPlayer().getWorld().getName();
+            this.checkDirectory();
+            ArrayList<ItemStack> list = new ArrayList<>();
+            File file = new File("plugins//InstantSkillzTV//Backpacks//" + world + ".yml");
+
+            if (!file.exists()) {
+                file.delete();
+            }
+
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            YamlConfiguration inv = YamlConfiguration.loadConfiguration(file);
+
+            ArrayList<Integer> slot = new ArrayList<>();
+            for (int i = 0; i < event.getInventory().getSize(); i++) {
+                if (event.getInventory().getItem(i) != null) {
+                    slot.add(i);
+                } else if (i == event.getInventory().getSize()) {
+                    break;
+                }
+            }
+
+            ItemStack[] contents = event.getInventory().getStorageContents();
+            for (int i = 0; i < contents.length; i++) {
+                ItemStack item = contents[i];
+
+                if (!(item == null)) {
+                    list.add(item);
+                }
+            }
+
+            inv.set("Slot", slot);
+            inv.set("Backpack", list);
+
+            try {
+                inv.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void checkDirectory() {
