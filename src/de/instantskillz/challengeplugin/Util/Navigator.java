@@ -2998,10 +2998,20 @@ public class Navigator implements Listener {
                 }
             }
             if (event.getSlot() == 23) {
-
+                double health = player.getHealth();
+                double newhealth = health + 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 32) {
-
+                double health = player.getHealth();
+                double newhealth = health - 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
@@ -3353,22 +3363,36 @@ public class Navigator implements Listener {
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setSH(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setSH(false);
+                    openOWC1(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
-
+                double health = player.getHealth();
+                double newhealth = health + 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 32) {
-
+                double health = player.getHealth();
+                double newhealth = health - 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setHunger(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setHunger(false);
+                    openOWC1(player.getPlayer());
                 }
             }
 
@@ -3712,22 +3736,36 @@ public class Navigator implements Listener {
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setSH(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setSH(false);
+                    openOWC1(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
-
+                double health = player.getHealth();
+                double newhealth = health + 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 32) {
-
+                double health = player.getHealth();
+                double newhealth = health - 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setHunger(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setHunger(false);
+                    openOWC1(player.getPlayer());
                 }
             }
 
@@ -4072,22 +4110,36 @@ public class Navigator implements Listener {
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setSH(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setSH(false);
+                    openOWC1(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
-
+                double health = player.getHealth();
+                double newhealth = health + 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 32) {
-
+                double health = player.getHealth();
+                double newhealth = health - 1;
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.setMaxHealth(newhealth);
+                    all.setHealth(newhealth);
+                }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
-
+                    Main.getPlugin().setHunger(true);
+                    openOWC1(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
-
+                    Main.getPlugin().setHunger(false);
+                    openOWC1(player.getPlayer());
                 }
             }
 

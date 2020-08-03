@@ -63,6 +63,11 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            all.setGameMode(GameMode.ADVENTURE);
+            all.sendMessage("§aServer " + "§8>> " + "§aPlugin geladen.");
+        }
+
         MuteCommand muteCommand = new MuteCommand();
         new RecipeLoader().registerRecipes();
 
@@ -103,10 +108,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new SplitHerzen(), this);
         pluginManager.registerEvents(new HungerOnOff(), this);
         pluginManager.registerEvents(new BackPackCommand(),this);
-        for (Player all : Bukkit.getOnlinePlayers()) {
-            all.sendMessage("§aServer " + "§8>> " + "§aPlugin geladen.");
-            all.setGameMode(GameMode.ADVENTURE);
-        }
+
 
     }
 
