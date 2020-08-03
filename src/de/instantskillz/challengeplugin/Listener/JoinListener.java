@@ -9,6 +9,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemFlag;
@@ -80,6 +81,18 @@ public class JoinListener implements Listener {
             Score score = online.getScoreboard().getObjective(DisplaySlot.SIDEBAR).getScore("§cSpieler: §7" + Bukkit.getOnlinePlayers().size());
             score.setScore(1);
         }
+    }
+
+    @EventHandler
+    public void onHunger(FoodLevelChangeEvent event) {
+        Player player = (Player) event.getEntity();
+        if (player.getWorld() == Bukkit.getWorld("world")) {
+            for (Player all : Bukkit.getOnlinePlayers()) {
+                all.setFoodLevel(20);
+            }
+            event.setCancelled(true);
+        }
+
     }
 
 

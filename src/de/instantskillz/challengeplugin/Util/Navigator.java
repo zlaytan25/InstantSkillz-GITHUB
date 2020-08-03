@@ -2881,16 +2881,35 @@ public class Navigator implements Listener {
 
                     if (Bukkit.getWorld("Challenge-1") != null) {
                         player.closeInventory();
-                        //HUB-Teleport
+
                         for (Player all : Bukkit.getOnlinePlayers()) {
-
-                            all.teleport(lochub);
-                            //Navigator
-                            all.getInventory().setItem(4, item);
-                            //Gamemode
-                            all.setGameMode(GameMode.ADVENTURE);
-
+                            if (all.getWorld().getName().equals("Challenge-1")) {
+                                //HUB-Teleport
+                                all.teleport(lochub);
+                                all.getInventory().clear();
+                                //Navigator
+                                all.getInventory().setItem(4, item);
+                                //Gamemode
+                                all.setGameMode(GameMode.ADVENTURE);
+                                all.setFoodLevel(20);
+                                all.setMaxHealth(20.0);
+                                all.setHealth(20);
+                                all.setTotalExperience(0);
+                                all.setExp(0);
+                                all.setLevel(0);
+                                all.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
+                                Main.getPlugin().setFDMG(true);
+                                Main.getPlugin().setSKL(true);
+                                Main.getPlugin().setUUHC(true);
+                                Main.getPlugin().setUHC(true);
+                                Main.getPlugin().setBP(false);
+                                Main.getPlugin().setEDK(false);
+                                Main.getPlugin().setKA(false);
+                                Main.getPlugin().setTimer(false);
+                                Main.getPlugin().setSH(true);
+                            }
                         }
+
                         //Inventar löschen
                         String playername = player.getName();
                         File inventory = new File("plugins//InstantSkillzTV//Inventories//" + world1);
@@ -3224,13 +3243,33 @@ public class Navigator implements Listener {
 
                     if (Bukkit.getWorld("Challenge-2") != null) {
                         player.closeInventory();
-                        //HUB-Teleport
-                        if (player.getWorld() != hub) {
-                            player.teleport(lochub);
-                            //Navigator
-                            player.getInventory().setItem(4, item);
-                            //Gamemode
-                            player.setGameMode(GameMode.ADVENTURE);
+
+                        for (Player all : Bukkit.getOnlinePlayers()) {
+                            if (all.getWorld().getName().equals("Challenge-2")) {
+                                //HUB-Teleport
+                                all.teleport(lochub);
+                                all.getInventory().clear();
+                                //Navigator
+                                all.getInventory().setItem(4, item);
+                                //Gamemode
+                                all.setGameMode(GameMode.ADVENTURE);
+                                all.setFoodLevel(20);
+                                all.setMaxHealth(20.0);
+                                all.setHealth(20);
+                                all.setTotalExperience(0);
+                                all.setExp(0);
+                                all.setLevel(0);
+                                all.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
+                                Main.getPlugin().setFDMG(true);
+                                Main.getPlugin().setSKL(true);
+                                Main.getPlugin().setUUHC(true);
+                                Main.getPlugin().setUHC(true);
+                                Main.getPlugin().setBP(false);
+                                Main.getPlugin().setEDK(false);
+                                Main.getPlugin().setKA(false);
+                                Main.getPlugin().setTimer(false);
+                                Main.getPlugin().setSH(true);
+                            }
                         }
 
                         //Inventar löschen
@@ -3563,13 +3602,33 @@ public class Navigator implements Listener {
 
                     if (Bukkit.getWorld("Challenge-3") != null) {
                         player.closeInventory();
-                        //HUB-Teleport
-                        if (player.getWorld() != hub) {
-                            player.teleport(lochub);
-                            //Navigator
-                            player.getInventory().setItem(4, item);
-                            //Gamemode
-                            player.setGameMode(GameMode.ADVENTURE);
+
+                        for (Player all : Bukkit.getOnlinePlayers()) {
+                            if (all.getWorld().getName().equals("Challenge-3")) {
+                                //HUB-Teleport
+                                all.teleport(lochub);
+                                all.getInventory().clear();
+                                //Navigator
+                                all.getInventory().setItem(4, item);
+                                //Gamemode
+                                all.setGameMode(GameMode.ADVENTURE);
+                                all.setFoodLevel(20);
+                                all.setMaxHealth(20.0);
+                                all.setHealth(20);
+                                all.setTotalExperience(0);
+                                all.setExp(0);
+                                all.setLevel(0);
+                                all.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
+                                Main.getPlugin().setFDMG(true);
+                                Main.getPlugin().setSKL(true);
+                                Main.getPlugin().setUUHC(true);
+                                Main.getPlugin().setUHC(true);
+                                Main.getPlugin().setBP(false);
+                                Main.getPlugin().setEDK(false);
+                                Main.getPlugin().setKA(false);
+                                Main.getPlugin().setTimer(false);
+                                Main.getPlugin().setSH(true);
+                            }
                         }
 
                         //Inventar löschen
@@ -3902,13 +3961,33 @@ public class Navigator implements Listener {
 
                     if (Bukkit.getWorld("Challenge-4") != null) {
                         player.closeInventory();
-                        //HUB-Teleport
-                        if (player.getWorld() != hub) {
-                            player.teleport(lochub);
-                            //Navigator
-                            player.getInventory().setItem(4, item);
-                            //Gamemode
-                            player.setGameMode(GameMode.ADVENTURE);
+
+                        for (Player all : Bukkit.getOnlinePlayers()) {
+                            if (all.getWorld().getName().equals("Challenge-4")) {
+                                //HUB-Teleport
+                                all.teleport(lochub);
+                                all.getInventory().clear();
+                                //Navigator
+                                all.getInventory().setItem(4, item);
+                                //Gamemode
+                                all.setGameMode(GameMode.ADVENTURE);
+                                all.setFoodLevel(20);
+                                all.setMaxHealth(20.0);
+                                all.setHealth(20);
+                                all.setTotalExperience(0);
+                                all.setExp(0);
+                                all.setLevel(0);
+                                all.sendMessage("§aServer " + "§8>> " + "§aDu wurdest zur §6Lobby §ateleportiert!");
+                                Main.getPlugin().setFDMG(true);
+                                Main.getPlugin().setSKL(true);
+                                Main.getPlugin().setUUHC(true);
+                                Main.getPlugin().setUHC(true);
+                                Main.getPlugin().setBP(false);
+                                Main.getPlugin().setEDK(false);
+                                Main.getPlugin().setKA(false);
+                                Main.getPlugin().setTimer(false);
+                                Main.getPlugin().setSH(true);
+                            }
                         }
 
                         //Inventar löschen
@@ -4167,6 +4246,9 @@ public class Navigator implements Listener {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
         if (player.getWorld() == Bukkit.getWorld("world")) {
+            if (player.getGameMode() == GameMode.CREATIVE) {
+                return;
+            }
             if (event.getSlotType() == SlotType.QUICKBAR) {
                 event.setCancelled(true);
                 switch (event.getCurrentItem().getType()) {
