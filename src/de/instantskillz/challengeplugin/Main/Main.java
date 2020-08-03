@@ -32,7 +32,6 @@ public class Main extends JavaPlugin {
     public SneakKillListener skl = new SneakKillListener();
     public GameModeListener gml = new GameModeListener();
 
-
     //SneakKillEvent
     private boolean SKL = true;
     //TimerAn/Aus
@@ -85,6 +84,8 @@ public class Main extends JavaPlugin {
         //getCommand("delete").setExecutor(new WorldDelete());
         getCommand("modes").setExecutor(new GameModesStartStop());
         getCommand("bingo").setExecutor(new BingoStart());
+        getCommand("unpause").setExecutor(new UnpauseChallengeCommand());
+        getCommand("pause").setExecutor(new PauseChallengeCommand());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);

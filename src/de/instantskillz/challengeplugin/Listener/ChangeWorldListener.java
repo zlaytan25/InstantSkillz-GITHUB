@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
@@ -23,15 +24,15 @@ public class ChangeWorldListener implements Listener {
 
     @EventHandler
     public void onPlayerChangeWorld(PlayerChangedWorldEvent event) {
+        String[] worldNames = new String[Bukkit.getServer().getWorlds().size()];
+        for (World w : Bukkit.getServer().getWorlds()) {
+            worldNames[challengeWorlds] = w.getName();
+            if (w.getName().contains("Challenge")) {
+                challengeWorlds++;
+            }
+        }
         String currentWorld = event.getPlayer().getWorld().getName();
         if (currentWorld != Bukkit.getWorld("world").getName() && currentWorld.contains("Challenge")) {
-            String[] worldNames = new String[Bukkit.getServer().getWorlds().size()];
-            for (World w : Bukkit.getServer().getWorlds()) {
-                worldNames[challengeWorlds] = w.getName();
-                if (w.getName().contains("Challenge")) {
-                    challengeWorlds++;
-                }
-            }
 
             for (int i = 1; i <= challengeWorlds; i++) {
                 if (currentWorld.equals("Challenge-" + i)) {
@@ -96,6 +97,26 @@ public class ChangeWorldListener implements Listener {
                     }
                 }
             }
+            File running = new File(currentWorld + "//.running");
+            if (running.exists()) {
+                running.delete();
+            }
+        }
+    }
+
+    @EventHandler
+    public void particles(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        String currentWorld = player.getWorld().getName();
+        for (int i = 1; i <= challengeWorlds; i++) {
+            if (currentWorld.equals("Challenge-" + i)) {
+                File paused = new File("Challenge-" + i + "//.paused");
+
+                if (paused.exists()) {
+                    Location loc = player.getLocation();
+                    player.getWorld().spawnParticle(Particle.SPELL_WITCH, loc, 2, 0, 0, 0);
+                }
+            }
         }
     }
 
@@ -104,9 +125,9 @@ public class ChangeWorldListener implements Listener {
         String currentWorld = event.getEntity().getWorld().getName();
         for (int i = 1; i <= challengeWorlds; i++) {
             if (currentWorld.equals("Challenge-" + i)) {
-                File file = new File("Challenge-" + i + "//.paused");
+                File paused = new File("Challenge-" + i + "//.paused");
 
-                if (file.exists()) {
+                if (paused.exists()) {
                     event.setCancelled(true);
                 }
             }
@@ -118,9 +139,9 @@ public class ChangeWorldListener implements Listener {
         String currentWorld = event.getEntity().getWorld().getName();
         for (int i = 1; i <= challengeWorlds; i++) {
             if (currentWorld.equals("Challenge-" + i)) {
-                File file = new File("Challenge-" + i + "//.paused");
+                File paused = new File("Challenge-" + i + "//.paused");
 
-                if (file.exists()) {
+                if (paused.exists()) {
                     event.setCancelled(true);
                 }
             }

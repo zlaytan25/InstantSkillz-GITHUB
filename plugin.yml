@@ -43,5 +43,7 @@ commands:
       description: Oeffnet dir die Spiel-Modi-Auswahl!
    bingo:
       description: Startet Bingo!
-      #reume:
-      #description: Spiele eine bestimmte Challenge weiter!
+   pause:
+      description: Pausiere eine bestimmte Challenge!
+   unpause:
+      description: Spiele eine bestimmte Challenge weiter!
