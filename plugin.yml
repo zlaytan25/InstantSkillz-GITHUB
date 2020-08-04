@@ -11,8 +11,6 @@ commands:
       description: Setze deinen individuellen Spawnpunkt!
    hub:
       description: Teleportiert dich zu deinem Spawnpunkt!
-   party:
-      description: Starte eine Party steigen!!! Juhu :D
    chatclear:
       description: Chatverlauf loeschen.
    mute:
@@ -35,12 +33,6 @@ commands:
       description: Startet eine Welt mit dem Bingo-Spielmodus!
    stopbingo:
       description: Loescht die Welt mit dem Bingo-Spielmodus!
-   start:
-      description: Erstellt eine zufaellige Challenge-Welten <1-5>!
-   delete:
-      description: Loescht die Challenge-Welten <1-5>!
-   modes:
-      description: Oeffnet dir die Spiel-Modi-Auswahl!
    bingo:
       description: Startet Bingo!
    pos:

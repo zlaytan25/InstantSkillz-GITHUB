@@ -15,7 +15,7 @@ public class UUHC implements Listener {
         if (Main.getPlugin().getUUHC() == true) {
 
         } else if (Main.getPlugin().getUUHC() == false) {
-            if (event.getRegainReason() == RegainReason.SATIATED || event.getRegainReason() == RegainReason.REGEN || event.getRegainReason() == RegainReason.EATING || event.getRegainReason() == RegainReason.MAGIC || event.getRegainReason() == RegainReason.MAGIC_REGEN)
+            if (event.getRegainReason() == RegainReason.EATING || event.getRegainReason() == RegainReason.MAGIC || event.getRegainReason() == RegainReason.MAGIC_REGEN)
                 event.setCancelled(true);
         }
     }

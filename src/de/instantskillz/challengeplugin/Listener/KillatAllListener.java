@@ -47,7 +47,6 @@ public class KillatAllListener implements Listener {
             Main.getPlugin().setFDMG(true);
             Main.getPlugin().setSKL(true);
             Main.getPlugin().setUUHC(true);
-            Main.getPlugin().setUHC(true);
             Main.getPlugin().setBP(false);
             Main.getPlugin().setEDK(false);
             Main.getPlugin().setKA(false);

@@ -30,7 +30,6 @@ public class Main extends JavaPlugin {
     private static Main plugin;
     public final String PREFIX = "§aServer " + "§8>> §r";
     public SneakKillListener skl = new SneakKillListener();
-    public GameModeListener gml = new GameModeListener();
 
 
     //SneakKillEvent
@@ -47,10 +46,20 @@ public class Main extends JavaPlugin {
     private boolean BINGO = true;
     //EnderDragonKill
     private boolean EDK = false;
-    //UUHC
-    private boolean UUHC = true;
+
     //UHC
     private boolean UHC = true;
+
+    public boolean getUHC() {
+        return UHC;
+    }
+
+    public void setUHC(boolean UHC) {
+        this.UHC = UHC;
+    }
+
+    //UUHC
+    private boolean UUHC = true;
     //SplitHerzen
     private boolean SH = true;
     //Hunger
@@ -88,7 +97,6 @@ public class Main extends JavaPlugin {
         //getCommand("stopbingo").setExecutor(new BingoWorldStop());
         //getCommand("start").setExecutor(new WorldGenerator());
         //getCommand("delete").setExecutor(new WorldDelete());
-        getCommand("modes").setExecutor(new GameModesStartStop());
         getCommand("bingo").setExecutor(new BingoStart());
         getCommand("pos").setExecutor(new PositionSafeCommand());
         getCommand("pos").setTabCompleter(new PositionSafeTabComplete());
@@ -101,12 +109,10 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new SneakKillListener(), this);
         //pluginManager.registerEvents(new FallDMGListener(), this);
         pluginManager.registerEvents(new Navigator(), this);
-        pluginManager.registerEvents(new RandomItemsChest(), this);
-        pluginManager.registerEvents(new GameModeListener(), this);
+        //pluginManager.registerEvents(new RandomItemsChest(), this);
         pluginManager.registerEvents(new BingoStart(), this);
         pluginManager.registerEvents(new EnderDragonKill(), this);
         pluginManager.registerEvents(new UUHC(), this);
-        pluginManager.registerEvents(new UHC(), this);
         pluginManager.registerEvents(new SplitHerzen(), this);
         pluginManager.registerEvents(new HungerOnOff(), this);
         pluginManager.registerEvents(new BackPackCommand(),this);
@@ -176,14 +182,6 @@ public class Main extends JavaPlugin {
 
     public void setUUHC(boolean start) {
         this.UUHC = start;
-    }
-
-    public boolean getUHC() {
-        return UHC;
-    }
-
-    public void setUHC(boolean start) {
-        this.UHC = start;
     }
 
     public boolean getSH() {
