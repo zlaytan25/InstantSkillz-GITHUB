@@ -606,12 +606,15 @@ public class Navigator implements Listener {
             OptionsCW1.setItem(21, KA2);
         }
 
-        ItemStack hp = new ItemStack(Material.POTION, 1);
+        double herzen = player.getMaxHealth();
+
+        ItemStack hp = new ItemStack(Material.POTION);
         PotionMeta meta1 = (PotionMeta) sh.getItemMeta();
         meta1.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL, false, true));
         meta1.setDisplayName("§6Anzahl der Herzen");
-        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen", " "));
+        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen / §7§o§l20 §7§oHalbe-Herzen", "§7§oAnzahl Potions = Anzahl Halbe-Herzen!", " "));
         meta1.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        hp.setAmount((int) herzen);
         hp.setItemMeta(meta1);
         OptionsCW1.setItem(14, hp);
 
@@ -1094,13 +1097,15 @@ public class Navigator implements Listener {
         KA2.setItemMeta(itemMeta77);
         OptionsCW2.setItem(21, KA2);
 
+        double herzen = player.getMaxHealth();
 
-        ItemStack hp = new ItemStack(Material.POTION, 1);
+        ItemStack hp = new ItemStack(Material.POTION);
         PotionMeta meta1 = (PotionMeta) sh.getItemMeta();
         meta1.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL, false, true));
         meta1.setDisplayName("§6Anzahl der Herzen");
-        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen", " "));
+        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen / §7§o§l20 §7§oHalbe-Herzen", "§7§oAnzahl Potions = Anzahl Halbe-Herzen!", " "));
         meta1.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        hp.setAmount((int) herzen);
         hp.setItemMeta(meta1);
         OptionsCW2.setItem(14, hp);
 
@@ -1550,7 +1555,7 @@ public class Navigator implements Listener {
             OptionsCW3.setItem(19, Timer2);
         }
 
-        ItemStack sh = new ItemStack(Material.POTION, 1);
+        ItemStack sh = new ItemStack(Material.POTION);
         PotionMeta meta = (PotionMeta) sh.getItemMeta();
         meta.setBasePotionData(new PotionData(PotionType.INSTANT_DAMAGE, false, true));
         meta.setDisplayName("§6Split-Herzen");
@@ -1573,13 +1578,15 @@ public class Navigator implements Listener {
         KA2.setItemMeta(itemMeta77);
         OptionsCW3.setItem(21, KA2);
 
+        double herzen = player.getMaxHealth();
 
-        ItemStack hp = new ItemStack(Material.POTION, 1);
+        ItemStack hp = new ItemStack(Material.POTION);
         PotionMeta meta1 = (PotionMeta) sh.getItemMeta();
         meta1.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL, false, true));
         meta1.setDisplayName("§6Anzahl der Herzen");
-        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen", " "));
+        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen / §7§o§l20 §7§oHalbe-Herzen", "§7§oAnzahl Potions = Anzahl Halbe-Herzen!", " "));
         meta1.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        hp.setAmount((int) herzen);
         hp.setItemMeta(meta1);
         OptionsCW3.setItem(14, hp);
 
@@ -2052,18 +2059,20 @@ public class Navigator implements Listener {
         KA2.setItemMeta(itemMeta77);
         OptionsCW4.setItem(21, KA2);
 
+        double herzen = player.getMaxHealth();
 
-        ItemStack hp = new ItemStack(Material.POTION, 1);
+        ItemStack hp = new ItemStack(Material.POTION);
         PotionMeta meta1 = (PotionMeta) sh.getItemMeta();
         meta1.setBasePotionData(new PotionData(PotionType.INSTANT_HEAL, false, true));
         meta1.setDisplayName("§6Anzahl der Herzen");
-        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen", " "));
+        meta1.setLore(Arrays.asList(" ", "§7§oStandard: §7§o§l10 §7§oHerzen / §7§o§l20 §7§oHalbe-Herzen", "§7§oAnzahl Potions = Anzahl Halbe-Herzen!", " "));
         meta1.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        hp.setAmount((int) herzen);
         hp.setItemMeta(meta1);
         OptionsCW4.setItem(14, hp);
 
         //GETTERS UND SETTERS MACHEN
-        ItemStack hp1 = new ItemStack(Material.LIGHT_BLUE_DYE, 1);
+        ItemStack hp1 = new ItemStack(Material.LIGHT_BLUE_DYE);
         ItemMeta itemMeta8 = hp1.getItemMeta();
         itemMeta8.setDisplayName("§cHalbes Herz: \u002B");
         itemMeta8.setLore(Arrays.asList(" ", "§7§oErhöht das Leben um ein halbes Herz!", " "));
@@ -3004,6 +3013,7 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC1(player.getPlayer());
             }
             if (event.getSlot() == 32) {
                 double health = player.getHealth();
@@ -3012,6 +3022,7 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC1(player.getPlayer());
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
@@ -3355,19 +3366,19 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setTimer(true);
-                    openOWC1(player.getPlayer());
+                    openOWC2(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setTimer(false);
-                    openOWC1(player.getPlayer());
+                    openOWC2(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setSH(true);
-                    openOWC1(player.getPlayer());
+                    openOWC2(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setSH(false);
-                    openOWC1(player.getPlayer());
+                    openOWC2(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
@@ -3377,6 +3388,7 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC2(player.getPlayer());
             }
             if (event.getSlot() == 32) {
                 double health = player.getHealth();
@@ -3385,14 +3397,15 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC2(player.getPlayer());
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setHunger(true);
-                    openOWC1(player.getPlayer());
+                    openOWC2(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setHunger(false);
-                    openOWC1(player.getPlayer());
+                    openOWC2(player.getPlayer());
                 }
             }
 
@@ -3436,37 +3449,37 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setBP(true);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setBP(false);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setSKL(true);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setSKL(false);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setUUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setUUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW21(player.getPlayer());
                 }
             }
         }
@@ -3509,37 +3522,37 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setFDMG(true);
-                    openOCW12(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setFDMG(false);
-                    openOCW12(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setKA(true);
-                    openOCW12(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setKA(false);
-                    openOCW12(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setEDK(true);
-                    openOCW12(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setEDK(false);
-                    openOCW12(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 }
             }
             /*if(event.getSlot()  == 25){
                 if(event.getCurrentItem().getType() == Material.GREEN_DYE){
                     Main.getPlugin().setUUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 }else if(event.getCurrentItem().getType() == Material.GRAY_DYE){
                     Main.getPlugin().setUUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW22(player.getPlayer());
                 }
             }*/
         }
@@ -3728,19 +3741,19 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setTimer(true);
-                    openOWC1(player.getPlayer());
+                    openOWC3(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setTimer(false);
-                    openOWC1(player.getPlayer());
+                    openOWC3(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setSH(true);
-                    openOWC1(player.getPlayer());
+                    openOWC3(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setSH(false);
-                    openOWC1(player.getPlayer());
+                    openOWC3(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
@@ -3750,6 +3763,7 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC3(player.getPlayer());
             }
             if (event.getSlot() == 32) {
                 double health = player.getHealth();
@@ -3758,15 +3772,17 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC3(player.getPlayer());
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setHunger(true);
-                    openOWC1(player.getPlayer());
+                    openOWC3(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setHunger(false);
-                    openOWC1(player.getPlayer());
+                    openOWC3(player.getPlayer());
                 }
+
             }
 
         }
@@ -3809,37 +3825,37 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setBP(true);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setBP(false);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setSKL(true);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setSKL(false);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setUUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setUUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW31(player.getPlayer());
                 }
             }
         }
@@ -3882,37 +3898,37 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setFDMG(true);
-                    openOCW12(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setFDMG(false);
-                    openOCW12(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setKA(true);
-                    openOCW12(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setKA(false);
-                    openOCW12(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setEDK(true);
-                    openOCW12(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setEDK(false);
-                    openOCW12(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 }
             }
             /*if(event.getSlot()  == 25){
                 if(event.getCurrentItem().getType() == Material.GREEN_DYE){
                     Main.getPlugin().setUUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 }else if(event.getCurrentItem().getType() == Material.GRAY_DYE){
                     Main.getPlugin().setUUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW32(player.getPlayer());
                 }
             }*/
         }
@@ -4102,19 +4118,19 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setTimer(true);
-                    openOWC1(player.getPlayer());
+                    openOWC4(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setTimer(false);
-                    openOWC1(player.getPlayer());
+                    openOWC4(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setSH(true);
-                    openOWC1(player.getPlayer());
+                    openOWC4(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setSH(false);
-                    openOWC1(player.getPlayer());
+                    openOWC4(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
@@ -4124,6 +4140,7 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC4(player.getPlayer());
             }
             if (event.getSlot() == 32) {
                 double health = player.getHealth();
@@ -4132,14 +4149,15 @@ public class Navigator implements Listener {
                     all.setMaxHealth(newhealth);
                     all.setHealth(newhealth);
                 }
+                openOWC4(player.getPlayer());
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setHunger(true);
-                    openOWC1(player.getPlayer());
+                    openOWC4(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setHunger(false);
-                    openOWC1(player.getPlayer());
+                    openOWC4(player.getPlayer());
                 }
             }
 
@@ -4183,37 +4201,37 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setBP(true);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setBP(false);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setSKL(true);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setSKL(false);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 }
             }
             if (event.getSlot() == 25) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setUUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setUUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW41(player.getPlayer());
                 }
             }
         }
@@ -4256,37 +4274,37 @@ public class Navigator implements Listener {
             if (event.getSlot() == 19) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setFDMG(true);
-                    openOCW12(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setFDMG(false);
-                    openOCW12(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 }
             }
             if (event.getSlot() == 21) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setKA(true);
-                    openOCW12(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setKA(false);
-                    openOCW12(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 }
             }
             if (event.getSlot() == 23) {
                 if (event.getCurrentItem().getType() == Material.GREEN_DYE) {
                     Main.getPlugin().setEDK(true);
-                    openOCW12(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 } else if (event.getCurrentItem().getType() == Material.GRAY_DYE) {
                     Main.getPlugin().setEDK(false);
-                    openOCW12(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 }
             }
             /*if(event.getSlot()  == 25){
                 if(event.getCurrentItem().getType() == Material.GREEN_DYE){
                     Main.getPlugin().setUUHC(true);
-                    openOCW11(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 }else if(event.getCurrentItem().getType() == Material.GRAY_DYE){
                     Main.getPlugin().setUUHC(false);
-                    openOCW11(player.getPlayer());
+                    openOCW42(player.getPlayer());
                 }
             }*/
         }
