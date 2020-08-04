@@ -43,3 +43,5 @@ commands:
       description: Oeffnet dir die Spiel-Modi-Auswahl!
    bingo:
       description: Startet Bingo!
+   pos:
+      description: Speichert deine Position mit einem Namen!

@@ -90,6 +90,7 @@ public class Main extends JavaPlugin {
         //getCommand("delete").setExecutor(new WorldDelete());
         getCommand("modes").setExecutor(new GameModesStartStop());
         getCommand("bingo").setExecutor(new BingoStart());
+        getCommand("pos").setExecutor(new PositionSafeCommand());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
