@@ -91,6 +91,7 @@ public class Main extends JavaPlugin {
         getCommand("modes").setExecutor(new GameModesStartStop());
         getCommand("bingo").setExecutor(new BingoStart());
         getCommand("pos").setExecutor(new PositionSafeCommand());
+        getCommand("pos").setTabCompleter(new PositionSafeTabComplete());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
