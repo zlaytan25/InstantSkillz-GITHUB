@@ -15,8 +15,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Score;
 
 public class JoinListener implements Listener {
 
@@ -27,6 +25,7 @@ public class JoinListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.getWorld() == world) {
+            player.setGameMode(GameMode.ADVENTURE);
             //Spawn-TP
             Location location = new Location(world, 0.5, 75, 0.5);
             player.teleport(location);
@@ -38,16 +37,14 @@ public class JoinListener implements Listener {
             player.setExp(0);
             player.setLevel(0);
             player.getInventory().clear();
-            player.setGameMode(GameMode.ADVENTURE);
 
             //Navigator
-            ItemStack item = new ItemStack(Material.BOOK);
+            ItemStack item = new ItemStack(Material.BOOK, 1);
             ItemMeta itemMeta = item.getItemMeta();
             itemMeta.setDisplayName("§6§lNavigator");
             itemMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
             itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(itemMeta);
-            item.setAmount(1);
             player.getInventory().setItem(4, item);
 
             //Setspawn(HUB)
@@ -59,6 +56,8 @@ public class JoinListener implements Listener {
             config.set("Spawn.Yaw", player.getLocation().getYaw());
             config.set("Spawn.Pitch", player.getLocation().getPitch());
             Main.getPlugin().saveConfig();
+
+
         }
 
         //Join-Message
@@ -74,13 +73,6 @@ public class JoinListener implements Listener {
 
         //Quit-Message
         event.setQuitMessage("§4§l<< §7" + player.getName());
-    }
-
-    public void updateScoreboard() {
-        for (Player online : Bukkit.getOnlinePlayers()) {
-            Score score = online.getScoreboard().getObjective(DisplaySlot.SIDEBAR).getScore("§cSpieler: §7" + Bukkit.getOnlinePlayers().size());
-            score.setScore(1);
-        }
     }
 
     @EventHandler

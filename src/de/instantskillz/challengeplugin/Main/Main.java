@@ -89,10 +89,8 @@ public class Main extends JavaPlugin {
         getCommand("inv").setExecutor(new InvCommand());
         getCommand("bp").setExecutor(new BackPackCommand());
         getCommand("timer").setExecutor(new TimerCommand());
-        getCommand("gm1").setExecutor(new GM1());
-        getCommand("gm2").setExecutor(new GM2());
-        getCommand("gm3").setExecutor(new GM3());
-        getCommand("gm0").setExecutor(new GM0());
+        getCommand("gm").setExecutor(new GamemodesCommand());
+        getCommand("gm").setTabCompleter(new GamemodesTabComplete());
         //getCommand("startbingo").setExecutor(new BingoWorldStart());
         //getCommand("stopbingo").setExecutor(new BingoWorldStop());
         //getCommand("start").setExecutor(new WorldGenerator());

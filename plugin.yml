@@ -21,14 +21,8 @@ commands:
       description: Oeffnet das Backpack!
    timer:
       description: Startet den Timer!
-   gm1:
-      description: Kreativ-Modus!
-   gm2:
-      description: Abenteuer-Modus!
-   gm3:
-      description: Zuschauer-Modus!
-   gm0:
-      description: Ueberlebens-Modus!
+   gm:
+      description: Aendert deinen Spielmodus!
    startbingo:
       description: Startet eine Welt mit dem Bingo-Spielmodus!
    stopbingo:

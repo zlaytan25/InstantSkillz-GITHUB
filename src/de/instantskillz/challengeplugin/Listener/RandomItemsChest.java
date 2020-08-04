@@ -41,6 +41,7 @@ public class RandomItemsChest implements Listener {
                     chestinv.setItem(c, item_3);
                     chestinv.setItem(c, item_4);
 
+
                 }
             } else {
                 return;
