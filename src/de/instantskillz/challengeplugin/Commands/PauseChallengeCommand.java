@@ -3,6 +3,7 @@
 package de.instantskillz.challengeplugin.Commands;
 
 
+import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -23,11 +24,12 @@ public class PauseChallengeCommand implements CommandExecutor {
             if (player.hasPermission("schnellerHase.pause")) {
                 if (args.length == 0) {
 
+
                     String currentWorld = player.getWorld().getName();
                     File paused = new File(currentWorld + "//.paused");
                     File running = new File(currentWorld + "//.running");
 
-                    if (running.exists()) {
+                    if (running.exists() || !paused.exists()) {
                         running.delete();
                         try {
                             paused.createNewFile();
@@ -36,7 +38,9 @@ public class PauseChallengeCommand implements CommandExecutor {
                         }
 
                         player.getPlayer().getWorld().setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
-                        Bukkit.broadcastMessage("Die Challenge wurde pausiert!");
+
+                        Main.getPlugin().setPup(true);
+                        Main.getPlugin().pausestatus(currentWorld);
 
                         for (Player all : Bukkit.getOnlinePlayers()) {
                             if (all.getWorld().getName().equals(currentWorld)) {

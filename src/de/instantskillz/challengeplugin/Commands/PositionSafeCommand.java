@@ -96,31 +96,6 @@ public class PositionSafeCommand implements CommandExecutor {
         return false;
     }
 
-
-
-
-    /*
-
-
-
-
-
-    DecimalFormat format = new DecimalFormat("0.00");
-    if (pos != null) {
-
-        if (!positions.contains(pos)) {
-            positions.add(pos);
-            X.add(pX);
-            Y.add(pY);
-            Z.add(pZ);
-            player.sendMessage(Main.getPlugin().PREFIX + "§aDie Position §6" + pos + " §abei §c<§6" + format.format(pX) + "§c, §6" + format.format(pY) + "§c, §6" + format.format(pZ)  + "§c> §awurde gespeichert!");
-        } else {
-            player.sendMessage(Main.getPlugin().PREFIX + "§6" + pos + " §aist bei §c<§6" + format.format(pX) + "§c, §6" + format.format(pY) + "§c, §6" + format.format(pZ)  + "§c>§a!");
-        }
-
-    }else
-        player.sendMessage(Main.getPlugin().PREFIX + "§aDie Position §c" + pos + " §aexistiert nicht!");
-     */
 }
 
 

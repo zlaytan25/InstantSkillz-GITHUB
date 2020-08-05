@@ -28,7 +28,6 @@ public class SpawnCommand implements CommandExecutor {
             if (player.hasPermission("schnellerHase.hub")) {
                 if (args.length == 0) {
 
-
                     if (player.getWorld() != Bukkit.getWorld("world")) {
                         Main.getPlugin().setTimer(true);
                         this.checkDirectory();

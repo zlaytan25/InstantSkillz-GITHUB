@@ -3,6 +3,7 @@
 package de.instantskillz.challengeplugin.Commands;
 
 
+import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
@@ -27,7 +28,7 @@ public class UnpauseChallengeCommand implements CommandExecutor {
                     File paused = new File(currentWorld + "//.paused");
                     File running = new File(currentWorld + "//.running");
 
-                    if (paused.exists()) {
+                    if (paused.exists() || !running.exists()) {
                         paused.delete();
                         try {
                             running.createNewFile();
@@ -36,7 +37,8 @@ public class UnpauseChallengeCommand implements CommandExecutor {
                         }
 
                         player.getPlayer().getWorld().setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
-                        Bukkit.broadcastMessage("Die Challenge läuft wieder!");
+                        Main.getPlugin().setPup(false);
+
 
                         for (Player all : Bukkit.getOnlinePlayers()) {
                             if (all.getWorld().getName().equals(currentWorld)) {

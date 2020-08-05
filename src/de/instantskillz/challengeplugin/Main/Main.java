@@ -7,6 +7,8 @@ import com.mojang.authlib.properties.Property;
 import de.instantskillz.challengeplugin.Commands.*;
 import de.instantskillz.challengeplugin.Listener.*;
 import de.instantskillz.challengeplugin.Util.*;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -15,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -30,7 +33,6 @@ public class Main extends JavaPlugin {
     private static Main plugin;
     public final String PREFIX = "§aServer " + "§8>> §r";
     public SneakKillListener skl = new SneakKillListener();
-
 
     //SneakKillEvent
     private boolean SKL = true;
@@ -48,6 +50,16 @@ public class Main extends JavaPlugin {
     private boolean EDK = false;
     //UHC
     private boolean UHC = true;
+    //Pause/Unpause
+    private boolean pup = true;
+
+    public boolean getPup() {
+        return pup;
+    }
+
+    public void setPup(boolean start) {
+        this.pup = start;
+    }
 
     public boolean getUHC() {
         return UHC;
@@ -56,6 +68,7 @@ public class Main extends JavaPlugin {
     public void setUHC(boolean UHC) {
         this.UHC = UHC;
     }
+
     //UUHC
     private boolean UUHC = true;
     //SplitHerzen
@@ -472,6 +485,25 @@ public class Main extends JavaPlugin {
         skullBingo.setItemMeta(smeta1);
 
         return skullBingo;
+    }
+
+    public void pausestatus(String name) {
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (Main.getPlugin().getPup() == false) {
+                    cancel();
+                    return;
+                } else {
+                    for (Player all : Bukkit.getOnlinePlayers()) {
+                        if (all.getWorld().getName().equals(name)) {
+                            all.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§6Die Challenge ist pausiert!"));
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(Main.getPlugin(), 0L, 20L);
     }
 
 

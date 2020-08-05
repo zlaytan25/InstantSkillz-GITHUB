@@ -40,13 +40,22 @@ public class PositionSafeTabComplete implements TabCompleter {
                             if (currentWorld.equals("Challenge-" + i)) {
 
                                 File[] files = new File("Challenge-" + i + "//public//pos-marker").listFiles();
+                                File checkdir = new File("Challenge-" + i + "//public//pos-marker");
                                 List<String> positions = new ArrayList<String>();
-                                for (File file : files) {
-                                    if (file.isFile()) {
-                                        positions.add(file.getName().replace(".yml", ""));
+                                if (checkdir.exists()) {
+                                    for (File file : files) {
+                                        if (file.isFile()) {
+                                            positions.add(file.getName().replace(".yml", ""));
+                                        }
                                     }
+                                    return positions;
+                                } else {
+                                    List<String> noPos = new ArrayList<>();
+                                    noPos.add("Keine Positionen gespeichert!");
+                                    return noPos;
                                 }
-                                return positions;
+
+
                             }
                         }
                     }
