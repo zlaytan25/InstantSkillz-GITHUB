@@ -96,6 +96,8 @@ public class Main extends JavaPlugin {
         //getCommand("start").setExecutor(new WorldGenerator());
         //getCommand("delete").setExecutor(new WorldDelete());
         getCommand("bingo").setExecutor(new BingoStart());
+        getCommand("unpause").setExecutor(new UnpauseChallengeCommand());
+        getCommand("pause").setExecutor(new PauseChallengeCommand());
         getCommand("pos").setExecutor(new PositionSafeCommand());
         getCommand("pos").setTabCompleter(new PositionSafeTabComplete());
 
@@ -114,6 +116,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new SplitHerzen(), this);
         pluginManager.registerEvents(new HungerOnOff(), this);
         pluginManager.registerEvents(new BackPackCommand(),this);
+        pluginManager.registerEvents(new ChangeWorldListener(), this);
 
 
     }

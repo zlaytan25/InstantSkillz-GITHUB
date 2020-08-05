@@ -31,3 +31,7 @@ commands:
       description: Startet Bingo!
    pos:
       description: Speichert deine Position mit einem Namen!
+   pause:
+      description: Pausiere eine bestimmte Challenge!
+   unpause:
+      description: Spiele eine bestimmte Challenge weiter!
