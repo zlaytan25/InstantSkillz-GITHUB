@@ -46,7 +46,6 @@ public class Main extends JavaPlugin {
     private boolean BINGO = true;
     //EnderDragonKill
     private boolean EDK = false;
-
     //UHC
     private boolean UHC = true;
 
@@ -57,7 +56,6 @@ public class Main extends JavaPlugin {
     public void setUHC(boolean UHC) {
         this.UHC = UHC;
     }
-
     //UUHC
     private boolean UUHC = true;
     //SplitHerzen
