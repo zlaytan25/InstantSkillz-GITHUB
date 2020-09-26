@@ -35,3 +35,5 @@ commands:
       description: Pausiere eine bestimmte Challenge!
    unpause:
       description: Spiele eine bestimmte Challenge weiter!
+   manhunt:
+      description: Startet eine Welt mit dem ManHunt Spielmodus!

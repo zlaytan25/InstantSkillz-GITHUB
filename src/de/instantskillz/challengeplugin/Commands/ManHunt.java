@@ -1,0 +1,145 @@
+//Plugin by: InstantSKillzTv
+//-> Mullemann25 and Mannam01
+package de.instantskillz.challengeplugin.Commands;
+
+import de.instantskillz.challengeplugin.Events.ManHuntEvent;
+import de.instantskillz.challengeplugin.Main.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Arrays;
+
+public class ManHunt implements CommandExecutor, Listener {
+
+    ManHuntEvent event = new ManHuntEvent();
+    int timer = 5;
+    String player_playername;
+
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (player.hasPermission("schnellerHase.manhunt")) {
+                if (args.length == 1) {
+
+                    if (args[0].equalsIgnoreCase("start")) {
+                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aManHunt wurde gestartet! Bitte geht in eine Welt und entscheidet euch für ein Team." + " §1Hunter: §7§o/manhunt join§1hunter§0; §4Player: §7§o/manhunt join§4player");
+                    }
+
+                    if (args[0].equalsIgnoreCase("joinhunter")) {
+                        timer = 5;
+                        event.setSpieler(1);
+                        event.setHunter(1);
+
+                        ItemStack item = new ItemStack(Material.COMPASS, 1);
+                        ItemMeta im = item.getItemMeta();
+                        im.setDisplayName("§6Tracker");
+                        im.setLore(Arrays.asList(" ", "§7§oTrackt den Player!", " "));
+                        im.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+                        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                        item.setItemMeta(im);
+                        player.getInventory().setItem(8, item);
+
+                        player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Huntern beigereten!");
+                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aEs sind nun §c" + event.getSpieler() + " Spieler §avon §c" + event.getMaxSpieler() + " Spieler §abeigetreten!");
+                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§1Hunter: §1" + event.getHunter() + "/1§0; §4Player: §4" + event.getPlayer() + "§4/1");
+                    }
+
+                    if (args[0].equalsIgnoreCase("joinplayer")) {
+                        if (event.getPlayer() == 1) {
+                            player.sendMessage(Main.getPlugin().PREFIX + "§4Es kann nur einen Player gleichzeitig geben! Trete den Huntern bei!");
+                        } else {
+                            player_playername = player.getPlayer().getDisplayName();
+                            event.setSpieler(1);
+                            event.setPlayer(1);
+                            player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Playern beigereten!");
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aEs sind nun §c" + event.getSpieler() + " Spieler §avon §c" + event.getMaxSpieler() + " Spieler §abeigetreten!");
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§1Hunter: §1" + event.getHunter() + "/1§0; §4Player: §4" + event.getPlayer() + "§4/1");
+                        }
+                    }
+
+                    if (event.getSpieler() == event.getMaxSpieler()) {
+                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aAlle Spieler sind beigetreten!");
+
+                        new BukkitRunnable() {
+
+                            @Override
+                            public void run() {
+                                Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aDas Spiel beginnt in: §c" + timer);
+                                timer--;
+                                if (timer == -1) {
+                                    cancel();
+                                    timer = 0;
+                                    for (Player all : Bukkit.getServer().getOnlinePlayers()) {
+                                        all.setGameMode(GameMode.CREATIVE);
+
+                                    }
+                                    Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§cDas Spiel beginnt. Viel Glück!!!");
+
+                                }
+                            }
+                        }.runTaskTimer(Main.getPlugin(), 0L, 20L);
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @EventHandler
+    public void onDrop(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        if (player.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+        if (event.getItemDrop().getItemStack().getType() == Material.COMPASS) {
+            event.setCancelled(true);
+        }
+
+    }
+
+    @EventHandler
+    public void handleNavigatorGUIClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+        Player player = (Player) event.getWhoClicked();
+        if (player.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+        if (event.getSlotType() == InventoryType.SlotType.QUICKBAR) {
+            event.setCancelled(true);
+            switch (event.getCurrentItem().getType()) {
+                case COMPASS:
+                    event.setCancelled(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+/*
+    @EventHandler
+    public void tracker(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        for(player_playername)
+    }
+*/
+
+}

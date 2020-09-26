@@ -111,6 +111,7 @@ public class Main extends JavaPlugin {
         getCommand("pause").setExecutor(new PauseChallengeCommand());
         getCommand("pos").setExecutor(new PositionSafeCommand());
         getCommand("pos").setTabCompleter(new PositionSafeTabComplete());
+        getCommand("manhunt").setExecutor(new ManHunt());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
@@ -128,6 +129,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new HungerOnOff(), this);
         pluginManager.registerEvents(new BackPackCommand(),this);
         pluginManager.registerEvents(new ChangeWorldListener(), this);
+        pluginManager.registerEvents(new ManHunt(), this);
 
 
     }

@@ -128,7 +128,7 @@ public class BingoStart implements CommandExecutor, Listener {
                                     }
                                 }
                             }.runTaskTimer(Main.getPlugin(), 0L, 20L);
-                            ;
+
                         }
 
 

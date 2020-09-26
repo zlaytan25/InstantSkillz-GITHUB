@@ -2,19 +2,21 @@
 //-> Mullemann25 and Mannam01
 package de.instantskillz.challengeplugin.Events;
 
+
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class BingoEvent extends Event {
+public class ManHuntEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
+    final int MAX_SPIELER = 2;
+    int spieler;
+    int hunter;
+    int player;
 
     static public HandlerList getHandlerList() {
         return handlers;
     }
-
-    final int MAX_SPIELER = 2;
-    int spieler;
 
     public int getMaxSpieler() {
         return MAX_SPIELER;
@@ -28,10 +30,24 @@ public class BingoEvent extends Event {
         spieler = spieler + a;
     }
 
+    public int getHunter() {
+        return hunter;
+    }
+
+    public void setHunter(int h) {
+        hunter = hunter + h;
+    }
+
+    public int getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(int p) {
+        player = player + p;
+    }
 
     public HandlerList getHandlers() {
         return handlers;
     }
-
 
 }
