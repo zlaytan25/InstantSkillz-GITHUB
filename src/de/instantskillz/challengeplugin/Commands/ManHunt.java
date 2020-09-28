@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,19 +18,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class ManHunt implements CommandExecutor, Listener {
 
     ManHuntEvent event = new ManHuntEvent();
     int timer = 5;
-    String player_playername;
-
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -39,10 +41,18 @@ public class ManHunt implements CommandExecutor, Listener {
                 if (args.length == 1) {
 
                     if (args[0].equalsIgnoreCase("start")) {
-                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aManHunt wurde gestartet! Bitte geht in eine Welt und entscheidet euch für ein Team." + " §1Hunter: §7§o/manhunt join§1hunter§0; §4Player: §7§o/manhunt join§4player");
+                        if (Main.getPlugin().getStart() == true) {
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aManHunt wurde schon gestartet! Bitte geht in eine Welt und entscheidet euch für ein Team.");
+                        } else {
+                            Main.getPlugin().setStart(true);
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aManHunt wurde gestartet! Bitte geht in eine Welt und entscheidet euch für ein Team." + " §1Hunter: §7§o/manhunt join§1hunter§0; §4Player: §7§o/manhunt join§4player");
+                        }
                     }
 
                     if (args[0].equalsIgnoreCase("joinhunter")) {
+
+                        //startabsicherung + gucken ob hunter voll ist!
+
                         timer = 5;
                         event.setSpieler(1);
                         event.setHunter(1);
@@ -62,10 +72,25 @@ public class ManHunt implements CommandExecutor, Listener {
                     }
 
                     if (args[0].equalsIgnoreCase("joinplayer")) {
+
+                        //startabsicherung
+
                         if (event.getPlayer() == 1) {
                             player.sendMessage(Main.getPlugin().PREFIX + "§4Es kann nur einen Player gleichzeitig geben! Trete den Huntern bei!");
                         } else {
-                            player_playername = player.getPlayer().getDisplayName();
+
+                            this.checkDirectory();
+                            File file = new File("plugins//InstantSkillzTV//Manhunt//" + player.getName() + ".yml");
+                            YamlConfiguration playername = YamlConfiguration.loadConfiguration(file);
+                            playername.set(player.getName(), player);
+
+                            try {
+                                playername.save(file);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
                             event.setSpieler(1);
                             event.setPlayer(1);
                             player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Playern beigereten!");
@@ -104,6 +129,14 @@ public class ManHunt implements CommandExecutor, Listener {
     }
 
     @EventHandler
+    public void checkDirectory() {
+        File file = new File("plugins//InstantSkillzTV//Manhunt");
+        if (!file.exists()) {
+            file.mkdir();
+        }
+    }
+
+    @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         if (player.getGameMode() == GameMode.CREATIVE) {
@@ -134,12 +167,15 @@ public class ManHunt implements CommandExecutor, Listener {
         }
     }
 
-/*
+
     @EventHandler
-    public void tracker(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        for(player_playername)
+    public void tracker(PlayerMoveEvent e) {
+        Player player = e.getPlayer();
+
+        File file = new File("plugins//InstantSkillzTV//Manhunt//" + player.getName() + ".yml");
+
+
     }
-*/
+
 
 }

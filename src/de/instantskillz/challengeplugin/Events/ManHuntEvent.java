@@ -10,9 +10,11 @@ public class ManHuntEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     final int MAX_SPIELER = 2;
+
     int spieler;
     int hunter;
     int player;
+
 
     static public HandlerList getHandlerList() {
         return handlers;

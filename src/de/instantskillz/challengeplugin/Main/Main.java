@@ -75,6 +75,16 @@ public class Main extends JavaPlugin {
     private boolean SH = true;
     //Hunger
     private boolean Hunger = false;
+    //startmanhunt
+    private boolean start = false;
+
+    public boolean getStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
 
     public static Main getPlugin() {
         return plugin;
@@ -112,6 +122,7 @@ public class Main extends JavaPlugin {
         getCommand("pos").setExecutor(new PositionSafeCommand());
         getCommand("pos").setTabCompleter(new PositionSafeTabComplete());
         getCommand("manhunt").setExecutor(new ManHunt());
+        getCommand("manhunt").setTabCompleter(new ManhuntJoinTabComplete());
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
