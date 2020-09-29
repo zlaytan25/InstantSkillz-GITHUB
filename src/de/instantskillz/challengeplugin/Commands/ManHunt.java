@@ -6,6 +6,7 @@ import de.instantskillz.challengeplugin.Events.ManHuntEvent;
 import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -43,46 +44,50 @@ public class ManHunt implements CommandExecutor, Listener {
                     if (args[0].equalsIgnoreCase("start")) {
                         if (Main.getPlugin().getStart() == true) {
                             Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aManHunt wurde schon gestartet! Bitte geht in eine Welt und entscheidet euch für ein Team.");
-                        } else {
+                        } else if (Main.getPlugin().getStart() == false) {
                             Main.getPlugin().setStart(true);
                             Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aManHunt wurde gestartet! Bitte geht in eine Welt und entscheidet euch für ein Team." + " §1Hunter: §7§o/manhunt join§1hunter§0; §4Player: §7§o/manhunt join§4player");
+                        } else if (event.getSpieler() == event.getMaxSpieler()) {
+                            player.sendMessage(Main.getPlugin().PREFIX + "§4Die Runde startet bereits!");
                         }
                     }
 
                     if (args[0].equalsIgnoreCase("joinhunter")) {
 
-                        //startabsicherung + gucken ob hunter voll ist!
+                        if (event.getHunter() != (event.getMaxSpieler() - 1)) {
+                            timer = 5;
+                            event.setSpieler(1);
+                            event.setHunter(1);
 
-                        timer = 5;
-                        event.setSpieler(1);
-                        event.setHunter(1);
+                            ItemStack item = new ItemStack(Material.COMPASS, 1);
+                            ItemMeta im = item.getItemMeta();
+                            im.setDisplayName("§6Tracker");
+                            im.setLore(Arrays.asList(" ", "§7§oTrackt den Player!", " "));
+                            im.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+                            im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                            item.setItemMeta(im);
+                            player.getInventory().setItem(8, item);
 
-                        ItemStack item = new ItemStack(Material.COMPASS, 1);
-                        ItemMeta im = item.getItemMeta();
-                        im.setDisplayName("§6Tracker");
-                        im.setLore(Arrays.asList(" ", "§7§oTrackt den Player!", " "));
-                        im.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-                        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                        item.setItemMeta(im);
-                        player.getInventory().setItem(8, item);
-
-                        player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Huntern beigereten!");
-                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aEs sind nun §c" + event.getSpieler() + " Spieler §avon §c" + event.getMaxSpieler() + " Spieler §abeigetreten!");
-                        Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§1Hunter: §1" + event.getHunter() + "/1§0; §4Player: §4" + event.getPlayer() + "§4/1");
+                            player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Huntern beigetreten!");
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aEs sind §c" + event.getSpieler() + "/" + event.getMaxSpieler() + " §aSpieler beigetreten!");
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§1Hunter: §1" + event.getHunter() + "/1§0; §4Player: §4" + event.getPlayer() + "§4/1");
+                        } else if (event.getHunter() == (event.getMaxSpieler() - 1)) {
+                            player.sendMessage(Main.getPlugin().PREFIX + "§4Die Hunter sind voll. Trete dem Player bei, falls es noch keinen gibt!");
+                        } else if (event.getSpieler() == event.getMaxSpieler()) {
+                            player.sendMessage(Main.getPlugin().PREFIX + "§4Die Runde startet bereits!");
+                        }
                     }
 
                     if (args[0].equalsIgnoreCase("joinplayer")) {
-
-                        //startabsicherung
-
                         if (event.getPlayer() == 1) {
                             player.sendMessage(Main.getPlugin().PREFIX + "§4Es kann nur einen Player gleichzeitig geben! Trete den Huntern bei!");
-                        } else {
+                        } else if (event.getPlayer() != 1) {
 
                             this.checkDirectory();
-                            File file = new File("plugins//InstantSkillzTV//Manhunt//" + player.getName() + ".yml");
+                            File file = new File("plugins//InstantSkillzTV//ManHunt//player.yml");
                             YamlConfiguration playername = YamlConfiguration.loadConfiguration(file);
-                            playername.set(player.getName(), player);
+                            String pname = player.getName();
+                            playername.set("Player", pname);
 
                             try {
                                 playername.save(file);
@@ -93,9 +98,11 @@ public class ManHunt implements CommandExecutor, Listener {
 
                             event.setSpieler(1);
                             event.setPlayer(1);
-                            player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Playern beigereten!");
-                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aEs sind nun §c" + event.getSpieler() + " Spieler §avon §c" + event.getMaxSpieler() + " Spieler §abeigetreten!");
+                            player.sendMessage(Main.getPlugin().PREFIX + "§aDu bist den Playern beigetreten!");
+                            Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§aEs sind §c" + event.getSpieler() + "/" + event.getMaxSpieler() + " §aSpieler beigetreten!");
                             Bukkit.broadcastMessage(Main.getPlugin().PREFIX + "§1Hunter: §1" + event.getHunter() + "/1§0; §4Player: §4" + event.getPlayer() + "§4/1");
+                        } else if (event.getSpieler() == event.getMaxSpieler()) {
+                            player.sendMessage(Main.getPlugin().PREFIX + "§4Die Runde startet bereits!");
                         }
                     }
 
@@ -130,7 +137,7 @@ public class ManHunt implements CommandExecutor, Listener {
 
     @EventHandler
     public void checkDirectory() {
-        File file = new File("plugins//InstantSkillzTV//Manhunt");
+        File file = new File("plugins//InstantSkillzTV//Manhunt//player");
         if (!file.exists()) {
             file.mkdir();
         }
@@ -171,10 +178,18 @@ public class ManHunt implements CommandExecutor, Listener {
     @EventHandler
     public void tracker(PlayerMoveEvent e) {
         Player player = e.getPlayer();
-
-        File file = new File("plugins//InstantSkillzTV//Manhunt//" + player.getName() + ".yml");
-
-
+        if (event.getSpieler() == event.getMaxSpieler()) {
+            File file = new File("plugins//InstantSkillzTV//ManHunt//player.yml");
+            YamlConfiguration pname = YamlConfiguration.loadConfiguration(file);
+            if (file.exists()) {
+                String playername = pname.getString("Player");
+                if (e.getPlayer().getName().equalsIgnoreCase(playername)) {
+                    String world = player.getWorld().getName();
+                    Location playerloc = player.getLocation();
+                    Bukkit.getWorld(world).setSpawnLocation(playerloc);
+                }
+            }
+        }
     }
 
 
