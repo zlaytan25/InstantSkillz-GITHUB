@@ -6,7 +6,6 @@ import de.instantskillz.challengeplugin.Events.ManHuntEvent;
 import de.instantskillz.challengeplugin.Main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -183,10 +182,9 @@ public class ManHunt implements CommandExecutor, Listener {
             YamlConfiguration pname = YamlConfiguration.loadConfiguration(file);
             if (file.exists()) {
                 String playername = pname.getString("Player");
+                Bukkit.broadcastMessage(playername);
                 if (e.getPlayer().getName().equalsIgnoreCase(playername)) {
-                    String world = player.getWorld().getName();
-                    Location playerloc = player.getLocation();
-                    Bukkit.getWorld(world).setSpawnLocation(playerloc);
+                    player.performCommand("/setworldspawn ~ ~ ~");
                 }
             }
         }
