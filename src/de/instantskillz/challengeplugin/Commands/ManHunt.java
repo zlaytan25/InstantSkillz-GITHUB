@@ -143,18 +143,6 @@ public class ManHunt implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void onDrop(PlayerDropItemEvent event) {
-        Player player = event.getPlayer();
-        if (player.getGameMode() == GameMode.CREATIVE) {
-            return;
-        }
-        if (event.getItemDrop().getItemStack().getType() == Material.COMPASS) {
-            event.setCancelled(true);
-        }
-
-    }
-
-    @EventHandler
     public void handleNavigatorGUIClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
         Player player = (Player) event.getWhoClicked();
@@ -185,6 +173,73 @@ public class ManHunt implements CommandExecutor, Listener {
                 Bukkit.broadcastMessage(playername);
                 if (e.getPlayer().getName().equalsIgnoreCase(playername)) {
                     player.performCommand("/setworldspawn ~ ~ ~");
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void particles(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        challengeWorlds = 0;
+        String[] worldNames = new String[Bukkit.getServer().getWorlds().size()];
+        for (World w : Bukkit.getServer().getWorlds()) {
+            worldNames[challengeWorlds] = w.getName();
+            if (w.getName().contains("Challenge")) {
+                challengeWorlds++;
+            }
+        }
+        String currentWorld = player.getWorld().getName();
+        for (int i = 1; i <= challengeWorlds; i++) {
+            if (currentWorld.equals("Challenge-" + i)) {
+                File paused = new File("Challenge-" + i + "//.paused");
+
+                if (paused.exists()) {
+                    Main.getPlugin().setPup(true);
+                    Main.getPlugin().pausestatus(currentWorld);
+                    Location loc = player.getLocation();
+                    player.getWorld().spawnParticle(Particle.SPELL_WITCH, loc, 2, 0, 0, 0);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageEvent event) {
+        challengeWorlds = 0;
+        String[] worldNames = new String[Bukkit.getServer().getWorlds().size()];
+        for (World w : Bukkit.getServer().getWorlds()) {
+            worldNames[challengeWorlds] = w.getName();
+            if (w.getName().contains("Challenge")) {
+                challengeWorlds++;
+            }
+        }
+        String currentWorld = event.getEntity().getWorld().getName();
+        for (int i = 1; i <= challengeWorlds; i++) {
+            if (currentWorld.equals("Challenge-" + i)) {
+                File paused = new File("Challenge-" + i + "//.paused");
+            } else if {
+                return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void onHunger(FoodLevelChangeEvent event) {
+        challengeWorlds = 0;
+        String[] worldNames = new String[Bukkit.getServer().getWorlds().size()];
+        for (World w : Bukkit.getServer().getWorlds()) {
+            worldNames[challengeWorlds] = w.getName();
+        }
+        String currentWorld = event.getEntity().getWorld().getName();
+        for (int i = 1; i <= challengeWorlds; i++) {
+            if (currentWorld.equals("Challenge-" + i)) {
+
+                if (paused.exists()) {
+                    for (Player all : Bukkit.getOnlinePlayers()) {
+                        all.setFoodLevel(20);
+                    }
+                    event.setCancelled(true);
                 }
             }
         }
